@@ -8,7 +8,13 @@
     </div>
     <!-- Icon open / close -->
     <div class="col xs1">
-      <span [ngClass]="{'icon-list': true, 'up': !course.isSelected, 'down': course.isSelected}" (click)="revealOrHide(course)">&gt;</span>
+      <span 
+        [ngClass]="{'icon-list': true, 'up': !course.isSelected, 'down': course.isSelected}" 
+        (click)="revealOrHide(course)"
+        *ngIf="course.modules.length"
+      >
+        &gt;
+      </span>
     </div>
   </div>
 

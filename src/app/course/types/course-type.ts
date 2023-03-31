@@ -1,10 +1,10 @@
 import { ModuleType } from "./module-type"
 
 export type CourseType = {
-  id: number
+  id?: number
   title: string
-  createdAt: Date
-  updatedAt: Date
+  createdAt?: Date
+  updatedAt?: Date
   objective: string
-  modules: Array<ModuleType>
+  modules?: Array<ModuleType>
 }

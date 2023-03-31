@@ -4,14 +4,14 @@
       {{ course.title}}
     </div>
     <div class="col xs1">
-      {{ course.modules.length }} items
+      {{ course.modules!.length }} items
     </div>
     <!-- Icon open / close -->
     <div class="col xs1">
       <span 
         [ngClass]="{'icon-list': true, 'up': !course.isSelected, 'down': course.isSelected}" 
         (click)="revealOrHide(course)"
-        *ngIf="course.modules.length"
+        *ngIf="course.modules!.length"
       >
         &gt;
       </span>
@@ -34,6 +34,6 @@
     </div>
   </div>
 
-  <app-module-list [ngClass]="{'is-visible': course.isSelected}" [modules]="course.modules"></app-module-list>
+  <app-module-list [ngClass]="{'is-visible': course.isSelected}" [modules]="course.modules!"></app-module-list>
 </div>
 

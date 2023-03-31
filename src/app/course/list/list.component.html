@@ -1,10 +1,15 @@
 <!-- Display title and number -->
 <div class="row">
-  <div class="col xs11 course-title">
+  <div class="col xs9 course-title">
     Course List
   </div>
   <div class="col xs1 course-number">
     {{ courses.length }} items
+  </div>
+  <div class="col xs2">
+    <button mat-raised-button color="primary" [routerLink]="['/', 'course', 'add']">
+      Create a course
+    </button>
   </div>
 </div>
 

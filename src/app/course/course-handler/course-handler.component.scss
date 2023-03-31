@@ -1,0 +1,20 @@
+ul {
+    &.module-list {
+        list-style-type: none;
+        li {
+            display: flex;
+            border-bottom-width: 1px;
+            border-bottom-color: rgb(128, 128, 128);
+            border-bottom-style: dotted;
+            padding: 1em;
+            div {
+                &.title {
+                    flex: 2;
+                }
+                &.remove {
+                    flex: 1;
+                }
+            }
+        }
+    }
+}

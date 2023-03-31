@@ -19,8 +19,8 @@
                 <li *ngFor="let module of modules">
                     <div class="title">{{ module.name }}</div>
                     <div class="remove">
-                        <button (click)="removeModule(module)">
-                            <mat-icon color="danger">delete</mat-icon>
+                        <button mat-button (click)="removeModule(module)">
+                            <mat-icon color="error">delete</mat-icon>
                         </button>
                     </div>
                 </li>

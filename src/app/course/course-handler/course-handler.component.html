@@ -1,0 +1,23 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <mat-form-field class="col xs12">
+            <input matInput formControlName="title" placeholder="Course title...">
+            <mat-error *ngIf="c['title'].errors && c['title'].touched">
+                Title is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field class="col xs12">
+            <input matInput formControlName="objective" placeholder="Objective...">
+        </mat-form-field>
+    </div>
+
+    <div class="row">
+        <div class="col xs4"></div>
+        <div class="col xs4">
+            <button mat-raised-button color="primary" [disabled]="form.invalid">Add</button>
+        </div>
+        <div class="col xs4"></div>
+    </div>
+</form>

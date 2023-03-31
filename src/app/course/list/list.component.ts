@@ -38,20 +38,20 @@ export class ListComponent implements OnInit {
           if (course.id !== inCourse.id) {
             inCourse.isSelected = false
             // Close all modules too...
-            inCourse.modules.forEach((module: ModuleType) => module.selected = false)
+            inCourse.modules!.forEach((module: ModuleType) => module.selected = false)
           }
         })
     }
   }
 
   doRemoveCourse(course: CourseListType): void {
-    this._courseService.remove(course.id)
+    this._courseService.remove(course.id!)
       .pipe(
         take(1)
       )
       .subscribe({
         next: (response: HttpResponse<any>) => {
-           const message: string = `${course.title} was removed. ${course.modules.length} modules were affected`
+           const message: string = `${course.title} was removed. ${course.modules!.length} modules were affected`
            this._toastService.show(message)
         },
         error: (error: any) => {

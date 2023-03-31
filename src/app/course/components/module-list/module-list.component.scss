@@ -1,10 +1,125 @@
 ul {
   &.module-list {
     list-style-type: none;
-
+    background-color: rgba(20, 20, 150, .8);
+    color: #fff;
     li {
       padding-left: .5em;
       border-bottom: solid 1px rgba(128, 128, 128, .8);
+       div {
+        &.module-tile {
+          display: flex;
+          div {
+            &.title {
+              flex: 3
+            }
+            &.medias-number {
+              flex: 1;
+            }
+            &.duration {
+              flex: 1;
+            }
+            &.action {
+              flex: 1;
+            }
+          }
+        }
+      }
+      ul {
+        list-style-type: none;
+        background-color: rgba(127, 127, 243, 0.8);
+
+        li {
+          div {
+            &.media {
+              display: flex;
+              div {
+                &.title {
+                  flex: 2;
+                }
+                &.type {
+                  flex: 2;
+                }
+                &.duration {
+                  flex: 1;
+                }
+              }
+            }
+          }
+        }
+      }
     }
+  }
+}
+
+.module-tile {
+  .icon-list {
+    display: inline-block;
+    &.up {
+      animation-name: up;
+      animation-duration: .5s;
+      animation-fill-mode: forwards;
+      animation-iteration-count: 1;
+      animation-timing-function: ease-out;
+    }
+
+    &.down {
+      animation-name: down;
+      animation-duration: .5s;
+      animation-fill-mode: forwards;
+      animation-iteration-count: 1;
+      animation-timing-function: ease-out;
+    }
+  }
+
+  app-module-list {
+    display: none;
+    &.is-visible {
+      display: block;
+      animation-name: show;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+      animation-iteration-count: 1;
+      animation-timing-function: ease-out;
+
+    }
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: .5;
+  }
+
+  100%{
+    opacity: 1;
+  }
+}
+
+@keyframes up {
+  0% {
+    display: inline-block;
+  }
+
+  50%{
+    transform: rotate(-45deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes down {
+  0% {}
+  50%{
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(90deg);
   }
 }

@@ -15,4 +15,15 @@ export class ModuleListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  revealOrHide(module: ModuleType): void {
+    module.selected = !module.selected
+    if (module.selected) {
+      this.modules.filter((inModule: ModuleType) => inModule.selected).forEach((inModule: ModuleType) => {
+        if (module.id !== inModule.id) {
+          inModule.selected = false
+        }
+      })
+    }
+  }
+
 }

@@ -1,5 +1,34 @@
 <ul class="module-list">
   <li *ngFor="let module of modules">
-    {{ module.name }}
+    <div class="module-tile">
+      <div class="title">{{ module.name }}</div>
+      <div class="medias-number">{{ module.medias.length }} {{ module.medias.length ? module.medias.length === 1 ? 'medium' : 'media' : '' }}</div>
+      <div class="duration">{{ module.totalTime }}</div>
+      <div class="action">
+        <span 
+          [ngClass]="{'icon-list': true, 'up': !module.selected, 'down': module.selected}"
+          (click)="revealOrHide(module)"
+          *ngIf="module.medias.length">
+            &gt;
+        </span>
+      </div>    
+    </div>
+    <ng-container *ngIf="module.medias.length && module.selected">
+      <ul>
+        <li *ngFor="let media of module.medias">
+          <div class="media">
+            <div class="title">
+              {{ media.title }}
+            </div>
+            <div class="type">
+              {{ media.typeMedia.title }}
+            </div>
+            <div class="duration">
+              {{ media.totalTime }}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </ng-container>
   </li>
 </ul>

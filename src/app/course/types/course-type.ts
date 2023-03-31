@@ -6,5 +6,5 @@ export type CourseType = {
   createdAt: Date
   updatedAt: Date
   objective: string
-  modules: Array<ModuleType> // ModuleType[]
+  modules: Array<ModuleType>
 }

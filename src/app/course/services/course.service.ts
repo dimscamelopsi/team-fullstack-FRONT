@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CourseListType } from '../types/course-list-type';
@@ -14,6 +14,15 @@ export class CourseService {
   public findFullCourses(): Observable<CourseListType[]> {
     return this._httpClient.get<CourseListType[]>(
       this.endPoint
+    )
+  }
+
+  public remove(id: number): Observable<HttpResponse<any>> {
+    return this._httpClient.delete<CourseListType>(
+      `${this.endPoint}/${id}`,
+      {
+        observe: 'response'
+      }
     )
   }
 }

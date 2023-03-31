@@ -10,6 +10,10 @@
 
 <ng-container *ngIf="courses.length">
   <ng-container *ngFor="let course of courses">
-    <app-course-tile [course]="course" (onToggleCourse)="onCourseToggle($event)"></app-course-tile>
+    <app-course-tile
+      [course]="course" 
+      (onToggleCourse)="onCourseToggle($event)"
+      (onRemoveCourse)="doRemoveCourse($event)"
+    ></app-course-tile>
   </ng-container>
 </ng-container>

@@ -1,0 +1,12 @@
+<h2>{{ data.title }}</h2>
+
+<div mat-dialog-content>
+    After confirm, this course will be removed.<br>
+    Note that modules will be removed too.
+    This action is not reversible
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="closeMessage">Confirm</button>
+</div>

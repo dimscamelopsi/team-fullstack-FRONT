@@ -38,6 +38,12 @@
   }
 }
 
+span {
+  &.hot-action {
+    color: rgb(200,20,10);
+  }
+}
+
 @keyframes show {
   0% {
     opacity: 0;

@@ -1,0 +1,10 @@
+div {
+    &.mat-dialog-actions {
+        button {
+            text-transform: uppercase;
+            &:nth-child(2) {
+                color: rgb(220, 10, 10);
+            }
+        }
+    }
+}

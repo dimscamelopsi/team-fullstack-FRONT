@@ -26,6 +26,11 @@ export class CourseTileComponent implements OnInit {
     this.onToggleCourse.emit(course)
   }
 
+  public toggle(courseStatus: boolean): void {
+    this.course.isSelected = courseStatus
+    this.onToggleCourse.emit(this.course)
+  }
+
   public onRemoveClick(course: CourseListType): void {
     this._dialog.open(
       RemoveCourseDialogComponent,

@@ -5,13 +5,13 @@
       <div class="medias-number">{{ module.medias.length }} {{ module.medias.length ? module.medias.length === 1 ? 'medium' : 'media' : '' }}</div>
       <div class="duration">{{ module.totalTime }}</div>
       <div class="action">
-        <span 
-          [ngClass]="{'icon-list': true, 'up': !module.selected, 'down': module.selected}"
-          (click)="revealOrHide(module)"
-          *ngIf="module.medias.length">
-            &gt;
-        </span>
-      </div>    
+        <toggle
+          [isExpandable]="module.medias!.length > 0"
+          [selectedStatus]="module.selected"
+          (onToggle)="revealOrHide(module)"
+        >
+        </toggle>
+      </div>
     </div>
     <ng-container *ngIf="module.medias.length && module.selected">
       <ul>

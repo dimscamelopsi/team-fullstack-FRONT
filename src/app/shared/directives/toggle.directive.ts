@@ -1,4 +1,4 @@
-import { ComponentFactoryResolver, Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, ViewContainerRef } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, ViewContainerRef } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 
 @Directive({
@@ -41,6 +41,7 @@ export class ToggleDirective implements OnInit {
     this._span = this._renderer.createElement('span')
 
     if (this.useIcon) {
+      // @todo : Check if MatIcon is registered before to
       const icon = this._viewContainerRef.createComponent(MatIcon)
       this._nativeIcon = icon.instance._elementRef.nativeElement
       this._nativeIcon.textContent = this._nativeIconContent

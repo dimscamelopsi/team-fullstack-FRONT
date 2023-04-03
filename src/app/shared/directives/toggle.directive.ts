@@ -11,8 +11,15 @@ export class ToggleDirective implements OnInit {
   private _nativeIcon: any
   private _nativeIconContent: string = 'chevron_right'
   private _iconStatus: boolean = true
+  private _selectedStatus: boolean = false
 
-  @Input() public selectedStatus : boolean = false
+  @Input() public set selectedStatus(status: boolean) {
+    this._selectedStatus = status
+    console.log(`Status changed to : ${this._selectedStatus ? 'true' : 'false'}` )
+    if (this.useIcon) {
+      this._nativeIcon.textContent = status ? 'expand_more' : 'chevron_right'
+    }
+  }
 
   @Input() public set isExpandable(status: boolean) {
     this._iconStatus = status
@@ -61,10 +68,11 @@ export class ToggleDirective implements OnInit {
   @HostListener('click')
   onClick(): void {
     if (this._iconStatus) {
-      this.selectedStatus = !this.selectedStatus
-      this.onToggle.emit(this.selectedStatus)
+      this._selectedStatus = !this._selectedStatus
+      this.onToggle.emit(this._selectedStatus)
+
       if (!this.useIcon) {
-        if (this.selectedStatus) {
+        if (this._selectedStatus) {
           this._renderer.removeClass(this._span, 'up')
           this._renderer.addClass(this._span, 'down')
         } else {
@@ -72,7 +80,7 @@ export class ToggleDirective implements OnInit {
           this._renderer.addClass(this._span, 'up')
         }
       } else {
-        if (this.selectedStatus) {
+        if (this._selectedStatus) {
           this._nativeIcon.textContent = 'expand_more'
         } else {
           this._nativeIcon.textContent = 'chevron_right'

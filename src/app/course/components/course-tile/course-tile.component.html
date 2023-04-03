@@ -10,6 +10,7 @@
     <div class="col xs1">
       <toggle
         [selectedStatus]="course.isSelected"
+        [isExpandable]="course.modules!.length > 0"
         (onToggle)="toggle($event)"
       ></toggle>
     </div>

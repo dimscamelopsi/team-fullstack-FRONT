@@ -20,6 +20,11 @@ export class UserService {
   constructor() { }
 
   public get user(): any {
+    const jsonUser: string | null = sessionStorage.getItem('auth-key')
+
+    if (jsonUser !== null) {
+      this._user = JSON.parse(jsonUser)
+    }
     return this._user
   }
 

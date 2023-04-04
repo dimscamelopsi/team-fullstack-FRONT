@@ -37,6 +37,10 @@ export class AppRoutingModule {
       loadChildren: () => import('./course/course.module').then((m) => m.CourseModule)
     },
     {
+      path: 'user',
+      loadChildren: () => import('./user/user.module').then((m) => m.UserModule)
+    },
+    {
       path: '**',
       redirectTo: 'dashboard', // Or any 404  component you want !
       pathMatch: 'full'

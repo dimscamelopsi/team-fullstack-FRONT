@@ -27,6 +27,9 @@ export class UserService {
     this._user = users.find((user: any) =>
       user.login === credentials.login && user.password === credentials.password)
 
+    if (this._user) {
+      sessionStorage.setItem('auth-key', JSON.stringify(credentials))
+    }
     return this._user !== undefined
   }
 }

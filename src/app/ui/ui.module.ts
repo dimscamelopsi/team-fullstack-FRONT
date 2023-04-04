@@ -8,7 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { MatMenu, MatMenuModule } from '@angular/material/menu'
+import { MatMenuModule } from '@angular/material/menu'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 @NgModule({
   declarations: [],
   imports: [
@@ -27,6 +28,7 @@ export class UiModule {
     MatSnackBarModule,
     MatDialogModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSlideToggleModule
   ]
 }

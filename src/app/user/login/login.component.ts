@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { LocalStorageStrategy } from 'src/app/core/store/local-storage-strategy';
+import { SessionStorageStrategy } from 'src/app/core/store/session-storage-strategy';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   public form: FormGroup = new FormGroup({})
   public showPassword: boolean = false
+  public stayConnected: boolean = false
 
   constructor(
     private _userService: UserService,
@@ -30,6 +33,15 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword
     if (this.showPassword) {
       setTimeout(() => this.showPassword = false, 800)
+    }
+  }
+
+  changeStrategy(): void {
+    console.log('stayConnected was changed')
+    if (this.stayConnected) {
+      this._userService.storageStrategy = new LocalStorageStrategy()
+    } else {
+      this._userService.storageStrategy = new SessionStorageStrategy()
     }
   }
 

@@ -19,11 +19,24 @@
       </div>
     </mat-form-field>
 
-
     <div class="col xs12">
       <button mat-raised-button color="primary" [disabled]="form.invalid">
         Login
       </button>
     </div>
   </form>
+
+  <div class="row">
+    <div class="col xs12">
+      <mat-label>
+        Stay connected ?
+      </mat-label>
+      <mat-slide-toggle
+      [(ngModel)]="stayConnected"
+      (ngModelChange)="changeStrategy()"
+    >
+      {{ stayConnected ? 'Yes' : 'No'}}
+    </mat-slide-toggle>
+    </div>
+  </div>
 

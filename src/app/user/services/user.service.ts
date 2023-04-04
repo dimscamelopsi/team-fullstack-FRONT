@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import { environment } from './../../../environments/environment';
+import { IStorageStrategy } from './../../core/store/i-storage-strategy';
+import { SessionStorageStrategy } from './../../core/store/session-storage-strategy';
+import { LocalStorageStrategy } from './../../core/store/local-storage-strategy';
 
 const users: Array<any> = [
   {
@@ -16,16 +20,21 @@ const users: Array<any> = [
 export class UserService {
 
   private _user: any = undefined
+  private _storageStrategy: IStorageStrategy
 
-  constructor() { }
+  constructor() {
+    this._storageStrategy = environment.storage.auth.strategy === 'session' ?
+      new SessionStorageStrategy() :
+      new LocalStorageStrategy()
+  }
+
+  public set storageStrategy(strategy: IStorageStrategy) {
+    this._storageStrategy = strategy
+  }
 
   public get user(): any {
     if (this._user === undefined) {
-      const jsonUser: string | null = sessionStorage.getItem('auth-key')
-
-      if (jsonUser !== null) {
-        this._user = JSON.parse(jsonUser)
-      }
+      this._user = this._storageStrategy.retrieve()
     }
 
     return this._user
@@ -36,7 +45,7 @@ export class UserService {
       user.login === credentials.login && user.password === credentials.password)
 
     if (this._user) {
-      sessionStorage.setItem('auth-key', JSON.stringify(credentials))
+      this._storageStrategy.store(credentials)
     }
     return this._user !== undefined
   }

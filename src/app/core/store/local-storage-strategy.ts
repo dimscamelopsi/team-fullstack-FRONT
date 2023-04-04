@@ -17,7 +17,7 @@ export class LocalStorageStrategy implements IStorageStrategy {
       const jsonValue: string | null =  localStorage.getItem(this._key)
       return JSON.parse(jsonValue!)
     }
-    throw new Error(`No ${this._key} in local Storage`)
+    return undefined
   }
 
   remove(): void {

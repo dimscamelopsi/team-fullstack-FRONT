@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddComponent } from './student/add/add.component';
 import { ListComponent } from './student/list/list.component';
 import { UpdateComponent } from './student/update/update.component';
+import { AuthGuard } from './user/guards/auth.guard';
 
 @NgModule({
   imports: [RouterModule.forRoot(AppRoutingModule.routes)],
@@ -18,27 +19,40 @@ export class AppRoutingModule {
     },
     {
       path: 'dashboard',
-      component: DashboardComponent
+      component: DashboardComponent,
+      canActivate: [
+        AuthGuard
+      ]
     },
     {
       path: 'student/list',
-      component: ListComponent
+      component: ListComponent,
+      canActivate: [
+        AuthGuard
+      ]
     },
     {
       path: 'student/add',
-      component: AddComponent
+      component: AddComponent,
+      canActivate: [
+        AuthGuard
+      ]
     },
     {
       path: 'student/:id/update', // :id => sera remplacé par l'ID d'un Student à l'exécution
-      component: UpdateComponent
+      component: UpdateComponent,
+      canActivate: [
+        AuthGuard
+      ]
     },
     {
       path: 'course',
-      loadChildren: () => import('./course/course.module').then((m) => m.CourseModule)
+      loadChildren: () => import('./course/course.module').then((m) => m.CourseModule),
+      canActivate: [AuthGuard]
     },
     {
       path: 'user',
-      loadChildren: () => import('./user/user.module').then((m) => m.UserModule)
+      loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
     },
     {
       path: '**',

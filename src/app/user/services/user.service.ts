@@ -62,5 +62,9 @@ export class UserService {
     this._storageStrategy.remove()
     this._user = undefined
     this._user$.next(this._user)
+    // Fallback to default strategy
+    this._storageStrategy = environment.storage.auth.strategy === 'session' ?
+      new SessionStorageStrategy() :
+      new LocalStorageStrategy()
   }
 }

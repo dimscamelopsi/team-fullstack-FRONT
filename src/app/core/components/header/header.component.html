@@ -1,5 +1,7 @@
 <mat-toolbar color="primary">
-  <span>Streamer</span>
+  <span>
+    <a [routerLink]="['/']">Streamer</a>
+  </span>
   <span class="spacer"></span>
   <button mat-icon-button *ngIf="user$ | async" (click)="logout()">
     <mat-icon>power_rounded</mat-icon>

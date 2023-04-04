@@ -4,7 +4,7 @@ import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { LocalStorageStrategy } from 'src/app/core/store/local-storage-strategy';
 import { SessionStorageStrategy } from 'src/app/core/store/session-storage-strategy';
-
+import { environment } from './../../../environments/environment'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   public form: FormGroup = new FormGroup({})
   public showPassword: boolean = false
-  public stayConnected: boolean = false
+
+  public stayConnected: boolean = environment.storage.auth.strategy !== 'session'
 
   constructor(
     private _userService: UserService,

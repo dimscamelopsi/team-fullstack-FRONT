@@ -15,7 +15,6 @@ export class ToggleDirective implements OnInit {
 
   @Input() public set selectedStatus(status: boolean) {
     this._selectedStatus = status
-    console.log(`Status changed to : ${this._selectedStatus ? 'true' : 'false'}` )
     if (this.useIcon) {
       this._nativeIcon.textContent = status ? 'expand_more' : 'chevron_right'
     }

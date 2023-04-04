@@ -5,11 +5,22 @@ div {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
+    border: solid 1px rgb(128, 128, 128);
+    box-shadow: 1px 1px 3px rgb(128, 128, 128);
 
     div {
       &.title {
         display: flex;
         justify-content: center;
+        font-weight: bold;
+        font-size: 1.3em;
+        padding: 1em;
+      }
+
+      &.actions {
+        display: flex;
+        justify-content: end;
+        padding: 1em;
       }
     }
   }

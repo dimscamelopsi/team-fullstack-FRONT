@@ -3,6 +3,11 @@
     <mat-toolbar-row class="col xs12">
       <h1>{{ title }}</h1>
     </mat-toolbar-row>
+    <mat-toolbar-row>
+      <a [routerLink]="['/', 'user']">
+        Login
+      </a>
+    </mat-toolbar-row>
   </mat-toolbar>
 
   <div class="row">

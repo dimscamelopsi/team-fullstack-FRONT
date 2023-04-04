@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,10 @@ export class LoginComponent implements OnInit {
   public form: FormGroup = new FormGroup({})
   public showPassword: boolean = false
 
-  constructor() { }
+  constructor(
+    private _userService: UserService,
+    private _router: Router
+  ) { }
 
   ngOnInit(): void {
     const loginControl: AbstractControl = new FormControl('', [Validators.required])
@@ -28,4 +33,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  onSubmit(): void {
+    if (this._userService.authenticate(this.form.value)) {
+      this._router.navigate(['/'])
+    } else {
+      this.form.controls['login'].setValue('')
+      this.form.controls['password'].setValue('')
+      // Maybe a toast, more user friendly ?
+    }
+  }
 }

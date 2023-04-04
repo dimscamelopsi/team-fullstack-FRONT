@@ -1,1 +1,7 @@
-<p>header works!</p>
+<mat-toolbar color="primary">
+  <span>Streamer</span>
+  <span class="spacer"></span>
+  <button mat-icon-button *ngIf="user$ | async" (click)="logout()">
+    <mat-icon>power_rounded</mat-icon>
+  </button>
+</mat-toolbar>

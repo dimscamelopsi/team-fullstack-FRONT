@@ -14,7 +14,7 @@ export class AppInitializerService {
       const jsonUser: string | null = localStorage.getItem(environment.storage.auth.key)
       if (jsonUser) {
         this._userService.storageStrategy = new LocalStorageStrategy()
-        this._userService.authenticate(JSON.parse(jsonUser))
+        this._userService.authenticate(JSON.parse(jsonUser)).subscribe()
       }
       resolve()
     })
@@ -22,7 +22,6 @@ export class AppInitializerService {
 
   public static initializeApp(_appInitializerService: AppInitializerService): any {
     return (): Promise<any> => {
-      console.log(`I'm the app initializer`)
       return _appInitializerService.init()
     }
   }

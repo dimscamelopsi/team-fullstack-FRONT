@@ -3,7 +3,8 @@ import { environment } from './../../../environments/environment';
 import { IStorageStrategy } from './../../core/store/i-storage-strategy';
 import { SessionStorageStrategy } from './../../core/store/session-storage-strategy';
 import { LocalStorageStrategy } from './../../core/store/local-storage-strategy';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, take, tap } from 'rxjs';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 
 const users: Array<any> = [
   {
@@ -25,7 +26,9 @@ export class UserService {
 
   private _storageStrategy: IStorageStrategy
 
-  constructor() {
+  constructor(
+    private _httpClient: HttpClient
+  ) {
     this._storageStrategy = environment.storage.auth.strategy === 'session' ?
       new SessionStorageStrategy() :
       new LocalStorageStrategy()
@@ -47,15 +50,24 @@ export class UserService {
     return this._user$
   }
 
-  public authenticate(credentials: any): boolean {
-    this._user = users.find((user: any) =>
-      user.login === credentials.login && user.password === credentials.password)
-
-    if (this._user) {
-      this._storageStrategy.store(credentials)
-      this._user$.next(this._user)
-    }
-    return this._user !== undefined
+  public authenticate(credentials: any): Observable<HttpResponse<any>> {
+    const endPoint: string = `${environment.apiRootUri}user/byEmailAndPassword`
+    return this._httpClient.post<any>(
+      endPoint,
+      credentials,
+      {
+        observe: 'response'
+      }
+    ).pipe(
+      take(1),
+      tap((response: HttpResponse<any>) => {
+        if (response.status === 200) {
+          this._user = response.body
+          this._storageStrategy.store(credentials)
+          this._user$.next(this._user)
+        }
+      })
+    )
   }
 
   public logout(): void {

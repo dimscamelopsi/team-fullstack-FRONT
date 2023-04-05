@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { UserService } from 'src/app/user/services/user.service';
-import { SessionStorageStrategy } from '../../store/session-storage-strategy';
 
 @Component({
   selector: 'app-header',

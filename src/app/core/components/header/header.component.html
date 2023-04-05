@@ -6,4 +6,7 @@
   <button mat-icon-button *ngIf="user$ | async" (click)="logout()">
     <mat-icon>logout</mat-icon>
   </button>
+  <span *ngIf="user !== undefined">
+    {{ user.login }}
+  </span>
 </mat-toolbar>

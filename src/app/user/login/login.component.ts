@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LocalStorageStrategy } from 'src/app/core/store/local-storage-strategy';
 import { SessionStorageStrategy } from 'src/app/core/store/session-storage-strategy';
 import { environment } from './../../../environments/environment'
+import { HttpResponse } from '@angular/common/http';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -47,12 +48,17 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this._userService.authenticate(this.form.value)) {
-      this._router.navigate(['/'])
-    } else {
-      this.form.controls['login'].setValue('')
-      this.form.controls['password'].setValue('')
-      // Maybe a toast, more user friendly ?
-    }
+
+    this._userService.authenticate(this.form.value)
+      .subscribe({
+        next: (response: HttpResponse<any>) => {
+          this._router.navigate(['/'])
+        },
+        error: (error: any) => {},
+        complete: () => {
+          this.form.controls['login'].setValue('')
+          this.form.controls['password'].setValue('')
+        }
+      })
   }
 }

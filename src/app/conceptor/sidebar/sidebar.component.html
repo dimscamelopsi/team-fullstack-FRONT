@@ -1,0 +1,73 @@
+<p>sidebar works!</p>
+
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+
+    <h2 class="name">My Dashboard</h2>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button" routerLink="/home">
+      <mat-icon>visibility</mat-icon>
+      <span>See all courses</span>
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <div>
+      <h2>Edition</h2>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button" routerLink="/profile">
+      <mat-icon>library_add</mat-icon>
+      <span>Create course</span>
+    </button>
+
+    <button mat-button class="menu-button" routerLink="/about">
+      <mat-icon>library_add</mat-icon>
+      <span>Create module</span>
+    </button>
+
+    <button mat-button class="menu-button" routerLink="/about">
+      <mat-icon>library_add</mat-icon>
+      <span>Create media</span>
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <div>
+      <h2>Management</h2>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button" routerLink="/help">
+      <mat-icon>edit</mat-icon>
+      <span>Manage courses</span>
+    </button>
+
+    <button mat-button class="menu-button" routerLink="/help">
+      <mat-icon>edit</mat-icon>
+      <span>Manage modules </span>
+    </button>
+
+    <button mat-button class="menu-button" routerLink="/help">
+      <mat-icon>edit</mat-icon>
+      <span>Manage medias</span>
+    </button>
+
+  </mat-sidenav>
+
+  <mat-divider></mat-divider>
+
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+
+
+
+</mat-sidenav-container>

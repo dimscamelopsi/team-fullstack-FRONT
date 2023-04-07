@@ -41,7 +41,7 @@ export class UserService {
   }
 
   public authenticate(credentials: any): Observable<HttpResponse<any>> {
-    const endPoint: string = `${environment.apiRootUri}user/byEmailAndPassword`
+    const endPoint: string = `${environment.apiRootUri}students/byLoginAndPassword`
     return this._httpClient.post<any>(
       endPoint,
       credentials,

@@ -11,7 +11,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 export class ConceptorRoutingModule {
   public static routes: Routes = [
     {
-      path:'conceptor',
+      path:'',
       component:SidebarComponent
     }
 

@@ -5,6 +5,7 @@ import { AddComponent } from './student/add/add.component';
 import { ListComponent } from './student/list/list.component';
 import { UpdateComponent } from './student/update/update.component';
 import { AuthGuard } from './user/guards/auth.guard';
+import { SidebarComponent } from './conceptor/sidebar/sidebar.component';
 
 @NgModule({
   imports: [RouterModule.forRoot(AppRoutingModule.routes)],
@@ -53,6 +54,10 @@ export class AppRoutingModule {
     {
       path: 'user',
       loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
+    },
+    {
+      path: 'conceptor',
+      loadChildren: () => import('./conceptor/conceptor.module').then((m) => m.ConceptorModule)
     },
     {
       path: '**',

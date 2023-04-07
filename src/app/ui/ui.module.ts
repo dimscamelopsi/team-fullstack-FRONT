@@ -10,6 +10,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatDividerModule} from '@angular/material/divider';
 @NgModule({
   declarations: [],
   imports: [
@@ -29,6 +31,8 @@ export class UiModule {
     MatDialogModule,
     MatIconModule,
     MatMenuModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSidenavModule,
+    MatDividerModule
   ]
 }

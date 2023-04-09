@@ -5,7 +5,7 @@
 
     <mat-divider></mat-divider>
 
-    <button mat-button class="menu-button" routerLink="">
+    <button [name]="listb" type="button" mat-button class="menu-button" (click)="listb = !listb" [routerLink]="[{ outlets: { global: ['list'] } }]">
       <mat-icon>visibility</mat-icon>
       <span>See all courses</span>
     </button>
@@ -62,7 +62,7 @@
 
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">
-      <router-outlet></router-outlet>
+      <router-outlet name = "global" > <app-list *ngIf="listb"></app-list></router-outlet>
     </div>
   </mat-sidenav-content>
 

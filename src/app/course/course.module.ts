@@ -23,6 +23,10 @@ import { ModuleAddComponent } from './dialogs/module-add/module-add.component';
   imports: [
     SharedModule,
     CourseRoutingModule
+  ],
+  exports: [
+    ListComponent
   ]
+
 })
 export class CourseModule { }

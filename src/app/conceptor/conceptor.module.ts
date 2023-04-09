@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { UiModule } from '../ui/ui.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AddModuleComponent } from './add-module/add-module.component';
+import { CourseModule } from '../course/course.module';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { AddModuleComponent } from './add-module/add-module.component';
     ConceptorRoutingModule,
     SharedModule,
     UiModule,
+    CourseModule
 
   ]
 })

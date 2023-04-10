@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
     {
       title: 'Courses',
       summary: 'Manage courses and medias',
-      action: ['course']
+      action: ['conceptor']
     })
   }
 }

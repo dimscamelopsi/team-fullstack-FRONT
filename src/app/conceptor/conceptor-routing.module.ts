@@ -2,6 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { OutletContext, RouterModule, Routes } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ListComponent } from '../course/list/list.component';
+import { CourseHandlerComponent } from '../course/course-handler/course-handler.component';
 
 
 
@@ -12,13 +13,18 @@ import { ListComponent } from '../course/list/list.component';
 export class ConceptorRoutingModule {
   public static routes: Routes = [
     {
-      path:'',
-      component:SidebarComponent
-    },
-    {
-      path:'list',
-      component: ListComponent,
-      outlet: 'global'
+      path: '',
+      component: SidebarComponent, children:[
+        {
+        path: 'addCourse',
+       component: CourseHandlerComponent
+        },
+        {
+          path:'list',
+          component:ListComponent
+        }
+
+      ]
     }
 
   ];

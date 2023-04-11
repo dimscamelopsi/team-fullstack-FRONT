@@ -7,6 +7,7 @@ import { FormCourseBuilderService } from '../services/course-handler/form-course
 import { CourseService } from '../services/course.service';
 import { CourseType } from '../types/course-type';
 import { ModuleType } from '../types/module-type';
+import { ListComponent } from '../list/list.component';
 
 @Component({
   selector: 'app-course-handler',
@@ -68,7 +69,13 @@ export class CourseHandlerComponent implements OnInit {
   }
 
   addCourse(): void {
-
+    this._dialog.open(
+      ListComponent,
+      {
+        height: 'flex',
+        width: 'flex'
+      }
+    )
   }
 
 }

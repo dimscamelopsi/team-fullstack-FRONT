@@ -23,7 +23,7 @@ export class CourseHandlerComponent implements OnInit {
     private _courseService: CourseService,
     private _router: Router,
     private _dialog: MatDialog
-  ) { 
+  ) {
     this.form = this._formBuilder.form
   }
 
@@ -65,6 +65,10 @@ export class CourseHandlerComponent implements OnInit {
       .subscribe((courseType: CourseType) => {
         this._router.navigate(['/', 'course'])
       })
+  }
+
+  addCourse(): void {
+
   }
 
 }

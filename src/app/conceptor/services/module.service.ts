@@ -8,7 +8,7 @@ import { ModuleType } from '../types/module-type';
   providedIn: 'root'
 })
 export class ModuleService {
-  private readonly endpoint: string = `${environment.apiRootUri}modules`
+  private readonly endpoint: string = `${environment.apiRootUri}module`
   
 
   constructor(

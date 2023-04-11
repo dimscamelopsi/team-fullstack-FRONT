@@ -1,24 +1,26 @@
 <!-- Display title and number -->
-<div class="row">
-  <div class="col xs9 course-title">
-    Course List
+<mat-dialog-content>
+  <div class="row">
+    <div class="col xs9 course-title">
+      Course List
+    </div>
+    <div class="col xs1 course-number">
+      {{ courses.length }} items
+    </div>
+    <div class="col xs2">
+      <button mat-raised-button color="primary" [routerLink]="['/', 'course', 'add']">
+        Create a course
+      </button>
+    </div>
   </div>
-  <div class="col xs1 course-number">
-    {{ courses.length }} items
-  </div>
-  <div class="col xs2">
-    <button mat-raised-button color="primary" [routerLink]="['/', 'course', 'add']">
-      Create a course
-    </button>
-  </div>
-</div>
 
-<ng-container *ngIf="courses.length">
-  <ng-container *ngFor="let course of courses">
-    <app-course-tile
-      [course]="course" 
-      (onToggleCourse)="onCourseToggle($event)"
-      (onRemoveCourse)="doRemoveCourse($event)"
-    ></app-course-tile>
+  <ng-container *ngIf="courses.length">
+    <ng-container *ngFor="let course of courses">
+      <app-course-tile
+        [course]="course"
+        (onToggleCourse)="onCourseToggle($event)"
+        (onRemoveCourse)="doRemoveCourse($event)"
+      ></app-course-tile>
+    </ng-container>
   </ng-container>
-</ng-container>
+</mat-dialog-content>

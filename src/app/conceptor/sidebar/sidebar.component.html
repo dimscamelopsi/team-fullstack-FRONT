@@ -18,7 +18,7 @@
 
     <mat-divider></mat-divider>
 
-    <button mat-button class="menu-button" routerLink="">
+    <button mat-button class="menu-button" routerLink="addCourse">
       <mat-icon>library_add</mat-icon>
       <span>Create course</span>
     </button>
@@ -62,7 +62,9 @@
 
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">
-      <router-outlet name = "global" > <app-list *ngIf="listb"></app-list></router-outlet>
+      <router-outlet>
+        <!-- <app-list *ngIf="listb"></app-list> -->
+      </router-outlet>
     </div>
   </mat-sidenav-content>
 

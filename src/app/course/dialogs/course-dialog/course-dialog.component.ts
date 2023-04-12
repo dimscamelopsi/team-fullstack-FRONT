@@ -16,6 +16,7 @@ export class CourseDialogComponent implements OnInit {
 
   public courses: Array<CourseListType> = []
   public showAdd: boolean = false
+  public course!: CourseListType
 
 
   constructor(
@@ -48,5 +49,10 @@ export class CourseDialogComponent implements OnInit {
           }
         })
     }
+  }
+
+  sendCourse(course: CourseListType) {
+    this.course = course
+    this.dialogRef.close(this.course)
   }
 }

@@ -7,6 +7,7 @@ import { environment } from './../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
+//public userId:
 export class CourseService {
 
   private readonly endPoint: string = `${environment.apiRootUri}course`
@@ -34,4 +35,9 @@ export class CourseService {
       }
     )
   }
+  /*public findUsersCourses(): Observable<CourseListType[]> {
+    return this._httpClient.get<CourseListType[]>(
+      `${this.endPoint}usersCourses/${}`,
+    )
+  }*/
 }

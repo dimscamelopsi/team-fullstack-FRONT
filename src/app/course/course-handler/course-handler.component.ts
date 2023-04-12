@@ -85,6 +85,12 @@ export class CourseHandlerComponent implements OnInit {
       if (result !== undefined) {
         // this.modules.push(result)
         console.log(result)
+        this.c['title'].setValue(result.title)
+        this.c['objective'].setValue(result.objective)
+        let module: ModuleType
+        for(module of result.modules!) {
+          this.modules.push(module)
+        }
       }
     })
   }

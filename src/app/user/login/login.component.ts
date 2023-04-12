@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const loginControl: AbstractControl = new FormControl('Lemaire.Aldegonde', [Validators.required])
-    const passwordControl: AbstractControl = new FormControl('GfNScUbIzt6VJzZEtfgH', [Validators.required])
+    const loginControl: AbstractControl = new FormControl('', [Validators.required])
+    const passwordControl: AbstractControl = new FormControl('', [Validators.required])
 
     this.form.addControl('login', loginControl)
     this.form.addControl('password', passwordControl)

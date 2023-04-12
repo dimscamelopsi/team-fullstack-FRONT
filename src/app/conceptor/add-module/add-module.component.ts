@@ -6,6 +6,8 @@ import { CourseType } from 'src/app/course/types/course-type';
 import { ToastService } from 'src/app/core/toast.service';
 import { HttpResponse } from '@angular/common/http';
 import { ModuleType } from '../types/module-type';
+import { CourseService } from 'src/app/course/services/course.service';
+import { CourseListType } from 'src/app/course/types/course-list-type';
 
 @Component({
   selector: 'app-add-module',
@@ -15,15 +17,26 @@ import { ModuleType } from '../types/module-type';
 export class AddModuleComponent implements OnInit {
   moduleFormGroup!: FormGroup;
   public moduleType!: ModuleType[];
+  public usercourses: Array<CourseListType> = []
 
   constructor(
 
     private _fb: FormBuilder,
     private _moduleService: ModuleService,
-    private _toastService: ToastService
+    private _toastService: ToastService,
+    private _courseService: CourseService
   ) { }
 
   ngOnInit(): void {
+
+    this._courseService.findUsersCourses()
+      .pipe(
+        take(1)
+      )
+      .subscribe((response: CourseListType[]) => {
+        
+        this.usercourses=response
+      })
 
     this.moduleFormGroup = this._fb.group({
       name: this._fb.control("",
@@ -36,6 +49,7 @@ export class AddModuleComponent implements OnInit {
           Validators.required,
           Validators.minLength(4)
         ])
+        
 
     });
   }

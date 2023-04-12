@@ -9,6 +9,7 @@ import { CourseType } from '../types/course-type';
 import { ModuleType } from '../types/module-type';
 import { ListComponent } from '../list/list.component';
 import { CourseDialogComponent } from '../dialogs/course-dialog/course-dialog.component';
+import { CourseListType } from '../types/course-list-type';
 
 @Component({
   selector: 'app-course-handler',
@@ -19,6 +20,7 @@ export class CourseHandlerComponent implements OnInit {
   public form: FormGroup
   public useModule: boolean = true
   public modules: Array<ModuleType> = []
+  public course!: CourseListType
 
   constructor(
     private _formBuilder: FormCourseBuilderService,
@@ -78,8 +80,13 @@ export class CourseHandlerComponent implements OnInit {
         },
         height: 'flex',
         width: 'flex'
-      },
-    )
+      }
+    ).afterClosed().subscribe((result: CourseListType | undefined) => {
+      if (result !== undefined) {
+        // this.modules.push(result)
+        console.log(result)
+      }
+    })
   }
 
 }

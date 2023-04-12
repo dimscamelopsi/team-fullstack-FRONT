@@ -5,7 +5,6 @@ import { AddComponent } from './student/add/add.component';
 import { ListComponent } from './student/list/list.component';
 import { UpdateComponent } from './student/update/update.component';
 import { AuthGuard } from './user/guards/auth.guard';
-import { SidebarComponent } from './conceptor/sidebar/sidebar.component';
 
 @NgModule({
   imports: [RouterModule.forRoot(AppRoutingModule.routes)],

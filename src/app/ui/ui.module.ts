@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -11,6 +11,8 @@ import { MatMenuModule } from '@angular/material/menu'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatSelectModule} from '@angular/material/select'; 
+
 @NgModule({
   declarations: [],
   imports: [
@@ -32,6 +34,7 @@ export class UiModule {
     MatMenuModule,
     MatSlideToggleModule,
     MatSidenavModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSelectModule
   ]
 }

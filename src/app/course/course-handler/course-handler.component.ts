@@ -98,4 +98,11 @@ export class CourseHandlerComponent implements OnInit {
     })
   }
 
+  resetForm(event:any): void {
+    event.preventDefault();
+    this.modules = []
+    this.c['title'].setValue('')
+    this.c['objective'].setValue('')
+  }
+
 }

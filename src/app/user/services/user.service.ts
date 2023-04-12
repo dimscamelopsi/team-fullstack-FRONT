@@ -6,6 +6,7 @@ import { LocalStorageStrategy } from './../../core/store/local-storage-strategy'
 import { BehaviorSubject, Observable, take, tap } from 'rxjs';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -54,6 +55,7 @@ export class UserService {
         if (response.status === 200) {
           this._user = response.body
 
+
           /**
           let storage = this.user.stayConnected ? localStorage : sessionStorage
           storage.setItem('auth', JSON.stringify(credentials))
@@ -64,7 +66,7 @@ export class UserService {
             sessionStorage.setItem('auth', JSON.stringify(credentials))
           }
           */
-          this._storageStrategy.store(credentials)
+         this._storageStrategy.store(this._user);
           this._user$.next(this._user)
         }
       })

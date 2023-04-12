@@ -4,15 +4,19 @@ import { Observable } from 'rxjs';
 import { CourseListType } from '../types/course-list-type';
 import { CourseType } from '../types/course-type';
 import { environment } from './../../../environments/environment';
+import { UserService } from 'src/app/user/services/user.service';
 @Injectable({
   providedIn: 'root'
 })
-//public userId:
+
 export class CourseService {
 
   private readonly endPoint: string = `${environment.apiRootUri}course`
 
-  constructor(private _httpClient: HttpClient) { }
+  constructor(
+    private _httpClient: HttpClient,
+    private _userService: UserService
+    ) { }
 
   public findFullCourses(): Observable<CourseListType[]> {
     return this._httpClient.get<CourseListType[]>(
@@ -35,9 +39,12 @@ export class CourseService {
       }
     )
   }
-  /*public findUsersCourses(): Observable<CourseListType[]> {
+  public findUsersCourses(): Observable<CourseListType[]> {
+    console.log(this._userService.user.id)
     return this._httpClient.get<CourseListType[]>(
-      `${this.endPoint}usersCourses/${}`,
+      //`${this.endPoint}/usersCourses/${this._userService.user.id}`,
+      this.endPoint + '/usersCourses/' + this._userService.user.id
+   
     )
-  }*/
+  }
 }

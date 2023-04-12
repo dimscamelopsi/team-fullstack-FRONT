@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { MediaType } from "src/app/course/types/media-type";
 import { environment } from "src/environments/environment";
 
@@ -16,5 +17,12 @@ constructor(
   private _httpClient: HttpClient
 ) { }
 
+
+public add(media: MediaType) : Observable<any> {
+  return this._httpClient.post<MediaType>(
+    this.endpoint,
+    media
+  )
+}
 }
 

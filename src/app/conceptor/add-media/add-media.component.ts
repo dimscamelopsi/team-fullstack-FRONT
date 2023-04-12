@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { take } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
-import { FormCourseBuilderService } from 'src/app/course/services/course-handler/form-course-builder.service';
+import {ReactiveFormsModule} from'@angular/forms';
 
 
 @Component({
@@ -17,25 +15,30 @@ import { FormCourseBuilderService } from 'src/app/course/services/course-handler
 })
 export class AddMediaComponent implements OnInit {
 
-  public form!: FormGroup;
-  public mediaFormGroup!: FormGroup;
-  public formModule!: FormsModule;
-  public router!: Router;
+
+ mediaForm!: FormGroup;
+ router!: Router;
   mediaService: any;
   _toastService: any;
 
-  constructor(
-    private formBuilder: FormCourseBuilderService
-    ) {
-      this.mediaFormGroup = this.formBuilder.form
-     }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.mediaForm =this.formBuilder.group
+    ({
 
+      title: null,
+      summary: null,
+      duration: null,
+      totalTime: null,
+      createdAt: Date,
+      url:null,
+      typeMedia: null
+    });
 }
 
 public addMedia() {
-  this.mediaService.add(this.mediaFormGroup.value)
+  this.mediaService.add(this.mediaForm.value)
   .pipe(
     take(1)
   ).suscribe({
@@ -49,19 +52,10 @@ public addMedia() {
     }
   })
 }
-/*this.mediaFormGroup = this.formBuilder.group({
-  id: null,
-  title: null,
-  summary: null,
-  duration: null,
-  totalTime: null,
-  createdAt: Date,
-  url:null,
-  typeMedia: null
-});*/
+
 
 onSubmitForm() {
-  console.log(this.mediaFormGroup.value);
+  console.log(this.mediaForm.value);
 }
 
 }

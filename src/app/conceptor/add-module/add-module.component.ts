@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModuleService } from '../services/module.service';
 import { take } from 'rxjs';
-import { CourseType } from 'src/app/course/types/course-type';
 import { ToastService } from 'src/app/core/toast.service';
 import { HttpResponse } from '@angular/common/http';
 import { ModuleType } from '../types/module-type';

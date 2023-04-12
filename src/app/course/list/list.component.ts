@@ -14,6 +14,7 @@ import { ModuleType } from '../types/module-type';
 export class ListComponent implements OnInit {
 
   public courses: Array<CourseListType> = []
+  
 
   constructor(
     private _courseService: CourseService,
@@ -22,12 +23,16 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this._courseService.findFullCourses()
+    //this._courseService.findUsersCourses()
       .pipe(
         take(1)
       )
       .subscribe((response: CourseListType[]) => {
         this.courses = response
+        //this.usercourses=response
       })
+      
+      
   }
 
   onCourseToggle(course: CourseListType): void {

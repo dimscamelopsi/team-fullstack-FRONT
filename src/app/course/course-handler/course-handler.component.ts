@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -72,9 +72,12 @@ export class CourseHandlerComponent implements OnInit {
     this._dialog.open(
       ListComponent,
       {
+        data : {
+          show : true
+        },
         height: 'flex',
         width: 'flex'
-      }
+      },
     )
   }
 

@@ -15,7 +15,10 @@
         [useIcon]="true"
       ></toggle>
     </div>
+
+
     <div class="col xs1">
+      <span *ngIf="showAdd">coucou</span>
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>

@@ -2,6 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { OutletContext, RouterModule, Routes } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ListComponent } from '../course/list/list.component';
+import { AddMediaComponent } from './add-media/add-media.component';
 
 
 
@@ -19,7 +20,11 @@ export class ConceptorRoutingModule {
       path:'list',
       component: ListComponent,
       outlet: 'global'
-    }
+    },
+    {
+      path: 'addMedia',
+      component: AddMediaComponent,
+   },
 
   ];
  }

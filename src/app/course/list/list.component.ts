@@ -16,14 +16,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class ListComponent implements OnInit {
 
   public courses: Array<CourseListType> = []
-  public showAdd: boolean = false
-
 
   constructor(
     private _courseService: CourseService,
     private _toastService: ToastService,
-    public dialogRef: MatDialogRef<CourseHandlerComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +30,6 @@ export class ListComponent implements OnInit {
       .subscribe((response: CourseListType[]) => {
         this.courses = response
       })
-      this.showAdd = this.data.show
   }
 
   onCourseToggle(course: CourseListType): void {

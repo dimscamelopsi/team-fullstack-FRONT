@@ -8,6 +8,7 @@ import { CourseService } from '../services/course.service';
 import { CourseType } from '../types/course-type';
 import { ModuleType } from '../types/module-type';
 import { ListComponent } from '../list/list.component';
+import { CourseDialogComponent } from '../dialogs/course-dialog/course-dialog.component';
 
 @Component({
   selector: 'app-course-handler',
@@ -70,7 +71,7 @@ export class CourseHandlerComponent implements OnInit {
 
   addCourse(): void {
     this._dialog.open(
-      ListComponent,
+      CourseDialogComponent,
       {
         data : {
           show : true

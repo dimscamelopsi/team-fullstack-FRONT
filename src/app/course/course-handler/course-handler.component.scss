@@ -22,6 +22,15 @@ h2 {
   font-size: 2rem;
 }
 
+#import {
+  font-size: 1rem;
+  button{
+    margin-left: 1rem;
+    width: 6rem;
+    font-size: 1rem;
+  }
+}
+
 fieldset {
   border-radius: 0.5rem;
   margin: 1.5rem 0 1.5rem 0;
@@ -83,3 +92,15 @@ fieldset {
 mat-divider {
   background-color: #002b5c;
 }
+
+.buttons{
+  display: flex;
+  justify-content: space-evenly;
+  button{
+    width: 6rem;
+    font-size: 1rem;
+  }
+
+}
+
+

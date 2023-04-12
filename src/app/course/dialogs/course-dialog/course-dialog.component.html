@@ -6,16 +6,10 @@
     <div class="col xs1 course-number">
       {{ courses.length }} items
     </div>
-    <div class="col xs2">
-      <button mat-raised-button color="primary" [routerLink]="['/', 'course', 'add']">
-        Create a course
-      </button>
-    </div>
   </div>
 
   <ng-container *ngIf="courses.length">
     <ng-container *ngFor="let course of courses">
-      <span *ngIf="data.show">coucou</span>
       <app-course-tile
         [course]="course" [showAdd]="data.show"
         (onToggleCourse)="onCourseToggle($event)"

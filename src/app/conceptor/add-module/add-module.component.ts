@@ -34,8 +34,8 @@ export class AddModuleComponent implements OnInit {
         take(1)
       )
       .subscribe((response: CourseListType[]) => {
-        
-        this.usercourses=response
+
+        this.usercourses = response
       })
 
     this.moduleFormGroup = this._fb.group({
@@ -48,8 +48,8 @@ export class AddModuleComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(4)
-        ])
-        
+        ]),
+      course: this._fb.control("")
 
     });
   }
@@ -61,8 +61,8 @@ export class AddModuleComponent implements OnInit {
         take(1)
       ).subscribe({
         next: (response: HttpResponse<any>) => {
-           const message: string = `module was added. `
-           this._toastService.show(message)
+          const message: string = `module was added. `
+          this._toastService.show(message)
         },
         error: (error: any) => {
           const badMessage: string = `Module not added.`

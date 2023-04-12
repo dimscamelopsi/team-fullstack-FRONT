@@ -19,6 +19,7 @@ import { CourseListType } from '../types/course-list-type';
 export class CourseHandlerComponent implements OnInit {
   public form: FormGroup
   public useModule: boolean = true
+  public module!: ModuleType
   public modules: Array<ModuleType> = []
   public course!: CourseListType
 
@@ -83,13 +84,15 @@ export class CourseHandlerComponent implements OnInit {
       }
     ).afterClosed().subscribe((result: CourseListType | undefined) => {
       if (result !== undefined) {
-        // this.modules.push(result)
+
         console.log(result)
+
+        this.modules = []
         this.c['title'].setValue(result.title)
         this.c['objective'].setValue(result.objective)
-        let module: ModuleType
-        for(module of result.modules!) {
-          this.modules.push(module)
+
+        for(this.module of result.modules!) {
+          this.modules.push(this.module)
         }
       }
     })

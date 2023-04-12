@@ -1,0 +1,15 @@
+footer {
+  background: blue;
+  color: white;
+  height: 150px;
+  margin: 0;
+  bottom: 0;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  background: linear-gradient(rgb(85, 85, 85), rgb(17, 17, 17));
+  align-items: center;
+  div {
+    font-size: 20px;
+  }
+}

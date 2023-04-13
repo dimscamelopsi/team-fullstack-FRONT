@@ -9,6 +9,7 @@ import { ModuleListComponent } from './components/module-list/module-list.compon
 import { RemoveCourseDialogComponent } from './dialogs/remove-course-dialog/remove-course-dialog.component';
 import { CourseHandlerComponent } from './course-handler/course-handler.component';
 import { ModuleAddComponent } from './dialogs/module-add/module-add.component';
+import { ManageCourseComponent } from './components/manage-course/manage-course.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ModuleAddComponent } from './dialogs/module-add/module-add.component';
     ModuleListComponent,
     RemoveCourseDialogComponent,
     CourseHandlerComponent,
-    ModuleAddComponent
+    ModuleAddComponent,
+    ManageCourseComponent
   ],
   imports: [
     SharedModule,

@@ -71,6 +71,8 @@ export class UserService {
     )
   }
 
+
+
   public logout(): void {
     this._storageStrategy.remove()
     this._user = undefined

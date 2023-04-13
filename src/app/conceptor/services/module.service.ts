@@ -9,7 +9,7 @@ import { ModuleType } from '../types/module-type';
 })
 export class ModuleService {
   private readonly endpoint: string = `${environment.apiRootUri}module`
-  
+
 
   constructor(
     private _httpClient: HttpClient // DI Angular
@@ -23,4 +23,9 @@ export class ModuleService {
     )
   }
 
+  public findAllModules(): Observable<ModuleType[]> {
+    return this._httpClient.get<ModuleType[]>(
+      this.endpoint
+    )
+  }
 }

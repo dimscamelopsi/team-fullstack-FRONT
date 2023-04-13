@@ -12,6 +12,7 @@ import { CourseDialogComponent } from '../dialogs/course-dialog/course-dialog.co
 import { CourseListType } from '../types/course-list-type';
 import { BehaviorSubject } from 'rxjs';
 import { UserService } from 'src/app/user/services/user.service';
+import { ModuleDialogComponent } from '../dialogs/module-dialog/module-dialog.component';
 
 @Component({
   selector: 'app-course-handler',
@@ -94,6 +95,20 @@ export class CourseHandlerComponent implements OnInit {
         for(this.module of result.modules!) {
           this.modules.push(this.module)
         }
+      }
+    })
+  }
+
+  openModule(): void {
+    this._dialog.open(
+      ModuleDialogComponent,
+      {
+        height: 'flex',
+        width: 'flex'
+      }
+    ).afterClosed().subscribe((result: ModuleType | undefined) => {
+      if (result !== undefined) {
+          this.modules.push(result)
       }
     })
   }

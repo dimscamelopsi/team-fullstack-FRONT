@@ -1,0 +1,48 @@
+<mat-dialog-content>
+  <div class="row">
+    <div class="col xs9 course-title">
+      Module List
+    </div>
+    <div class="col xs1 course-number">
+      {{ modules.length }} items
+    </div>
+  </div>
+
+  <ng-container *ngIf="modules.length">
+    <ng-container *ngFor="let module of modules">
+      <div class="module-list">
+        <span>{{module.name}}</span>
+        <span>{{module.medias.length}} {{ module.medias.length ? module.medias.length === 1 ? 'medium' : 'media' : ''}} </span>
+        <toggle
+        [isExpandable]="module!.medias.length > 0"
+         *ngIf="module!.medias.length > 0"
+        [selectedStatus]="module.selected"
+          (onToggle)="revealOrHide(module)"
+          [useIcon]="true"
+      ></toggle>
+        <button mat-icon-button id="add" (click)="addModule(module)">
+          <mat-icon >add</mat-icon>
+        </button>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div *ngIf="module.selected">
+        <ul class="media-list">
+          <li *ngFor="let media of module.medias">
+            <div class="media-tile">
+              <div class="title">{{ media.title }}</div>
+              <div class="type">{{ media.typeMedia.title }}</div>
+              <div class="duration">{{ media.totalTime }}</div>
+            </div>
+            <mat-divider></mat-divider>
+          </li>
+        </ul>
+      </div>
+      <!-- <app-course-tile
+        [course]="course" [showAdd]="data.show"
+        (onToggleCourse)="onCourseToggle($event)"
+        (sendCourse)="sendCourse(course)"
+      ></app-course-tile> -->
+    </ng-container>
+  </ng-container>
+</mat-dialog-content>

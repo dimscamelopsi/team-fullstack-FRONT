@@ -14,10 +14,9 @@ export class MediaService {
     private _httpClient: HttpClient // DI Angular
   ) { }
 
-  public findAllMedia(media: MediaType): Observable<any> {
-    return this._httpClient.post<MediaType>(
-      this.endpoint,
-      media
+  public findAllMedias(): Observable<MediaType[]> {
+    return this._httpClient.get<MediaType[]>(
+      this.endpoint
     )
   }
 }

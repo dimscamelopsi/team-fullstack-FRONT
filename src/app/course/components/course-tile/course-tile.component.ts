@@ -12,6 +12,8 @@ export class CourseTileComponent implements OnInit {
   @Input() public course!: CourseListType
   @Output() public onToggleCourse: EventEmitter<CourseListType> = new EventEmitter()
   @Output() public onRemoveCourse: EventEmitter<CourseListType> = new EventEmitter()
+  @Output() public sendCourse: EventEmitter<CourseListType> = new EventEmitter()
+  @Input() public showAdd!: boolean
 
   constructor(
     private _dialog: MatDialog
@@ -45,5 +47,11 @@ export class CourseTileComponent implements OnInit {
         this.onRemoveCourse.emit(this.course)
       }
     })
+  }
+
+  // Send course data so we can import it in create a course (course-handler component)
+
+  public addCourse(course: CourseListType): void {
+    this.sendCourse.emit(this.course)
   }
 }

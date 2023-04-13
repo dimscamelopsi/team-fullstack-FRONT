@@ -7,6 +7,7 @@ import { UiModule } from '../ui/ui.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AddModuleComponent } from './add-module/add-module.component';
 import { CourseModule } from '../course/course.module';
+import { CourseHandlerComponent } from '../course/course-handler/course-handler.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CourseModule } from '../course/course.module';
     ConceptorRoutingModule,
     SharedModule,
     UiModule,
-    CourseModule
+    CourseModule,
+
 
   ]
 })

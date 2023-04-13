@@ -53,7 +53,8 @@ export class AddModuleComponent implements OnInit {
           Validators.required,
           Validators.minLength(4)
         ]),
-      course: this._fb.control("")
+      course: this._fb.control(""),
+      media: this._fb.control("")
 
     });
   }

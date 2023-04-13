@@ -27,9 +27,15 @@
   </div>
   </fieldset>
 
+  <div id="import">
+    <span>Import a module from an existing one :  </span>
+    <button  mat-raised-button type="button" color="primary"  (click)="openModule()">
+      Import
+  </button>
+  </div>
 
     <ng-container *ngIf="useModule">
-        <ng-container *ngIf="modules.length">
+        <ng-container>
           <fieldset>
             <legend>Modules</legend>
             <ol class="module-list">

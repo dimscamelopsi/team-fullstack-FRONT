@@ -1,7 +1,9 @@
 import { Component, NgModule } from '@angular/core';
 import { OutletContext, RouterModule, Routes } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { AddModuleComponent } from './add-module/add-module.component';
+
+import { AddModuleComponent } from './modules/add-module/add-module.component';
+
 import { ListComponent } from '../course/list/list.component';
 import { CourseHandlerComponent } from '../course/course-handler/course-handler.component';
 

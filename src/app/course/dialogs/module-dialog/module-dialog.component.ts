@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ModuleType } from '../../types/module-type';
-import { ModuleService } from 'src/app/conceptor/services/module.service';
+import { ModuleService } from 'src/app/conceptor/modules/services/module.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CourseHandlerComponent } from '../../course-handler/course-handler.component';
 import { take } from 'rxjs';

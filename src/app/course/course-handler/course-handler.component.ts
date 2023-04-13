@@ -10,6 +10,8 @@ import { ModuleType } from '../types/module-type';
 import { ListComponent } from '../list/list.component';
 import { CourseDialogComponent } from '../dialogs/course-dialog/course-dialog.component';
 import { CourseListType } from '../types/course-list-type';
+import { BehaviorSubject } from 'rxjs';
+import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
   selector: 'app-course-handler',
@@ -23,16 +25,26 @@ export class CourseHandlerComponent implements OnInit {
   public modules: Array<ModuleType> = []
   public course!: CourseListType
 
+  private _user: any = undefined
+  private _user$: BehaviorSubject<any  | undefined> = new BehaviorSubject(undefined)
+
   constructor(
     private _formBuilder: FormCourseBuilderService,
     private _courseService: CourseService,
     private _router: Router,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _userService: UserService
   ) {
     this.form = this._formBuilder.form
   }
 
   ngOnInit(): void {
+    this._user = this._userService.user$.getValue()
+    console.log(this._user.id)
+  }
+
+  public get user$() {
+    return this._user$
   }
 
   get c(): {[key: string]: AbstractControl} {

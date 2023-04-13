@@ -7,6 +7,9 @@ import { HttpResponse } from '@angular/common/http';
 import { ModuleType } from '../types/module-type';
 import { CourseService } from 'src/app/course/services/course.service';
 import { CourseListType } from 'src/app/course/types/course-list-type';
+import { MediaType } from 'src/app/course/types/media-type';
+import { MatDialog } from '@angular/material/dialog';
+import { MediaDialogComponent } from '../modules/media-dialog/media-dialog.component';
 
 @Component({
   selector: 'app-add-module',
@@ -17,13 +20,15 @@ export class AddModuleComponent implements OnInit {
   moduleFormGroup!: FormGroup;
   public moduleType!: ModuleType[];
   public usercourses: Array<CourseListType> = []
+  public medias: Array<MediaType> = []
 
   constructor(
 
     private _fb: FormBuilder,
     private _moduleService: ModuleService,
     private _toastService: ToastService,
-    private _courseService: CourseService
+    private _courseService: CourseService,
+    private _dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -69,9 +74,20 @@ export class AddModuleComponent implements OnInit {
         }
       })
   }
-
-  public addMedia(){
-    
+  openMedia(): void {
+    this._dialog.open(
+      MediaDialogComponent,
+      {
+        height: 'flex',
+        width: 'flex'
+      }
+    ).afterClosed().subscribe((result: MediaType | undefined) => {
+      if (result !== undefined) {
+          this.medias.push(result)
+      }
+    })
   }
+
+
 
 }

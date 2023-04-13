@@ -1,1 +1,14 @@
-<p>media-dialog works!</p>
+<mat-dialog-content>
+    <div class="row">
+        <div class="col xs9 media-title">
+            Media List
+        </div>
+    </div>
+    <ng-container *ngIf="medias.length">
+        <ng-container *ngFor="let media of medias">
+            <div class="media-list">
+                <span>{{media.title}}</span>
+            </div>
+        </ng-container>
+    </ng-container>
+</mat-dialog-content>

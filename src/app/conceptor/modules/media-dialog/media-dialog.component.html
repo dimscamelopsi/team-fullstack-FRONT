@@ -1,4 +1,4 @@
-<mat-dialog-content>
+<mat-dialog-content class="list-media">
     <div class="row">
         <div class="col xs9 media-title">
             Media List
@@ -7,7 +7,10 @@
     <ng-container *ngIf="medias.length">
         <ng-container *ngFor="let media of medias">
             <div class="media-list">
-                <span>{{media.title}}</span>
+                <div class="row">
+                    <div class="col xs6"><span>{{media.title}}</span></div>
+                    <div class="col xs6"><span>{{media.typeMedia.title}}</span></div>
+                </div>
             </div>
         </ng-container>
     </ng-container>

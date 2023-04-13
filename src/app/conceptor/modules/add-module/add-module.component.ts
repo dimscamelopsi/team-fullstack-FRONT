@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModuleService } from '../services/module.service';
 import { take } from 'rxjs';
 import { ToastService } from 'src/app/core/toast.service';
 import { HttpResponse } from '@angular/common/http';
-import { ModuleType } from '../types/module-type';
+import { ModuleType } from '../../types/module-type';
 import { CourseService } from 'src/app/course/services/course.service';
 import { CourseListType } from 'src/app/course/types/course-list-type';
 import { MediaType } from 'src/app/course/types/media-type';
-import { MatDialog } from '@angular/material/dialog';
-import { MediaDialogComponent } from '../modules/media-dialog/media-dialog.component';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MediaDialogComponent } from '../media-dialog/media-dialog.component';
 
 @Component({
   selector: 'app-add-module',
@@ -74,6 +74,7 @@ export class AddModuleComponent implements OnInit {
         }
       })
   }
+
   openMedia(): void {
     this._dialog.open(
       MediaDialogComponent,

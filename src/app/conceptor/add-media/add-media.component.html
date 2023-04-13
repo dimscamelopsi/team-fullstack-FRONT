@@ -1,56 +1,47 @@
-
-
-  <div class=" form-group row"></div>
-  <div class="row">
-     <div class="col xs10">
-       <ng-container >
-        <fieldset>
-          <legend>
-            New media
-          </legend>
-          <div class="row">
-            <div class="col xs10 md6">
-                    <input matInput placeholder="Media title...*" formControlTitle="title">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col xs10 md6">
-                    <input matInput placeholder="Media summary..*" formControlSummary="summary">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col xs10 md6">
-                    <input matInput placeholder="Media duration..*" formControlDuration="duration">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col xs10 md6">
-                    <input matInput placeholder="Media Url.*" formControlUrl="url">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col s10 md6">
-                    <input matInput placeholder="Media typeMedia..*" formControlTypeMedia="typeMedia">
-            </div>
-          </div>
-
 <div class="row">
-    <div class="col xs6"></div>
-       <div class="col xs6">
-          <button mat-raised-button type="button" color="primary" (click)="addMedia()"> Add Média </button>
-           </div>
-          <div class="col xs4"></div>
-        </div>
-      </fieldset>
+</div>
+<div class="row">
+    <div class="col xs12">
+        <ng-container>
+           <form [formGroup]="mediaFormGroup">
+            <fieldset>
+             <legend>
+             New media
+            </legend>
+            <div class="row">
+              <div class="col xs12 md6">
+                      <input matInput placeholder="Media title...*" formControlTitle="title">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col xs12 md6">
+                      <input matInput placeholder="Media summary..*" formControlSummary="summary">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col xs12 md6">
+                      <input matInput placeholder="Media duration..*" formControlDuration="duration">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col xs12 md6">
+                      <input matInput placeholder="Media Url.*" formControlUrl="url">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12 md6">
+                      <input matInput placeholder="Media typeMedia..*" formControlTypeMedia="typeMedia">
+              </div>
+            </div>
+          </fieldset>
+  <div class="row">
+      <div class="col xs6"></div>
+         <div class="col xs6">
+            <button mat-raised-button type="button" color="primary" (click)="addMedia()"> Add Média </button>
+             </div>
+            <div class="col xs4"></div>
+          </div>
+      </form>
     </ng-container>
   </div>
 </div>
-
-
-
-
-
-
-
-
-

@@ -7,6 +7,7 @@ import { AddModuleComponent } from './add-module/add-module.component';
 import { ListComponent } from '../course/list/list.component';
 import { AddMediaComponent } from './add-media/add-media.component';
 
+
 @NgModule({
   imports: [RouterModule.forChild(ConceptorRoutingModule.routes)],
   exports: [RouterModule]
@@ -14,7 +15,7 @@ import { AddMediaComponent } from './add-media/add-media.component';
 export class ConceptorRoutingModule {
   public static routes: Routes = [
     {
-<<<<<<< HEAD
+
       path:'',
       component:SidebarComponent
     },
@@ -23,25 +24,17 @@ export class ConceptorRoutingModule {
       component: ListComponent,
       outlet: 'global'
     },
+
+   {
+    path: 'addModule',
+   component: AddModuleComponent
+    },
     {
       path: 'addMedia',
-      component: AddMediaComponent,
-   },
-=======
-      path: '',
-      component: SidebarComponent, children:[
-        {
-        path: 'addModule',
-       component: AddModuleComponent
-        },
-        {
-          path:'list',
-          component:ListComponent
-        }
+      component: AddMediaComponent
+    }
+
 
       ]
     }
->>>>>>> 0c2dba130ec71e635512eeed3e9ec7c2449a4edb
 
-  ];
-}

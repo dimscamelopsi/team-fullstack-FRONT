@@ -1,61 +1,58 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { take } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModuleType } from 'src/app/course/types/module-type';
+import { MediaService } from '../services/media.service';
+import { ToastService } from 'src/app/core/toast.service';
+import { take } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
-import {ReactiveFormsModule} from'@angular/forms';
-
 
 @Component({
   selector: 'app-add-media',
   templateUrl: './add-media.component.html',
   styleUrls: ['./add-media.component.scss']
-
-
 })
 export class AddMediaComponent implements OnInit {
+  mediaFormGroup!: FormGroup;
+  public mediaType!: ModuleType[];
 
 
- mediaForm!: FormGroup;
- router!: Router;
-  mediaService: any;
-  _toastService: any;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private _fb: FormBuilder,
+    private _mediaService: MediaService,
+    private _toastService: ToastService
+  ) { }
 
   ngOnInit(): void {
-    this.mediaForm =this.formBuilder.group
-    ({
-
-      title: null,
-      summary: null,
-      duration: null,
-      totalTime: null,
-      createdAt: Date,
-      url:null,
-      typeMedia: null
+    this.mediaFormGroup =this._fb.group({
+      name: this._fb.control("",
+      [
+        Validators.required,
+        Validators.minLength(4)
+      ]),
+      objective: this._fb.control("",
+      [
+        Validators.required,
+        Validators.minLength(4)
+      ])
     });
-}
+  }
+    public addMedia(){
+      this._mediaService.add(this.mediaFormGroup.value)
+      .pipe(
+         take(1)
+      ).subscribe({
+        next: (response: HttpResponse<any>) =>{
+          const message: string = `Media was created ! `
+          this._toastService.show(message)
+        },
+        error: (error:any) => {
+          const badMessage: string = `Media has not created !!! `
+          this._toastService.show(badMessage)
+        }
 
-public addMedia() {
-  this.mediaService.add(this.mediaForm.value)
-  .pipe(
-    take(1)
-  ).suscribe({
-    next: (_Response: HttpResponse<any>) => {
-      const message: string = `Media was added.`
-      this._toastService.show(message)
-    },
-    error: (_error: any) => {
-      const badMessage: string = `Media not added !!`
-      this._toastService.show(badMessage)
+      })
     }
-  })
-}
 
-
-onSubmitForm() {
-  console.log(this.mediaForm.value);
-}
 
 }

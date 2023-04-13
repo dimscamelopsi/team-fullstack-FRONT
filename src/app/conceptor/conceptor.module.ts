@@ -7,11 +7,13 @@ import { UiModule } from '../ui/ui.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AddModuleComponent } from './add-module/add-module.component';
 import { CourseModule } from '../course/course.module';
+import { AddMediaComponent } from './add-media/add-media.component';
 
 @NgModule({
   declarations: [
     SidebarComponent,
-    AddModuleComponent
+    AddModuleComponent,
+    AddMediaComponent
   ],
   imports: [
     CommonModule,

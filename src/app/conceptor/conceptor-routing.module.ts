@@ -6,6 +6,7 @@ import { AddModuleComponent } from './modules/add-module/add-module.component';
 
 import { ListComponent } from '../course/list/list.component';
 import { CourseHandlerComponent } from '../course/course-handler/course-handler.component';
+import { ManageCourseComponent } from '../course/components/manage-course/manage-course.component';
 
 
 
@@ -25,6 +26,10 @@ export class ConceptorRoutingModule {
         {
           path:'list',
           component:ListComponent
+        },
+        {
+          path: 'manageCourse',
+          component: ManageCourseComponent
         }
 
       ]

@@ -106,7 +106,11 @@ export class CourseHandlerComponent implements OnInit {
         height: 'flex',
         width: 'flex'
       }
-    )
+    ).afterClosed().subscribe((result: ModuleType | undefined) => {
+      if (result !== undefined) {
+          this.modules.push(result)
+      }
+    })
   }
 
   resetForm(event:any): void {

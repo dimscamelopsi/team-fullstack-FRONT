@@ -25,9 +25,6 @@ export class CourseHandlerComponent implements OnInit {
   public modules: Array<ModuleType> = []
   public course!: CourseListType
 
-  private _user: any = undefined
-  private _user$: BehaviorSubject<any  | undefined> = new BehaviorSubject(undefined)
-
   constructor(
     private _formBuilder: FormCourseBuilderService,
     private _courseService: CourseService,
@@ -39,12 +36,6 @@ export class CourseHandlerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._user = this._userService.user$.getValue()
-    console.log(this._user.id)
-  }
-
-  public get user$() {
-    return this._user$
   }
 
   get c(): {[key: string]: AbstractControl} {
@@ -96,9 +87,6 @@ export class CourseHandlerComponent implements OnInit {
       }
     ).afterClosed().subscribe((result: CourseListType | undefined) => {
       if (result !== undefined) {
-
-        console.log(result)
-
         this.modules = []
         this.c['title'].setValue(result.title)
         this.c['objective'].setValue(result.objective)

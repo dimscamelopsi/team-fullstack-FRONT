@@ -5,6 +5,7 @@ import { ToastService } from 'src/app/core/toast.service';
 import { take } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { MediaType } from 'src/app/course/types/media-type';
+import { AddMediaType } from 'src/app/course/types/add-media-type';
 
 @Component({
   selector: 'app-add-media',
@@ -14,41 +15,57 @@ import { MediaType } from 'src/app/course/types/media-type';
 export class AddMediaComponent implements OnInit {
   mediaFormGroup!: FormGroup;
   public mediaType!: MediaType[];
-
+  public addMediaType!: AddMediaType
 
 
   constructor(
     private _fb: FormBuilder,
     private _mediaService: MediaService,
-    private _toastService: ToastService
+    private _toastService: ToastService,
+
   ) { }
+
 
   ngOnInit(): void {
     this.mediaFormGroup =this._fb.group({
-      title: this._fb.control,
-      summary: this._fb.control,
-      duration: this._fb.control,
-      URL: this._fb.control,
-      Mediatype: this._fb.control
+
+      title: this._fb.control
       ("",
       [
         Validators.required,
-        Validators.minLength(4)
       ]),
-      objective: this._fb.control("",
+      summary: this._fb.control
+      ("",
       [
         Validators.required,
-        Validators.minLength(4)
-      ])
+      ]),
+      duration: this._fb.control
+      ("",
+      [
+        Validators.required,
+      ]),
+      url: this._fb.control
+      ("",
+      [
+        Validators.required,
+
+      ]),
+      typeMedia: this._fb.control
+      ("",
+      [
+        Validators.required,
+
+      ]),
     })
 
   }
     public addMedia(){
+      console.log(this.mediaFormGroup.value)
       this._mediaService.add(this.mediaFormGroup.value)
       .pipe(
          take(1)
       ).subscribe({
-        next: (response: HttpResponse<any>) =>{
+        next: (response: HttpResponse<any>) => {
           const message: string = `Media was created ! `
           this._toastService.show(message)
         },
@@ -56,9 +73,6 @@ export class AddMediaComponent implements OnInit {
           const badMessage: string = `Media has not created !!! `
           this._toastService.show(badMessage)
         }
-
       })
     }
-
-
-}
+  }

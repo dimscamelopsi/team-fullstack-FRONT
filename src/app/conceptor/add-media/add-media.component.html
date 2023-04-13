@@ -13,7 +13,7 @@
             <div class="row">
               <div class="col xs12 md6">
                 <mat-form-field>
-                  <input matInput placeholder="Media title...*" formControlTitle="title">
+                  <input matInput placeholder="Media title...*" formControlName="title">
                   <mat-error
                     *ngIf="mediaFormGroup.controls['title'].errors && mediaFormGroup.controls['title'].touched">
                     <span *ngIf="mediaFormGroup.controls['title'].hasError('required')">
@@ -26,7 +26,7 @@
 
 
             <mat-form-field>
-              <input matInput placeholder="Media summary..*" formControlTitle="summary">
+              <input matInput placeholder="Media summary..*" formControlName="summary">
               <mat-error
                 *ngIf="mediaFormGroup.controls['summary'].errors && mediaFormGroup.controls['summary'].touched">
                 <span *ngIf="mediaFormGroup.controls['summary'].hasError('required')">
@@ -37,7 +37,7 @@
 
 
             <mat-form-field>
-              <input matInput placeholder="Media duration..*" formControlTitle="duration">
+              <input matInput placeholder="Media duration..*" formControlName="duration">
               <mat-error
                 *ngIf="mediaFormGroup.controls['duration'].errors && mediaFormGroup.controls['duration'].touched">
                 <span *ngIf="mediaFormGroup.controls['duration'].hasError('required')">
@@ -48,32 +48,32 @@
 
 
             <mat-form-field>
-              <input matInput placeholder="Media URL..*" formControlTitle="URL">
+              <input matInput placeholder="Media URL..*" formControlName="url">
               <mat-error
-                *ngIf="mediaFormGroup.controls['URL'].errors && mediaFormGroup.controls['URL'].touched">
-                <span *ngIf="mediaFormGroup.controls['URL'].hasError('required')">
-                  URL cannot be empty !!!
+                *ngIf="mediaFormGroup.controls['url'].errors && mediaFormGroup.controls['url'].touched">
+                <span *ngIf="mediaFormGroup.controls['url'].hasError('required')">
+                  url cannot be empty !!!
               </span>
               </mat-error>
             </mat-form-field><br>
 
 
             <mat-form-field>
-              <input matInput placeholder="Media type.*" formControlTitle="Media type">
+              <input matInput placeholder="Media type.*" formControlName="typeMedia">
               <mat-error
-                *ngIf="mediaFormGroup.controls['Mediatype'].errors && mediaFormGroup.controls['Mediatype'].touched">
-                <span *ngIf="mediaFormGroup.controls['Mediatype'].hasError('required')">
+                *ngIf="mediaFormGroup.controls['typeMedia'].errors && mediaFormGroup.controls['typeMedia'].touched">
+                <span *ngIf="mediaFormGroup.controls['typeMedia'].hasError('required')">
                   Media type cannot be empty !!!
               </span>
               </mat-error>
-            </mat-form-field>
-
+            </mat-form-field><br>
+            <input type="file"capture>
 
           </fieldset>
           <div class="row">
             <div class="col xs6"></div>
                <div class="col xs6">
-                  <button mat-raised-button type="button" color="primary" (click)="addMedia()"> Add Média </button>
+                <button mat-raised-button [disabled]="mediaFormGroup.invalid" color="primary">Add</button>
                    </div>
                   <div class="col xs4"></div>
                 </div>

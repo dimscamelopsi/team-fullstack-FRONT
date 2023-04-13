@@ -7,9 +7,6 @@
     </div>
 </div>
 
-
-<!--  test affichage avec card -->
-
 <ng-container *ngIf="courses.length">
     <ng-container *ngFor="let course of courses">
         <div class="col xs12 marge">
@@ -17,10 +14,11 @@
                 <mat-card-header>
                     <mat-card-title>{{ course.title }}</mat-card-title>
                     <mat-card-subtitle> {{ course.objective }}</mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="animal">{{animal}}</mat-card-subtitle>
                 </mat-card-header>
 
                 <mat-card-actions align="end">
-                    <button mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
+                    <button (click)="openDialog(course)" mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
                         <mat-icon>edit</mat-icon>
                     </button>
                     <div *ngIf="course.publish; then thenBlock else elseBlock"></div>
@@ -45,4 +43,3 @@
         </div>
     </ng-container>
 </ng-container>
-

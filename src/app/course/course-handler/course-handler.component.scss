@@ -76,6 +76,7 @@ fieldset {
     div{
       &.media-tile {
         display: grid;
+        margin: 0.5rem;
         grid-template-columns: 50% 25% 25%;
       }
     }

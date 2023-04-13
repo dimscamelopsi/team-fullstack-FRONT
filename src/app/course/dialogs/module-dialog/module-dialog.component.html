@@ -19,7 +19,7 @@
         [selectedStatus]="module.selected"
           (onToggle)="revealOrHide(module)"
       ></toggle>
-        <button mat-icon-button id="add">
+        <button mat-icon-button id="add" (click)="addModule(module)">
           <mat-icon >add</mat-icon>
         </button>
         <mat-divider></mat-divider>

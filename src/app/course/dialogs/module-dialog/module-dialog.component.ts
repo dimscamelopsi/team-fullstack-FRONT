@@ -13,6 +13,7 @@ import { take } from 'rxjs';
 export class ModuleDialogComponent implements OnInit {
 
   public modules: Array<ModuleType> = []
+  public module!: ModuleType
 
   constructor(
     private _moduleService: ModuleService,
@@ -40,6 +41,11 @@ export class ModuleDialogComponent implements OnInit {
         }
       })
     }
+  }
+
+  public addModule(module: ModuleType): void {
+    this.module = module
+    this.dialogRef.close(this.module)
   }
 
 }

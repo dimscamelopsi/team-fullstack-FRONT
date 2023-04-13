@@ -15,9 +15,10 @@
         <span>{{module.medias.length}} {{ module.medias.length ? module.medias.length === 1 ? 'medium' : 'media' : ''}} </span>
         <toggle
         [isExpandable]="module!.medias.length > 0"
-        [useIcon]="true" *ngIf="module!.medias.length > 0"
+         *ngIf="module!.medias.length > 0"
         [selectedStatus]="module.selected"
           (onToggle)="revealOrHide(module)"
+          [useIcon]="true"
       ></toggle>
         <button mat-icon-button id="add" (click)="addModule(module)">
           <mat-icon >add</mat-icon>

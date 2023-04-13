@@ -28,7 +28,6 @@ export class ModuleDialogComponent implements OnInit {
     )
     .subscribe((response: any) => {
       this.modules = response
-      console.log(response)
     })
   }
 

@@ -5,6 +5,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { AddModuleComponent } from './add-module/add-module.component';
 
 import { ListComponent } from '../course/list/list.component';
+import { ManageCourseComponent } from '../course/components/manage-course/manage-course.component';
 
 @NgModule({
   imports: [RouterModule.forChild(ConceptorRoutingModule.routes)],
@@ -22,6 +23,10 @@ export class ConceptorRoutingModule {
         {
           path:'list',
           component:ListComponent
+        },
+        {
+          path: 'manageCourse',
+          component: ManageCourseComponent
         }
 
       ]

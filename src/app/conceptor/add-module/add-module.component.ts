@@ -70,4 +70,8 @@ export class AddModuleComponent implements OnInit {
       })
   }
 
+  public addMedia(){
+    
+  }
+
 }

@@ -1,10 +1,12 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { take } from 'rxjs';
 import { ToastService } from './../../core/toast.service';
 import { CourseService } from '../services/course.service';
 import { CourseListType } from '../types/course-list-type';
 import { ModuleType } from '../types/module-type';
+import { CourseHandlerComponent } from '../course-handler/course-handler.component';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-list',
@@ -18,7 +20,7 @@ export class ListComponent implements OnInit {
 
   constructor(
     private _courseService: CourseService,
-    private _toastService: ToastService
+    private _toastService: ToastService,
   ) { }
 
   ngOnInit(): void {

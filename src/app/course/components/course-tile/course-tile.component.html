@@ -16,25 +16,29 @@
       ></toggle>
     </div>
 
-    <ng-container *ngIf="!manage">
-      <div class="col xs1">
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
+
+    <div class="col xs1" *ngIf="!showAdd || !manage">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <span>View course</span>
         </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <span>View course</span>
-          </button>
-          <button mat-menu-item>
-            <span>Update course</span>
-          </button>
-          <button mat-menu-item (click)="onRemoveClick(course)">
-            <span class="hot-action">Remove course</span>
-          </button>
-        </mat-menu>
-      </div>
-    </ng-container>
-    
+        <button mat-menu-item>
+          <span>Update course</span>
+        </button>
+        <button mat-menu-item (click)="onRemoveClick(course)">
+          <span class="hot-action">Remove course</span>
+        </button>
+      </mat-menu>
+    </div>
+
+    <div class="col xs1" *ngIf="showAdd">
+      <button mat-icon-button (click)="addCourse(course)">
+        <mat-icon >add</mat-icon>
+      </button>
+    </div>
   </div>
 
   <app-module-list [ngClass]="{'is-visible': course.isSelected}" [modules]="course.modules!"></app-module-list>

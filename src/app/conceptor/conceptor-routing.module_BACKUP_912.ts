@@ -5,7 +5,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { AddModuleComponent } from './add-module/add-module.component';
 
 import { ListComponent } from '../course/list/list.component';
-import { ManageCourseComponent } from '../course/components/manage-course/manage-course.component';
 import { CourseHandlerComponent } from '../course/course-handler/course-handler.component';
 
 @NgModule({
@@ -28,10 +27,6 @@ export class ConceptorRoutingModule {
         {
           path:'list',
           component:ListComponent
-        },
-        {
-          path: 'manageCourse',
-          component: ManageCourseComponent
         }
 
       ]

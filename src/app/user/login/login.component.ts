@@ -6,6 +6,7 @@ import { LocalStorageStrategy } from 'src/app/core/store/local-storage-strategy'
 import { SessionStorageStrategy } from 'src/app/core/store/session-storage-strategy';
 import { environment } from './../../../environments/environment'
 import { HttpResponse } from '@angular/common/http';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,8 +25,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const loginControl: AbstractControl = new FormControl('', [Validators.required])
-    const passwordControl: AbstractControl = new FormControl('', [Validators.required])
+    const loginControl: AbstractControl = new FormControl('Lemaire.Aldegonde', [Validators.required])
+    const passwordControl: AbstractControl = new FormControl('GfNScUbIzt6VJzZEtfgH', [Validators.required])
 
     this.form.addControl('login', loginControl)
     this.form.addControl('password', passwordControl)

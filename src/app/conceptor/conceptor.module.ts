@@ -7,7 +7,11 @@ import { UiModule } from '../ui/ui.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AddModuleComponent } from './add-module/add-module.component';
 import { CourseModule } from '../course/course.module';
+<<<<<<< HEAD
 import { AddMediaComponent } from './add-media/add-media.component';
+=======
+import { CourseHandlerComponent } from '../course/course-handler/course-handler.component';
+>>>>>>> 3405e93bab3d34491e9029297955fd1d3c1ebe08
 
 @NgModule({
   declarations: [
@@ -20,7 +24,8 @@ import { AddMediaComponent } from './add-media/add-media.component';
     ConceptorRoutingModule,
     SharedModule,
     UiModule,
-    CourseModule
+    CourseModule,
+
 
   ]
 })

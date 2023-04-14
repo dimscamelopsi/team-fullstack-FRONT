@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -7,6 +7,12 @@ import { FormCourseBuilderService } from '../services/course-handler/form-course
 import { CourseService } from '../services/course.service';
 import { CourseType } from '../types/course-type';
 import { ModuleType } from '../types/module-type';
+import { ListComponent } from '../list/list.component';
+import { CourseDialogComponent } from '../dialogs/course-dialog/course-dialog.component';
+import { CourseListType } from '../types/course-list-type';
+import { BehaviorSubject } from 'rxjs';
+import { UserService } from 'src/app/user/services/user.service';
+import { ModuleDialogComponent } from '../dialogs/module-dialog/module-dialog.component';
 
 @Component({
   selector: 'app-course-handler',
@@ -16,14 +22,17 @@ import { ModuleType } from '../types/module-type';
 export class CourseHandlerComponent implements OnInit {
   public form: FormGroup
   public useModule: boolean = true
+  public module!: ModuleType
   public modules: Array<ModuleType> = []
+  public course!: CourseListType
 
   constructor(
     private _formBuilder: FormCourseBuilderService,
     private _courseService: CourseService,
     private _router: Router,
-    private _dialog: MatDialog
-  ) { 
+    private _dialog: MatDialog,
+    private _userService: UserService
+  ) {
     this.form = this._formBuilder.form
   }
 
@@ -65,6 +74,50 @@ export class CourseHandlerComponent implements OnInit {
       .subscribe((courseType: CourseType) => {
         this._router.navigate(['/', 'course'])
       })
+  }
+
+  addCourse(): void {
+    this._dialog.open(
+      CourseDialogComponent,
+      {
+        data : {
+          show : true
+        },
+        height: 'flex',
+        width: 'flex'
+      }
+    ).afterClosed().subscribe((result: CourseListType | undefined) => {
+      if (result !== undefined) {
+        this.modules = []
+        this.c['title'].setValue(result.title)
+        this.c['objective'].setValue(result.objective)
+
+        for(this.module of result.modules!) {
+          this.modules.push(this.module)
+        }
+      }
+    })
+  }
+
+  openModule(): void {
+    this._dialog.open(
+      ModuleDialogComponent,
+      {
+        height: 'flex',
+        width: 'flex'
+      }
+    ).afterClosed().subscribe((result: ModuleType | undefined) => {
+      if (result !== undefined) {
+          this.modules.push(result)
+      }
+    })
+  }
+
+  resetForm(event:any): void {
+    event.preventDefault();
+    this.modules = []
+    this.c['title'].setValue('')
+    this.c['objective'].setValue('')
   }
 
 }

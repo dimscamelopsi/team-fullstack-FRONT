@@ -11,10 +11,9 @@
     <ng-container *ngFor="let course of courses">
         <div class="col xs12 marge">
             <mat-card>
-                <mat-card-header>
+                <mat-card-header *ngIf="!courseEdit" >
                     <mat-card-title>{{ course.title }}</mat-card-title>
                     <mat-card-subtitle> {{ course.objective }}</mat-card-subtitle>
-                    <mat-card-subtitle *ngIf="animal">{{animal}}</mat-card-subtitle>
                 </mat-card-header>
 
                 <mat-card-actions align="end">

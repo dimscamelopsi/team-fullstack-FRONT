@@ -8,10 +8,6 @@ import { CourseManageType } from '../../types/course-manage-type';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateCourseManageComponent } from '../../dialogs/update-course-manage/update-course-manage.component';
 
-export interface DialogData {
-  animal: string;
-  name: string;
-}
 
 @Component({
   selector: 'app-manage-course',
@@ -19,8 +15,7 @@ export interface DialogData {
   styleUrls: ['./manage-course.component.scss']
 })
 export class ManageCourseComponent implements OnInit {
-  animal!: string
-  name: string = 'Daniel'
+  courseEdit!: CourseManageType
 
   private _visibility!: boolean
   public courses: Array<CourseManageType> = []
@@ -35,14 +30,17 @@ export class ManageCourseComponent implements OnInit {
         (response: CourseManageType[]) => {this.courses = response })
   }
 
-  openDialog(course: CourseManageType): void {
+  openDialog(courseObject: CourseManageType): void {
     const dialogRef = this.dialog.open(UpdateCourseManageComponent, {
-      data: {name: course.title, animal: this.animal},
-    })
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.animal = result;
-    })
+      height: '400px',
+      width: '600px',
+      data: {
+        title: courseObject.title,
+        objective: courseObject.objective,
+        visibility: courseObject.publish       
+      }
+    }).afterClosed().subscribe(
+      (result) => { this.courseEdit = result })
   }
 
   onCourseToggle(course: CourseListType): void {

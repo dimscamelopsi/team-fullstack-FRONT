@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModuleAddComponent } from '../dialogs/module-add/module-add.component';
 import { FormCourseBuilderService } from '../services/course-handler/form-course-builder.service';
 import { CourseService } from '../services/course.service';
@@ -12,6 +12,7 @@ import { CourseDialogComponent } from '../dialogs/course-dialog/course-dialog.co
 import { CourseListType } from '../types/course-list-type';
 import { BehaviorSubject } from 'rxjs';
 import { UserService } from 'src/app/user/services/user.service';
+import { CourseManageType } from '../types/course-manage-type';
 
 @Component({
   selector: 'app-course-handler',
@@ -24,11 +25,14 @@ export class CourseHandlerComponent implements OnInit {
   public module!: ModuleType
   public modules: Array<ModuleType> = []
   public course!: CourseListType
+  manageCourse!: string | null
+  manageBln!: boolean
 
   constructor(
     private _formBuilder: FormCourseBuilderService,
     private _courseService: CourseService,
     private _router: Router,
+    private _routerManage: ActivatedRoute,
     private _dialog: MatDialog,
     private _userService: UserService
   ) {
@@ -40,6 +44,12 @@ export class CourseHandlerComponent implements OnInit {
 
   get c(): {[key: string]: AbstractControl} {
     return this.form.controls
+  }
+
+  manageBool(): boolean{
+    this.manageCourse = this._routerManage.snapshot.queryParamMap.get('managerCourse')
+    if( this.manageCourse === 'true'){return this.manageBln = true }
+    else {return this.manageBln = false}
   }
 
   addModule(): void {

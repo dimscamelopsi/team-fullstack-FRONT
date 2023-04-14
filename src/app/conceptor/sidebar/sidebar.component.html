@@ -41,7 +41,7 @@
 
     <mat-divider></mat-divider>
 
-    <button mat-button class="menu-button" routerLink="manageCourse">
+    <button mat-button class="menu-button" routerLink="addCourse" [queryParams]="{ managerCourse: 'true' }">
       <mat-icon>edit</mat-icon>
       <span>Manage courses</span>
     </button>

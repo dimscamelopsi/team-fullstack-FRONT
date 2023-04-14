@@ -5,6 +5,6 @@ export type AddMediaType = {
     title: string
     summary: string
     duration: number
-    url: string,
+    url: string
     typeMedia: TypeMediaType
 }

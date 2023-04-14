@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MediaService } from '../services/media.service';
 import { ToastService } from 'src/app/core/toast.service';
 import { take } from 'rxjs';
-import { HttpResponse } from '@angular/common/http';
+import {  HttpResponse } from '@angular/common/http';
 import { MediaType } from 'src/app/course/types/media-type';
 import { AddMediaType } from 'src/app/course/types/add-media-type';
 
@@ -15,18 +15,20 @@ import { AddMediaType } from 'src/app/course/types/add-media-type';
 export class AddMediaComponent implements OnInit {
   mediaFormGroup!: FormGroup;
   public mediaType!: MediaType[];
-  public addMediaType!: AddMediaType
+  public addMediaType!: AddMediaType[];
 
 
   constructor(
     private _fb: FormBuilder,
     private _mediaService: MediaService,
     private _toastService: ToastService,
+    private _typeMediaService: MediaService,
 
   ) { }
 
 
   ngOnInit(): void {
+
     this.mediaFormGroup =this._fb.group({
 
       title: this._fb.control
@@ -60,19 +62,20 @@ export class AddMediaComponent implements OnInit {
 
   }
     public addMedia(){
-      console.log(this.mediaFormGroup.value)
       this._mediaService.add(this.mediaFormGroup.value)
       .pipe(
-         take(1)
+        take(1)
       ).subscribe({
         next: (response: HttpResponse<any>) => {
-          const message: string = `Media was created ! `
+          const message: string = `media was added. `
           this._toastService.show(message)
         },
-        error: (error:any) => {
-          const badMessage: string = `Media has not created !!! `
+        error: (error: any) => {
+          const badMessage: string = `media not added.`
           this._toastService.show(badMessage)
         }
       })
-    }
   }
+
+
+}

@@ -12,6 +12,9 @@ import { environment } from "src/environments/environment";
 
 
 export class MediaService {
+  getAllTypesMedia() {
+    throw new Error('Method not implemented.');
+  }
   private readonly endpoint: string =`${environment.apiRootUri}media`
 
 constructor(

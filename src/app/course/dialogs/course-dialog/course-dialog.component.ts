@@ -33,7 +33,7 @@ export class CourseDialogComponent implements OnInit {
       )
       .subscribe((response: CourseListType[]) => {
         this.courses = response
-      })
+      })  
       this.showAdd = this.data.show
   }
 

@@ -1,10 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CourseManageType } from '../../types/course-manage-type';
-import { CourseModel } from '../../models/course-model';
-import { Observable, map } from 'rxjs';
-import { AbstractControl, FormGroup } from '@angular/forms';
 import { CourseService } from '../../services/course.service';
+import { CourseHandlerComponent } from '../../course-handler/course-handler.component';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-update-course-manage',
@@ -12,21 +11,42 @@ import { CourseService } from '../../services/course.service';
   styleUrls: ['./update-course-manage.component.scss']
 })
 export class UpdateCourseManageComponent implements OnInit {
-  private _course: CourseModel = new CourseModel()
-  private _form: FormGroup = new FormGroup({})
+  public courses: Array<CourseManageType> = []
+  public showAdd: boolean = false
+  public manage: boolean = false
+  @Input() public course!: CourseManageType
 
   constructor(
-    public dialogRef: MatDialogRef<UpdateCourseManageComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: CourseManageType ) { }
+    private _courseService: CourseService,
+    public dialogRef: MatDialogRef<CourseHandlerComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any, ) { }
 
   ngOnInit(): void {
+    this._courseService.findListCourse()
+      .pipe(take(1))
+      .subscribe(
+        (response: CourseManageType[]) => {this.courses = response})  
+    this.showAdd = this.data.show
+    this.manage = this.data.manage
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  onCourseToggle(course: CourseManageType): void {
+    if (course.isSelected) {
+      this.courses
+        .filter((inCourse: CourseManageType) => inCourse.isSelected)
+        .forEach((inCourse: CourseManageType) => {
+          if (course.id !== inCourse.id) {
+            inCourse.isSelected = false
+            // Close all modules too...
+            //inCourse.modules!.forEach((module: ModuleType) => module.selected = false)
+          }
+        })
+    }
   }
-  public get c(): {[key: string]: AbstractControl} {
-    return this._form.controls
+
+  sendCourse(course: CourseManageType) {
+    this.course = course
+    this.dialogRef.close(this.course)
   }
 
 

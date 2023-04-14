@@ -6,6 +6,7 @@ import { CourseType } from '../types/course-type';
 import { environment } from './../../../environments/environment';
 import { UserService } from 'src/app/user/services/user.service';
 import { CourseManageType } from '../types/course-manage-type';
+import { CourseModel } from '../models/course-model';
 @Injectable({
   providedIn: 'root'
 })
@@ -51,5 +52,10 @@ export class CourseService {
   public findListCourse(): Observable<CourseManageType[]> {
     return this._httpClient.get<CourseManageType[]>(
       this.endPoint + '/usersCourses/' + this._userService.user.id)
+  }
+
+  public update(course: CourseModel): Observable<HttpResponse<any>> {
+    return this._httpClient.put<CourseModel>(
+      this.endPoint, course, { observe: 'response' })
   }
 }

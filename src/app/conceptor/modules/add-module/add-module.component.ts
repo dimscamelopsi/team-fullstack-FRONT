@@ -54,18 +54,23 @@ export class AddModuleComponent implements OnInit {
           Validators.minLength(4)
         ]),
       course: this._fb.control(""),
-      media: this._fb.control("")
+      //medias: this.medias
 
     });
   }
 
   public addModule() {
-    //console.log(this.courseFormGroup.value)
-    this._moduleService.add(this.moduleFormGroup.value)
-      .pipe(
-        take(1)
-      ).subscribe({
-        next: (response: HttpResponse<any>) => {
+    //console.log(this.moduleFormGroup.value)
+    const module:ModuleType={
+      name:this.moduleFormGroup.controls['name'].value,
+      objective:this.moduleFormGroup.controls['objective'].value,
+      course:this.moduleFormGroup.controls['course'].value,
+      medias:this.medias
+    }
+    //console.log(module)
+    this._moduleService.add(module)
+      .subscribe({
+        next: (moduletype:ModuleType) => {
           const message: string = `module was added. `
           this._toastService.show(message)
         },
@@ -85,9 +90,17 @@ export class AddModuleComponent implements OnInit {
       }
     ).afterClosed().subscribe((result: MediaType | undefined) => {
       if (result !== undefined) {
-          this.medias.push(result)
+        
+        this.medias.push(result)
+        //console.log(this.medias)
       }
     })
+  }
+  removeMedia(media: MediaType): void {
+    this.medias.splice(
+      this.medias.indexOf(media),
+      1
+    )
   }
 
 

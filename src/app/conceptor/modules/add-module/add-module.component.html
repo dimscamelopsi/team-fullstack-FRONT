@@ -63,21 +63,18 @@
                 <ng-container>
                     <fieldset>
                         <legend>Media</legend>
-                        <ol class="media-list" formControlName="media">
+                        <ol class="media-list" >
                             <li *ngFor="let media of medias">
                                 <div class="row">
-                                    <div class="col xs5">
+                                    <div class="col xs7">
                                         <div class="title">{{ media.title }}</div>
                                     </div>
-                                    <div class="col xs5">
+                                    <div class="col xs4">
                                         <div class="type">{{ media.typeMedia.title }}</div>
                                     </div>
-                                    <div class="col xs2">
-                                        <button mat-icon-button>
-                                            <mat-icon color="error">delete</mat-icon>
-                                        </button>
+                                    <div class="col xs1">
+                                            <mat-icon color="error" (click)="removeMedia(media)">delete</mat-icon>
                                     </div>
-
                                 </div>
                             </li>
                         </ol>

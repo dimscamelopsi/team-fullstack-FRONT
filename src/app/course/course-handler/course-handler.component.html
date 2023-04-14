@@ -1,16 +1,4 @@
-<div *ngIf="manageBool(); then thenBlock else elseBlock"></div>
-<ng-template #thenBlock>
-  <h2>Manage a course</h2>
 
-  <div id="import">
-    <span>Import a course from conceptor :  </span>
-    <button  mat-raised-button type="button" color="primary"  (click)="addCourse()">
-      Import
-    </button>
-  </div>
-
-</ng-template>
-<ng-template #elseBlock>
   <h2>Create a course</h2>
   <div id="import">
     <span>Import a course from an existing one :  </span>
@@ -18,12 +6,6 @@
       Import
     </button>
   </div>
-
-</ng-template>
-
-
-
-
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <fieldset>
@@ -36,12 +18,12 @@
               Title is required
           </mat-error>
       </mat-form-field>
-  </div>
-  <div class="row">
-      <mat-form-field class="col xs12">
-          <textarea matInput type="textarea"cdkTextareaAutosize cdkAutosizeMaxRows="10" formControlName="objective" placeholder="Objective..."></textarea>
-      </mat-form-field>
-  </div>
+    </div>
+    <div class="row">
+        <mat-form-field class="col xs12">
+            <textarea matInput type="textarea"cdkTextareaAutosize cdkAutosizeMaxRows="10" formControlName="objective" placeholder="Objective..."></textarea>
+        </mat-form-field>
+    </div>
   </fieldset>
 
   <div id="import">
@@ -90,5 +72,9 @@
     <div class="buttons">
           <button mat-raised-button color="warn" (click)="resetForm($event)">Reset</button>
           <button mat-raised-button color="primary" [disabled]="form.invalid">Add</button>
-    </div>
-</form>
+      </div>
+
+
+  </form>
+
+

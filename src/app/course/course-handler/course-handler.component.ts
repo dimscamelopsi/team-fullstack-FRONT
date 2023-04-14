@@ -16,6 +16,7 @@ import { ModuleDialogComponent } from '../dialogs/module-dialog/module-dialog.co
 import { SimpleStudent } from 'src/app/student/types/simple-student-type';
 import { ReallySimpleStudent } from 'src/app/student/types/really-simple-student';
 import { CourseManageType } from '../types/course-manage-type';
+import { UpdateCourseManageComponent } from '../dialogs/update-course-manage/update-course-manage.component';
 
 @Component({
   selector: 'app-course-handler',
@@ -131,6 +132,23 @@ export class CourseHandlerComponent implements OnInit {
           this.modules.push(result)
       }
     })
+  }
+
+  addCourseManage(): void{
+    this._dialog.open(UpdateCourseManageComponent, {
+      height: '400px',
+      width: '600px',
+      data: {
+        show : true,
+        manage : true       
+      }
+    }).afterClosed().subscribe(
+      (result: CourseManageType | undefined) => { 
+        if(result !== undefined){
+          this.c['title'].setValue(result.title)
+          this.c['objective'].setValue(result.objective)}
+      }
+    )
   }
 
   resetForm(event:any): void {

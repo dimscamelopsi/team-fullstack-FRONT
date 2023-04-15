@@ -12,8 +12,9 @@ import { MatMenuModule } from '@angular/material/menu'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDividerModule} from '@angular/material/divider';
-import { MatSelectModule } from '@angular/material/select'; 
-import {MatCardModule} from '@angular/material/card'; 
+import {MatSelectModule} from '@angular/material/select'; 
+import {MatCardModule} from '@angular/material/card';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [],
@@ -38,6 +39,7 @@ export class UiModule {
     MatSidenavModule,
     MatDividerModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    MatRadioModule
   ]
 }

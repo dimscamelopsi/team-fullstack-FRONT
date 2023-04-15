@@ -4,6 +4,10 @@ import { CourseManageType } from '../../types/course-manage-type';
 import { CourseService } from '../../services/course.service';
 import { CourseHandlerComponent } from '../../course-handler/course-handler.component';
 import { take } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
+import { CourseListType } from '../../types/course-list-type';
+import { CourseType } from '../../types/course-type';
+import { CourseModel } from '../../models/course-model';
 
 @Component({
   selector: 'app-update-course-manage',
@@ -47,6 +51,15 @@ export class UpdateCourseManageComponent implements OnInit {
   sendCourse(course: CourseManageType) {
     this.course = course
     this.dialogRef.close(this.course)
+  }
+
+  public delete(course: CourseManageType): void {
+    this._courseService.remove(Number(course.id))
+      .subscribe({
+        next: (respons: HttpResponse<any>) => {
+          this.courses.splice(
+            this.courses.indexOf(course), 1 )}
+      })
   }
 
 

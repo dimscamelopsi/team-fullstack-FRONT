@@ -14,6 +14,7 @@ import { BehaviorSubject } from 'rxjs';
 import { UserService } from 'src/app/user/services/user.service';
 import { CourseManageType } from '../types/course-manage-type';
 import { UpdateCourseManageComponent } from '../dialogs/update-course-manage/update-course-manage.component';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-course-handler',
@@ -25,9 +26,10 @@ export class CourseHandlerComponent implements OnInit {
   public useModule: boolean = true
   public module!: ModuleType
   public modules: Array<ModuleType> = []
-  public course!: CourseListType
   manageCourse!: string | null
   manageBln!: boolean
+  publish!: boolean
+  idCourse?: number
 
   constructor(
     private _formBuilder: FormCourseBuilderService,
@@ -47,6 +49,11 @@ export class CourseHandlerComponent implements OnInit {
     return this.form.controls
   }
 
+  /**
+   * La fonction permet de savoir si le user a clické sur le button manage course
+   * pour modifier l'interface IHM
+   * @returns boolean
+   */
   manageBool(): boolean{
     this.manageCourse = this._routerManage.snapshot.queryParamMap.get('managerCourse')
     if( this.manageCourse === 'true'){return this.manageBln = true }
@@ -86,6 +93,26 @@ export class CourseHandlerComponent implements OnInit {
       })
   }
 
+  editSubmit(): void {
+    const course: CourseManageType = {
+      id: this.idCourse,
+      title: this.c['title'].value,
+      objective: this.c['objective'].value,
+      //publish: this.c['publish'].value,
+      publish: this.publish,
+      isSelected: false
+    }
+    console.log(`Student was updated ${course}`)
+    this._courseService.update(course)
+      .subscribe({
+        next: (response: HttpResponse<any>) => {
+          this._router.navigate(['/'])
+          console.log(`Student was updated ${response.status}`)},
+        error: (error: any) => {
+          console.log(JSON.stringify(error))
+        }})
+  }
+
   addCourse(): void {
     this._dialog.open(
       CourseDialogComponent,
@@ -121,9 +148,16 @@ export class CourseHandlerComponent implements OnInit {
       (result: CourseManageType | undefined) => { 
         if(result !== undefined){
           this.c['title'].setValue(result.title)
-          this.c['objective'].setValue(result.objective)}
+          this.c['objective'].setValue(result.objective)
+          this.publish = result.publish
+          this.idCourse = result.id
+        }
       }
     )
+  }
+
+  editPublish(state: boolean): boolean{
+    return (state)? this.publish = false : this.publish =true
   }
 
   resetForm(event:any): void {

@@ -16,10 +16,21 @@
                     <button mat-button (click)="sendCourse(course)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-button>
-                        <mat-icon>visibility_off</mat-icon>
-                    </button>
-                    <button mat-button>
+                    <!-- Condition publish -->
+                    <div *ngIf="course.publish; then thenBlock else elseBlock "></div>
+                    <!-- true -->
+                    <ng-template #thenBlock>
+                        <button mat-button >
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                    </ng-template>
+                    <!-- false -->
+                    <ng-template #elseBlock>
+                        <button mat-button>
+                            <mat-icon>visibility_off</mat-icon>
+                        </button>
+                    </ng-template>
+                    <button (click)="delete(course)" mat-button>
                         <mat-icon>delete_forever</mat-icon>
                     </button>
                 </mat-card-actions>

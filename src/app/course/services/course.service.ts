@@ -41,6 +41,15 @@ export class CourseService {
       }
     )
   }
+
+  public removeM(id: number): Observable<HttpResponse<any>> {
+    return this._httpClient.delete<CourseManageType>(
+      `${this.endPoint}/${id}`,
+      {
+        observe: 'response'
+      }
+    )
+  }
   public findUsersCourses(): Observable<CourseListType[]> {
     console.log(this._userService.user.id)
     return this._httpClient.get<CourseListType[]>(
@@ -54,8 +63,8 @@ export class CourseService {
       this.endPoint + '/usersCourses/' + this._userService.user.id)
   }
 
-  public update(course: CourseModel): Observable<HttpResponse<any>> {
-    return this._httpClient.put<CourseModel>(
-      this.endPoint, course, { observe: 'response' })
+  public update(course: CourseManageType): Observable<HttpResponse<any>> {
+    return this._httpClient.put<CourseManageType>(
+      this.endPoint +'/'+ this._userService.user.id, course, { observe: 'response' })
   }
 }

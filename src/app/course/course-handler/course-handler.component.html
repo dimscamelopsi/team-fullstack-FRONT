@@ -9,7 +9,7 @@
       Import
     </button>
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="editSubmit()">
       <fieldset>
         <legend>Course</legend>
         <div class="row">
@@ -25,12 +25,37 @@
               <textarea matInput type="textarea"cdkTextareaAutosize cdkAutosizeMaxRows="10" formControlName="objective" placeholder="Objective..."></textarea>
           </mat-form-field>
       </div>
+      <!-- Icon Publish -->
+
+       <!-- Condition publish -->
+       <div *ngIf="publish; then thenBlock else elseBlock "></div>
+       <!-- true -->
+       <ng-template #thenBlock>
+        <div class="row">
+          <button (click)="editPublish(publish)" mat-button class="col xs1">
+              <mat-icon>visibility</mat-icon>
+          </button>
+          <p class="col xs11">Online !</p>
+         </div>
+       </ng-template>
+
+       <!-- false -->
+       <ng-template #elseBlock>
+        <div class="row">
+           <button (click)="editPublish(publish)" mat-button class="col xs1">
+               <mat-icon>visibility_off</mat-icon>
+           </button>
+           <p class="col xs11">Not Online !</p>
+          </div>
+       </ng-template>
+
       </fieldset>
         <div class="buttons">
           <button mat-raised-button color="warn" (click)="resetForm($event)">Reset</button>
           <button mat-raised-button color="primary" [disabled]="form.invalid">Edit</button>
         </div>
     </form>
+    
 
   </div>
 </ng-template>
@@ -97,7 +122,7 @@
               </ol>
             </fieldset>
           </ng-container>
-          <!-- <button mat-raised-button type="button" color="warn" (click)="addModule()">
+          <!--<button mat-raised-button type="button" color="warn" (click)="addModule()">
               Add Module
           </button> -->
       </ng-container>

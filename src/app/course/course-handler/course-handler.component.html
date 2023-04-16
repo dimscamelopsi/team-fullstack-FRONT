@@ -1,77 +1,135 @@
-<h2>Create a course</h2>
-
-<div id="import">
-  <span>Import a course from an existing one :  </span>
-  <button  mat-raised-button type="button" color="primary"  (click)="addCourse()">
-    Import
-</button>
-</div>
-
-
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <fieldset>
-    <legend>Course</legend>
-    <div class="row">
-
-      <mat-form-field class="col xs12">
-          <input matInput formControlName="title" placeholder="Course title...">
-          <mat-error *ngIf="c['title'].errors && c['title'].touched">
-              Title is required
-          </mat-error>
-      </mat-form-field>
-  </div>
-  <div class="row">
-      <mat-form-field class="col xs12">
-          <textarea matInput type="textarea"cdkTextareaAutosize cdkAutosizeMaxRows="10" formControlName="objective" placeholder="Objective..."></textarea>
-      </mat-form-field>
-  </div>
-  </fieldset>
+<div *ngIf="manageBool(); then thenBlock else elseBlock"></div>
+<!--  Condition true "Manage course" -->
+<ng-template #thenBlock>
+  <h2>Manage a course</h2>
 
   <div id="import">
-    <span>Import a module from an existing one :  </span>
-    <button  mat-raised-button type="button" color="primary"  (click)="openModule()">
+    <span>Import a course from conceptor :  </span>
+    <button  mat-raised-button type="button" color="primary"  (click)="addCourseManage()">
       Import
-  </button>
+    </button>
+
+    <form [formGroup]="form" (ngSubmit)="editSubmit()">
+      <fieldset>
+        <legend>Course</legend>
+        <div class="row">
+          <mat-form-field class="col xs12">
+              <input matInput formControlName="title" placeholder="Course title...">
+              <mat-error *ngIf="c['title'].errors && c['title'].touched">
+                  Title is required
+              </mat-error>
+          </mat-form-field>
+      </div>
+      <div class="row">
+          <mat-form-field class="col xs12">
+              <textarea matInput type="textarea"cdkTextareaAutosize cdkAutosizeMaxRows="10" formControlName="objective" placeholder="Objective..."></textarea>
+          </mat-form-field>
+      </div>
+      <!-- Icon Publish -->
+
+       <!-- Condition publish -->
+       <div *ngIf="publish; then thenBlock else elseBlock "></div>
+       <!-- true -->
+       <ng-template #thenBlock>
+        <div class="row">
+          <button (click)="editPublish(publish)" mat-button class="col xs1">
+              <mat-icon>visibility</mat-icon>
+          </button>
+          <p class="col xs11">Online !</p>
+         </div>
+       </ng-template>
+
+       <!-- false -->
+       <ng-template #elseBlock>
+        <div class="row">
+           <button (click)="editPublish(publish)" mat-button class="col xs1">
+               <mat-icon>visibility_off</mat-icon>
+           </button>
+           <p class="col xs11">Not Online !</p>
+          </div>
+       </ng-template>
+
+      </fieldset>
+        <div class="buttons">
+          <button mat-raised-button color="warn" (click)="resetForm($event)">Reset</button>
+          <button mat-raised-button color="primary" [disabled]="form.invalid">Edit</button>
+        </div>
+    </form>
+    
+
+  </div>
+</ng-template>
+
+
+<!--  Condition false "Create course" -->
+<ng-template #elseBlock>
+  <h2>Create a course</h2>
+  <div id="import">
+    <span>Import a course from an existing one :  </span>
+    <button  mat-raised-button type="button" color="primary"  (click)="addCourse()">
+      Import
+    </button>
   </div>
 
-    <ng-container *ngIf="useModule">
-        <ng-container>
-          <fieldset>
-            <legend>Modules</legend>
-            <ol class="module-list">
-                <li *ngFor="let module of modules">
-                  <div class="module-tile">
-                    <div class="title">{{ module.name }}</div>
-                    <div class="remove">
-                        <button mat-icon-button (click)="removeModule(module)">
-                            <mat-icon color="error">delete</mat-icon>
-                        </button>
-                    </div>
-
-                  </div>
-
-
-                    <ul class="media-list">
-                      <li *ngFor="let media of module.medias">
-                        <div class="media-tile">
-                          <div class="title">{{ media.title }}</div>
-                          <div class="type">{{ media.typeMedia.title }}</div>
-                          <div class="duration">{{ media.totalTime }}</div>
-                        </div>
-                        <mat-divider></mat-divider>
-                      </li>
-                    </ul>
-                </li>
-            </ol>
-          </fieldset>
-        </ng-container>
-        <!-- <button mat-raised-button type="button" color="warn" (click)="addModule()">
-            Add Module
-        </button> -->
-    </ng-container>
-
-    <div class="buttons">
-          <button mat-raised-button color="warn" (click)="resetForm($event)">Reset</button>
-          <button mat-raised-button color="primary" [disabled]="form.invalid">Add</button>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <fieldset>
+      <legend>Course</legend>
+      <div class="row">
+  
+        <mat-form-field class="col xs12">
+            <input matInput formControlName="title" placeholder="Course title...">
+            <mat-error *ngIf="c['title'].errors && c['title'].touched">
+                Title is required
+            </mat-error>
+        </mat-form-field>
     </div>
-</form>
+    <div class="row">
+        <mat-form-field class="col xs12">
+            <textarea matInput type="textarea"cdkTextareaAutosize cdkAutosizeMaxRows="10" formControlName="objective" placeholder="Objective..."></textarea>
+        </mat-form-field>
+    </div>
+    </fieldset>
+  
+      <ng-container *ngIf="useModule">
+          <ng-container *ngIf="modules.length">
+            <fieldset>
+              <legend>Modules</legend>
+              <ol class="module-list">
+                  <li *ngFor="let module of modules">
+                    <div class="module-tile">
+                      <div class="title">{{ module.name }}</div>
+                      <div class="remove">
+                          <button mat-icon-button (click)="removeModule(module)">
+                              <mat-icon color="error">delete</mat-icon>
+                          </button>
+                      </div>
+  
+                    </div>
+  
+  
+                      <ul class="media-list">
+                        <li *ngFor="let media of module.medias">
+                          <div class="media-tile">
+                            <div class="title">{{ media.title }}</div>
+                            <div class="type">{{ media.typeMedia.title }}</div>
+                            <div class="duration">{{ media.totalTime }}</div>
+                          </div>
+                          <mat-divider></mat-divider>
+                        </li>
+                      </ul>
+                  </li>
+              </ol>
+            </fieldset>
+          </ng-container>
+          <!--<button mat-raised-button type="button" color="warn" (click)="addModule()">
+              Add Module
+          </button> -->
+      </ng-container>
+  
+      <div class="buttons">
+        <button mat-raised-button color="warn" (click)="resetForm($event)">Reset</button>
+        <button mat-raised-button color="primary" [disabled]="form.invalid">Add</button>
+      </div>
+  </form>
+
+</ng-template>

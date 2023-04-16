@@ -99,9 +99,8 @@ export class CourseHandlerComponent implements OnInit {
       id: this.idCourse,
       title: this.c['title'].value,
       objective: this.c['objective'].value,
-      //publish: this.c['publish'].value,
       publish: this.publish,
-      isSelected: false
+      isSelected: false 
     }
     console.log(`Student was updated ${course}`)
     this._courseService.update(course)
@@ -135,6 +134,30 @@ export class CourseHandlerComponent implements OnInit {
         }
       }
     })
+  }
+
+  addCourseManage(): void{
+    this._dialog.open(UpdateCourseManageComponent, {
+      height: '400px',
+      width: '600px',
+      data: {
+        show : true,
+        manage : true       
+      }
+    }).afterClosed().subscribe(
+      (result: CourseManageType | undefined) => { 
+        if(result !== undefined) {
+          this.c['title'].setValue(result.title)
+          this.c['objective'].setValue(result.objective)
+          this.publish = result.publish
+          this.idCourse = result.id
+        }
+      }
+    )
+  }
+
+  editPublish(state: boolean): boolean {
+    return (state)? this.publish = false : this.publish =true
   }
 
   resetForm(event:any): void {

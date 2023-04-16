@@ -25,7 +25,8 @@ import { UpdateCourseManageComponent } from './dialogs/update-course-manage/upda
     ModuleAddComponent,
     ManageCourseComponent,
     CourseDialogComponent,
-    UpdateCourseManageComponent
+    UpdateCourseManageComponent,
+    ModuleDialogComponent
   ],
   imports: [
     SharedModule,

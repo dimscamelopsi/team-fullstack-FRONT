@@ -3,8 +3,7 @@ import { MediaService } from '../services/media.service';
 import { MediaType } from 'src/app/course/types/media-type';
 import { take } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { AddModuleComponent } from '../add-module/add-module.component';
-import { ModuleType } from '../../types/module-type';
+
 
 @Component({
   selector: 'app-media-dialog',

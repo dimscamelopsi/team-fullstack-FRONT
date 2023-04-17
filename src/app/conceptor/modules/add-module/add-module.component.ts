@@ -4,12 +4,14 @@ import { ModuleService } from '../services/module.service';
 import { take } from 'rxjs';
 import { ToastService } from 'src/app/core/toast.service';
 import { HttpResponse } from '@angular/common/http';
-import { ModuleType } from '../../types/module-type';
+
 import { CourseService } from 'src/app/course/services/course.service';
 import { CourseListType } from 'src/app/course/types/course-list-type';
 import { MediaType } from 'src/app/course/types/media-type';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MediaDialogComponent } from '../media-dialog/media-dialog.component';
+import { ModuleType } from 'src/app/course/types/module-type';
+import { ModuleAddType } from 'src/app/course/types/module-add-type';
 
 @Component({
   selector: 'app-add-module',
@@ -60,17 +62,16 @@ export class AddModuleComponent implements OnInit {
   }
 
   public addModule() {
-    //console.log(this.moduleFormGroup.value)
-    const module:ModuleType={
+    const module:ModuleAddType={
       name:this.moduleFormGroup.controls['name'].value,
       objective:this.moduleFormGroup.controls['objective'].value,
       course:this.moduleFormGroup.controls['course'].value,
-      medias:this.medias
+      media:this.medias
     }
-    //console.log(module)
-    this._moduleService.add(module)
+    this._moduleService.add(module) 
       .subscribe({
-        next: (moduletype:ModuleType) => {
+      
+        next: (response:HttpResponse<any>) => {
           const message: string = `module was added. `
           this._toastService.show(message)
         },
@@ -92,7 +93,6 @@ export class AddModuleComponent implements OnInit {
       if (result !== undefined) {
         
         this.medias.push(result)
-        //console.log(this.medias)
       }
     })
   }

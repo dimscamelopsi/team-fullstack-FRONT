@@ -2,7 +2,7 @@
 </div>
 <div class="row">
     <div class="col xs12">
-        <ng-container>
+        <ng-container >
            <form [formGroup]="mediaFormGroup" (ngSubmit)="addMedia()">
             <fieldset>
              <legend>
@@ -67,7 +67,15 @@
               </span>
               </mat-error>
             </mat-form-field><br>
-            <input type="file"capture>
+            <mat-form-field>
+
+              <mat-label>Modules list</mat-label>
+              <mat-select formControlName="Module">
+                  <mat-option *ngFor="let userModules of userModules" [value]="userModules">
+                      {{userModules.name}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
 
           </fieldset>
           <div class="row">

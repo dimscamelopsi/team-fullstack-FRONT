@@ -6,6 +6,9 @@ import { take } from 'rxjs';
 import {  HttpResponse } from '@angular/common/http';
 import { MediaType } from 'src/app/course/types/media-type';
 import { AddMediaType } from 'src/app/course/types/add-media-type';
+import { ModuleService } from '../services/module.service';
+import { ModuleListType } from 'src/app/course/types/media-list-type';
+
 
 @Component({
   selector: 'app-add-media',
@@ -16,18 +19,21 @@ export class AddMediaComponent implements OnInit {
   mediaFormGroup!: FormGroup;
   public mediaType!: MediaType[];
   public addMediaType!: AddMediaType[];
+  public userModules: Array<ModuleListType> = []
 
 
   constructor(
     private _fb: FormBuilder,
     private _mediaService: MediaService,
     private _toastService: ToastService,
-    private _typeMediaService: MediaService,
+    private _moduleService: ModuleService
 
   ) { }
 
 
   ngOnInit(): void {
+
+
 
     this.mediaFormGroup =this._fb.group({
 
@@ -66,11 +72,11 @@ export class AddMediaComponent implements OnInit {
       .pipe(
         take(1)
       ).subscribe({
-        next: (response: HttpResponse<any>) => {
+        next: (_response: HttpResponse<any>) => {
           const message: string = `media was added. `
           this._toastService.show(message)
         },
-        error: (error: any) => {
+        error: (_error: any) => {
           const badMessage: string = `media not added.`
           this._toastService.show(badMessage)
         }

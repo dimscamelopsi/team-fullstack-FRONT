@@ -59,22 +59,23 @@
 
 
             <mat-form-field>
-              <input matInput placeholder="Media type.*" formControlName="typeMedia">
-              <mat-error
-                *ngIf="mediaFormGroup.controls['typeMedia'].errors && mediaFormGroup.controls['typeMedia'].touched">
-                <span *ngIf="mediaFormGroup.controls['typeMedia'].hasError('required')">
-                  Media type cannot be empty !!!
-              </span>
-              </mat-error>
+              <mat-label>List MediaType</mat-label>
+              <mat-select formControlName="typeMedia">
+                  <mat-option *ngFor="let listTypeMedia of typeMedias" [value]="listTypeMedia">
+                      {{listTypeMedia.title}}
+                  </mat-option>
+              </mat-select>
             </mat-form-field><br>
-            <mat-form-field>
 
-              <mat-label>Modules list</mat-label>
+
+            <mat-form-field>
+              <mat-label>Module person list    ou   en boutton</mat-label>
               <mat-select formControlName="Module">
                   <mat-option *ngFor="let userModules of userModules" [value]="userModules">
                       {{userModules.name}}
                   </mat-option>
               </mat-select>
+
           </mat-form-field>
 
           </fieldset>

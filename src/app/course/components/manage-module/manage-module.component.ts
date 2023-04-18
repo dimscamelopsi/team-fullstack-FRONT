@@ -1,3 +1,4 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-module.component.scss']
 })
 export class ManageModuleComponent implements OnInit {
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol']
 
-  constructor() { }
+  constructor(private _liveAnnouncer: LiveAnnouncer) { }
 
   ngOnInit(): void {
   }

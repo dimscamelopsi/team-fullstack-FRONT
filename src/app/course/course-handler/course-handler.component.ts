@@ -13,6 +13,8 @@ import { CourseListType } from '../types/course-list-type';
 import { BehaviorSubject } from 'rxjs';
 import { UserService } from 'src/app/user/services/user.service';
 import { ModuleDialogComponent } from '../dialogs/module-dialog/module-dialog.component';
+import { SimpleStudent } from 'src/app/student/types/simple-student-type';
+import { ReallySimpleStudent } from 'src/app/student/types/really-simple-student';
 
 @Component({
   selector: 'app-course-handler',
@@ -37,6 +39,7 @@ export class CourseHandlerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   get c(): {[key: string]: AbstractControl} {
@@ -65,14 +68,21 @@ export class CourseHandlerComponent implements OnInit {
   }
 
   onSubmit(): void {
+    const student: ReallySimpleStudent = {
+      id: this._userService.user.id
+    }
+
+
     const course: CourseType = {
       title: this.c['title'].value,
       objective: this.c['objective'].value,
       modules: this.modules,
+      student: student
+
     }
     this._courseService.add(course)
       .subscribe((courseType: CourseType) => {
-        this._router.navigate(['/', 'course'])
+        this._router.navigate(['/', 'conceptor', '/', 'list'])
       })
   }
 

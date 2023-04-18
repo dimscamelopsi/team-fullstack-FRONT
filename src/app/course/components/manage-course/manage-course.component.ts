@@ -17,7 +17,6 @@ import { UpdateCourseManageComponent } from '../../dialogs/update-course-manage/
 export class ManageCourseComponent implements OnInit {
   courseEdit!: CourseManageType
 
-  private _visibility!: boolean
   public courses: Array<CourseManageType> = []
   
   constructor(

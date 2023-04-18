@@ -16,6 +16,8 @@ import { CourseManageType } from '../types/course-manage-type';
 import { UpdateCourseManageComponent } from '../dialogs/update-course-manage/update-course-manage.component';
 import { HttpResponse } from '@angular/common/http';
 import { ModuleDialogComponent } from '../dialogs/module-dialog/module-dialog.component';
+import { SimpleStudent } from 'src/app/student/types/simple-student-type';
+import { ReallySimpleStudent } from 'src/app/student/types/really-simple-student';
 
 @Component({
   selector: 'app-course-handler',
@@ -44,6 +46,7 @@ export class CourseHandlerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   get c(): {[key: string]: AbstractControl} {
@@ -83,14 +86,21 @@ export class CourseHandlerComponent implements OnInit {
   }
 
   onSubmit(): void {
+    const student: ReallySimpleStudent = {
+      id: this._userService.user.id
+    }
+
+
     const course: CourseType = {
       title: this.c['title'].value,
       objective: this.c['objective'].value,
       modules: this.modules,
+      student: student
+
     }
     this._courseService.add(course)
       .subscribe((courseType: CourseType) => {
-        this._router.navigate(['/', 'course'])
+        this._router.navigate(['/', 'conceptor', '/', 'list'])
       })
   }
 

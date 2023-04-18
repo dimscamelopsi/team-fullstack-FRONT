@@ -1,5 +1,10 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, OnInit } from '@angular/core';
+import { CourseManageType } from '../../types/course-manage-type';
+import { CourseService } from '../../services/course.service';
+import { take } from 'rxjs';
+import { ModuleService } from 'src/app/conceptor/services/module.service';
+import { ModuleManageType } from 'src/app/conceptor/types/module-manage-type';
+import { ModuleType } from 'src/app/conceptor/types/module-type';
 
 @Component({
   selector: 'app-manage-module',
@@ -7,11 +12,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-module.component.scss']
 })
 export class ManageModuleComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol']
+    public modules: Array<ModuleType> = []
+    public coursesByAutors: Array<CourseManageType> = []
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) { }
-
+  constructor(
+    private _moduleService: ModuleService,
+    private _courseByAutorService: CourseService) { }
+  
   ngOnInit(): void {
+    this._courseByAutorService.findListCourse()
+      .pipe(take(1)).subscribe(
+        (response: CourseManageType[]) => {this.coursesByAutors = response })
+
+    this._moduleService.findAllModules()
+      .pipe(take(1)).subscribe(
+        (response: any[]) => {this.modules = response })
   }
 
 }

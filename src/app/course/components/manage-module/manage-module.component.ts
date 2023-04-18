@@ -3,7 +3,6 @@ import { CourseManageType } from '../../types/course-manage-type';
 import { CourseService } from '../../services/course.service';
 import { take } from 'rxjs';
 import { ModuleService } from 'src/app/conceptor/services/module.service';
-import { ModuleManageType } from 'src/app/conceptor/types/module-manage-type';
 import { ModuleType } from 'src/app/conceptor/types/module-type';
 
 @Component({

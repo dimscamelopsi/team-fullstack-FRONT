@@ -8,6 +8,8 @@ import { MediaType } from 'src/app/course/types/media-type';
 import { AddMediaType } from 'src/app/course/types/add-media-type';
 import { ModuleService } from '../services/module.service';
 import { ModuleListType } from 'src/app/course/types/media-list-type';
+import { TypeMediaType } from 'src/app/course/types/type-media-type';
+import { TypeMediaService } from '../services/type-media.service';
 
 
 @Component({
@@ -19,21 +21,31 @@ export class AddMediaComponent implements OnInit {
   mediaFormGroup!: FormGroup;
   public mediaType!: MediaType[];
   public addMediaType!: AddMediaType[];
-  public userModules: Array<ModuleListType> = []
+  public userModules: Array<ModuleListType> = [];
+  public typeMedias: Array<TypeMediaType> = []
 
 
   constructor(
     private _fb: FormBuilder,
     private _mediaService: MediaService,
     private _toastService: ToastService,
-    private _moduleService: ModuleService
+    private _moduleService: ModuleService,
+    private _typeMediaService : TypeMediaService
 
   ) { }
 
 
   ngOnInit(): void {
 
+    this._typeMediaService.getAllTypesMedia()
+    .pipe(
+      take(1)
+    )
+    .subscribe((response: TypeMediaType[]) => {
 
+      this.typeMedias = response
+
+    })
 
     this.mediaFormGroup =this._fb.group({
 

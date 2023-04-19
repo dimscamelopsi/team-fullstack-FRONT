@@ -31,8 +31,8 @@ export class ManageCourseComponent implements OnInit {
 
   openDialog(courseObject: CourseManageType): void {
     const dialogRef = this.dialog.open(UpdateCourseManageComponent, {
-      height: '400px',
-      width: '600px',
+      height: '600px',
+      width: '900px',
       data: {
         title: courseObject.title,
         objective: courseObject.objective,

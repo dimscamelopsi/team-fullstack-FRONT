@@ -60,7 +60,7 @@ export class CourseService {
   }
   public findListCourse(): Observable<CourseManageType[]> {
     return this._httpClient.get<CourseManageType[]>(
-      this.endPoint + '/usersCourses/' + this._userService.user.id)
+      this.endPoint + '/managecourse/' + this._userService.user.id)
   }
 
   public update(course: CourseManageType): Observable<HttpResponse<any>> {

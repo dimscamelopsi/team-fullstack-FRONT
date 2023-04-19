@@ -1,3 +1,4 @@
+import { ModuleType } from "./module-type"
 import { SelectedType } from "./selected-type"
 
 export type CourseManageType = {
@@ -7,4 +8,5 @@ export type CourseManageType = {
     updatedAt?: Date
     objective: string
     publish: boolean
+    modules?: Array<ModuleType>
   } & SelectedType

@@ -1,11 +1,63 @@
 <mat-dialog-content>
     <div class="row">
         <div class="col xs9 course-title">
-            Course List
+            Course List || {{data.title}}
         </div>
     </div>
 
-    <ng-container *ngIf="courses.length">
+    <!-- Form manage course -->
+    <form [formGroup]="form" (ngSubmit)="editSubmit()">
+        <fieldset>
+            <legend>Course</legend>
+            <div class="row">
+                <mat-form-field class="col xs12">
+                    <input matInput formControlName="title" placeholder="Course title..." [(ngModel)]="data.title">
+                    <mat-error *ngIf="c['title'].errors && c['title'].touched">
+                        Title is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field class="col xs12">
+                    <textarea matInput type="textarea" cdkTextareaAutosize cdkAutosizeMaxRows="10"
+                        formControlName="objective" placeholder="Objective..." [(ngModel)]="data.objective"></textarea>
+                </mat-form-field>
+            </div>
+            <!-- Icon Publish -->
+    
+            <!-- Condition publish -->
+            <div *ngIf="publish; then thenBlock else elseBlock "></div>
+            <!-- true -->
+            <ng-template #thenBlock>
+                <div class="row">
+                    <button (click)="editPublish(publish)" mat-button class="col xs1">
+                        <mat-icon>visibility</mat-icon>
+                    </button>
+                    <p class="col xs11">Online !</p>
+                </div>
+            </ng-template>
+    
+            <!-- false -->
+            <ng-template #elseBlock>
+                <div class="row">
+                    <button (click)="editPublish(publish)" mat-button class="col xs1">
+                        <mat-icon>visibility_off</mat-icon>
+                    </button>
+                    <p class="col xs11">Not Online !</p>
+                </div>
+            </ng-template>
+    
+        </fieldset>
+        <div class="buttons">
+            <button mat-raised-button color="warn" (click)="resetForm($event)">Reset</button>
+            <button mat-raised-button color="primary" [disabled]="form.invalid">Edit</button>
+        </div>
+    </form>
+
+
+
+
+    <!-- <ng-container *ngIf="courses.length">
         <ng-container *ngFor="let course of courses">
             <mat-card>
                 <mat-card-header>
@@ -16,15 +68,15 @@
                     <button mat-button (click)="sendCourse(course)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <!-- Condition publish -->
+                    <!-- Condition publish --
                     <div *ngIf="course.publish; then thenBlock else elseBlock "></div>
-                    <!-- true -->
+                    <!-- true --
                     <ng-template #thenBlock>
                         <button mat-button >
                             <mat-icon>visibility</mat-icon>
                         </button>
                     </ng-template>
-                    <!-- false -->
+                    <!-- false --
                     <ng-template #elseBlock>
                         <button mat-button>
                             <mat-icon>visibility_off</mat-icon>
@@ -36,5 +88,7 @@
                 </mat-card-actions>
             </mat-card>
         </ng-container>
-    </ng-container>
+    </ng-container> 
+-->
 </mat-dialog-content>
+ 

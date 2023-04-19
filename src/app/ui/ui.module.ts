@@ -12,7 +12,8 @@ import { MatMenuModule } from '@angular/material/menu'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatSelectModule} from '@angular/material/select'; 
+import { MatSelectModule } from '@angular/material/select'; 
+import {MatCardModule} from '@angular/material/card'; 
 
 @NgModule({
   declarations: [],
@@ -36,6 +37,7 @@ export class UiModule {
     MatSlideToggleModule,
     MatSidenavModule,
     MatDividerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule
   ]
 }

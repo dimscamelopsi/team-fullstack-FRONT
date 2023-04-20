@@ -10,6 +10,8 @@ import { ModuleService } from '../services/module.service';
 import { ModuleListType } from 'src/app/course/types/media-list-type';
 import { TypeMediaType } from 'src/app/course/types/type-media-type';
 import { TypeMediaService } from '../services/type-media.service';
+import { log } from 'console';
+
 
 
 @Component({
@@ -22,7 +24,11 @@ export class AddMediaComponent implements OnInit {
   public mediaType!: MediaType[];
   public addMediaType!: AddMediaType[];
   public userModules: Array<ModuleListType> = [];
-  public typeMedias: Array<TypeMediaType> = []
+  public typeMedias: Array<TypeMediaType> = [];
+  selectedOption: any;
+  type!:any
+
+
 
 
   constructor(
@@ -77,9 +83,15 @@ export class AddMediaComponent implements OnInit {
 
       ]),
     })
+    this.type =this.selectedOption.entries()
+
 
   }
     public addMedia(){
+      console.log(this.selectedOption);
+      console.log(this.type.name)
+
+
       this._mediaService.add(this.mediaFormGroup.value)
       .pipe(
         take(1)

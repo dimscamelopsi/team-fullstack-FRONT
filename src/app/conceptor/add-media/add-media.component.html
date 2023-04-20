@@ -1,92 +1,138 @@
+<div class="row"></div>
 <div class="row">
-</div>
-<div class="row">
-    <div class="col xs12">
-        <ng-container >
-           <form [formGroup]="mediaFormGroup" (ngSubmit)="addMedia()">
-            <fieldset>
-             <legend>
-             New media
-            </legend>
+  <div class="col xs12">
+    <ng-container>
+      <form [formGroup]="mediaFormGroup" (ngSubmit)="addMedia()">
+        <fieldset>
+          <legend>New media</legend>
 
-
-            <div class="row">
-              <div class="col xs12 md6">
-                <mat-form-field>
-                  <input matInput placeholder="Media title...*" formControlName="title">
-                  <mat-error
-                    *ngIf="mediaFormGroup.controls['title'].errors && mediaFormGroup.controls['title'].touched">
-                    <span *ngIf="mediaFormGroup.controls['title'].hasError('required')">
-                      Title cannot be empty !!!
-                  </span>
-                  </mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-
-
-            <mat-form-field>
-              <input matInput placeholder="Media summary..*" formControlName="summary">
-              <mat-error
-                *ngIf="mediaFormGroup.controls['summary'].errors && mediaFormGroup.controls['summary'].touched">
-                <span *ngIf="mediaFormGroup.controls['summary'].hasError('required')">
-                  Summary cannot be empty !!!
-              </span>
-              </mat-error>
-            </mat-form-field><br>
-
-
-            <mat-form-field>
-              <input matInput placeholder="Media duration..*" formControlName="duration">
-              <mat-error
-                *ngIf="mediaFormGroup.controls['duration'].errors && mediaFormGroup.controls['duration'].touched">
-                <span *ngIf="mediaFormGroup.controls['duration'].hasError('required')">
-                  Duration cannot be empty !!!
-              </span>
-              </mat-error>
-            </mat-form-field><br>
-
-
-            <mat-form-field>
-              <input matInput placeholder="Media URL..*" formControlName="url">
-              <mat-error
-                *ngIf="mediaFormGroup.controls['url'].errors && mediaFormGroup.controls['url'].touched">
-                <span *ngIf="mediaFormGroup.controls['url'].hasError('required')">
-                  url cannot be empty !!!
-              </span>
-              </mat-error>
-            </mat-form-field><br>
-
-
-            <mat-form-field>
-              <mat-label>List MediaType</mat-label>
-              <mat-select formControlName="typeMedia">
-                  <mat-option *ngFor="let listTypeMedia of typeMedias" [value]="listTypeMedia">
-                      {{listTypeMedia.title}}
-                  </mat-option>
-              </mat-select>
-            </mat-form-field><br>
-
-
-            <mat-form-field>
-              <mat-label>Module person list    ou   en boutton</mat-label>
-              <mat-select formControlName="Module">
-                  <mat-option *ngFor="let userModules of userModules" [value]="userModules">
-                      {{userModules.name}}
-                  </mat-option>
-              </mat-select>
-
-          </mat-form-field>
-
-          </fieldset>
           <div class="row">
-            <div class="col xs6"></div>
-               <div class="col xs6">
-                <button mat-raised-button [disabled]="mediaFormGroup.invalid" color="primary">Add</button>
-                   </div>
-                  <div class="col xs4"></div>
-                </div>
+            <div class="col xs12 md6">
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Media title...*"
+                  formControlName="title"
+                />
+                <mat-error
+                  *ngIf="
+                    mediaFormGroup.controls['title'].errors &&
+                    mediaFormGroup.controls['title'].touched
+                  "
+                >
+                  <span
+                    *ngIf="
+                      mediaFormGroup.controls['title'].hasError('required')
+                    "
+                  >
+                    Title cannot be empty !!!
+                  </span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
 
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Media summary..*"
+              formControlName="summary"
+            />
+            <mat-error
+              *ngIf="
+                mediaFormGroup.controls['summary'].errors &&
+                mediaFormGroup.controls['summary'].touched
+              "
+            >
+              <span
+                *ngIf="mediaFormGroup.controls['summary'].hasError('required')"
+              >
+                Summary cannot be empty !!!
+              </span>
+            </mat-error> </mat-form-field
+          ><br />
+
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Media duration..*"
+              formControlName="duration"
+            />
+            <mat-error
+              *ngIf="
+                mediaFormGroup.controls['duration'].errors &&
+                mediaFormGroup.controls['duration'].touched
+              "
+            >
+              <span
+                *ngIf="mediaFormGroup.controls['duration'].hasError('required')"
+              >
+                Duration cannot be empty !!!
+              </span>
+            </mat-error> </mat-form-field
+          ><br />
+
+          <mat-form-field>
+            <mat-label>List MediaType</mat-label>
+            <mat-select
+              [(ngModel)]="selectedOption"
+              formControlName="typeMedia"
+              required
+            >
+              <mat-option
+                [value]="listTypeMedia.title"
+                *ngFor="let listTypeMedia of typeMedias"
+              >
+                {{ listTypeMedia.title }}
+              </mat-option>
+            </mat-select> </mat-form-field
+          ><br />
+          {{ selectedOption }}
+
+          <mat-form-field *ngIf="selectedOption === 'Video'">
+            <label for="urlInput">Entrer une URL de vidéo:</label>
+            <input id="urlInput" type="text" [(ngModel)]="selectedOption" />
+
+            <mat-error
+              *ngIf="
+                mediaFormGroup.controls['url'].errors &&
+                mediaFormGroup.controls['url'].touched
+              "
+            >
+              <span *ngIf="mediaFormGroup.controls['url'].hasError('required')">
+                url cannot be empty !!!
+              </span>
+
+              si le MediaType = vidéo je l'envoi dans une url sinan j'affiche un
+              bouton qui upload les docs
+            </mat-error> </mat-form-field
+          ><br />
+
+          <mat-form-field>
+            <mat-label>Module person list ou en boutton</mat-label>
+            <mat-select formControlName="Module">
+              <mat-option
+                *ngFor="let userModules of userModules"
+                [value]="userModules"
+              >
+                {{ userModules.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </fieldset>
+        <div class="row">
+          <div class="col xs6"></div>
+          <div class="col xs6">
+            <button
+              mat-raised-button
+              [disabled]="mediaFormGroup.invalid"
+              color="primary"
+            >
+              Add
+            </button>
+          </div>
+          <div class="col xs4"></div>
+        </div>
       </form>
     </ng-container>
   </div>

@@ -31,12 +31,12 @@ export class ManageCourseComponent implements OnInit {
 
   openDialog(courseObject: CourseManageType): void {
     const dialogRef = this.dialog.open(UpdateCourseManageComponent, {
-      height: '600px',
-      width: '900px',
       data: {
         title: courseObject.title,
         objective: courseObject.objective,
-        visibility: courseObject.publish       
+        visibility: courseObject.publish, 
+        modules: courseObject.modules
+  
       }
     }).afterClosed().subscribe(
       (result) => { this.courseEdit = result })

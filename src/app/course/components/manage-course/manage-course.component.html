@@ -14,7 +14,10 @@
                 <mat-card>
                     <mat-card-header *ngIf="!courseEdit">
                         <mat-card-title>{{ course.title }}</mat-card-title>
-                        <mat-card-subtitle> module :{{ course.modules?.length }}</mat-card-subtitle>
+                        <a >
+                            <mat-card-subtitle> module :{{ course.modules?.length }}</mat-card-subtitle>
+                        </a>
+                        
                     </mat-card-header>
                     <mat-card-content>
                         {{course.objective}} 
@@ -41,13 +44,15 @@
                         </ng-template>
                         
                         <!-- Button Edit -->
+                        
                         <button (click)="openDialog(course)" mat-icon-button matTooltip="Basic"
                             aria-label="Example icon-button with a heart icon">
                             <mat-icon>edit</mat-icon>
                         </button>
+                        <ng-container ></ng-container>
 
                         <!-- Button delete -->
-                        <button (click)="openDialog(course)" mat-icon-button matTooltip="Basic"
+                        <button mat-icon-button matTooltip="Basic"
                             aria-label="Example icon-button with a heart icon">
                             <mat-icon>delete</mat-icon>
                         </button>

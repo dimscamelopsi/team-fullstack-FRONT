@@ -1,7 +1,7 @@
 <mat-dialog-content>
     <div class="row">
-        <div class="col xs9 course-title">
-            Course List || {{data.title}}
+        <div class="col xs10 course-title">
+            <h1>Update course </h1>
         </div>
     </div>
 
@@ -48,47 +48,16 @@
             </ng-template>
     
         </fieldset>
-        <div class="buttons">
-            <button mat-raised-button color="warn" (click)="resetForm($event)">Reset</button>
-            <button mat-raised-button color="primary" [disabled]="form.invalid">Edit</button>
+        <div class="row buttons">
+            <div class="col xs9"></div>
+            <div class="col xs1">
+                <button mat-raised-button color="warn" (click)="resetForm($event)">Reset</button>
+            </div>
+            <div class="col xs2">
+                <button mat-raised-button color="primary" [disabled]="form.invalid">Edit</button>
+            </div>
         </div>
     </form>
 
-
-
-
-    <!-- <ng-container *ngIf="courses.length">
-        <ng-container *ngFor="let course of courses">
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title> {{ course.title}} </mat-card-title>
-                    <mat-card-subtitle>{{ course.objective }} </mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-actions align="end">
-                    <button mat-button (click)="sendCourse(course)">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    <!-- Condition publish --
-                    <div *ngIf="course.publish; then thenBlock else elseBlock "></div>
-                    <!-- true --
-                    <ng-template #thenBlock>
-                        <button mat-button >
-                            <mat-icon>visibility</mat-icon>
-                        </button>
-                    </ng-template>
-                    <!-- false --
-                    <ng-template #elseBlock>
-                        <button mat-button>
-                            <mat-icon>visibility_off</mat-icon>
-                        </button>
-                    </ng-template>
-                    <button (click)="delete(course)" mat-button>
-                        <mat-icon>delete_forever</mat-icon>
-                    </button>
-                </mat-card-actions>
-            </mat-card>
-        </ng-container>
-    </ng-container> 
--->
 </mat-dialog-content>
  

@@ -72,7 +72,27 @@
             </mat-error> </mat-form-field
           ><br />
 
+
+
           <mat-form-field>
+            <mat-label>List MediaType</mat-label>
+            <mat-select [(ngModel)]="selectedOption" formControlName="typeMedia" required>
+              <mat-option [value]="listTypeMedia" *ngFor="let listTypeMedia of typeMedias">
+                {{ listTypeMedia.title }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div *ngIf="selectedOption && selectedOption.title === 'Video'">
+
+            <mat-form-field>
+              <mat-label>Media URL</mat-label>
+              <input matInput type="text" formControlName="url" placeholder="Enter url of your Media..*" >
+            </mat-form-field>
+          </div>
+
+
+       <!--    <mat-form-field>
             <mat-label>List MediaType</mat-label>
             <mat-select
               [(ngModel)]="selectedOption"
@@ -80,35 +100,36 @@
               required
             >
               <mat-option
-                [value]="listTypeMedia.title"
+                [value]="listTypeMedia"
                 *ngFor="let listTypeMedia of typeMedias"
               >
-                {{ listTypeMedia.title }}
+       {{ listTypeMedia.title }}
               </mat-option>
-            </mat-select> </mat-form-field
-          ><br />
-          {{ selectedOption }}
+            </mat-select >
+            <input matInput type="text" *ngIf="selectedOption.find(option => option.title === 'Video')" formControlName="url" placeholder="Enter url of your Media..*">
 
-          <mat-form-field *ngIf="selectedOption === 'Video'">
+             </mat-form-field
+          ><br /> -->
+
+
+        <!-- <input matInput  type="text" *ngIf="selectedOption.find(so =>so.title==='Video')  " formControlName="url" placeholder="Enter url of your Media..*" > --> <br>
+
+
+    <!--       <mat-form-field *ngIf="selectedOption === 'Video'">
             <label for="urlInput">Entrer une URL de vidéo:</label>
-            <input id="urlInput" type="text" [(ngModel)]="selectedOption" />
+            <input id="urlInput" type="text"  />
 
-            <mat-error
-              *ngIf="
-                mediaFormGroup.controls['url'].errors &&
-                mediaFormGroup.controls['url'].touched
-              "
-            >
+            <mat-error *ngIf=" mediaFormGroup.controls['url'].errors && mediaFormGroup.controls['url'].touched " >
               <span *ngIf="mediaFormGroup.controls['url'].hasError('required')">
                 url cannot be empty !!!
               </span>
+               </mat-error>
 
-              si le MediaType = vidéo je l'envoi dans une url sinan j'affiche un
-              bouton qui upload les docs
-            </mat-error> </mat-form-field
-          ><br />
-
-          <mat-form-field>
+             </mat-form-field -->
+          <br /><!--
+          <div appUpload (onFileDropped)="uploadFile($event)" >Déposer un fichier ici</div>
+ -->
+          <!--<mat-form-field>
             <mat-label>Module person list ou en boutton</mat-label>
             <mat-select formControlName="Module">
               <mat-option
@@ -118,7 +139,8 @@
                 {{ userModules.name }}
               </mat-option>
             </mat-select>
-          </mat-form-field>
+          </mat-form-field>-->
+
         </fieldset>
         <div class="row">
           <div class="col xs6"></div>

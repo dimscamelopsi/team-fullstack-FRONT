@@ -54,7 +54,7 @@ export class AddModuleComponent implements OnInit {
   }
 
   public addModule() {
-    //console.log(this.courseFormGroup.value)
+    //console.log(this.moduleFormGroup.value)
     this._moduleService.add(this.moduleFormGroup.value)
       .pipe(
         take(1)

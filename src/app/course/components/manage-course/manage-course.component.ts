@@ -1,15 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CourseListType } from '../../types/course-list-type';
 import { CourseService } from '../../services/course.service';
-import { ToastService } from 'src/app/core/toast.service';
 import { take } from 'rxjs';
 import { ModuleType } from '../../types/module-type';
 import { CourseManageType } from '../../types/course-manage-type';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateCourseManageComponent } from '../../dialogs/update-course-manage/update-course-manage.component';
-import { ModuleDialogComponent } from '../../dialogs/module-dialog/module-dialog.component';
 import { ModuleManageDialogComponent } from '../../dialogs/module-manage-dialog/module-manage-dialog.component';
-import { NavigationExtras, Router } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
+import { ModuleService } from 'src/app/conceptor/services/module.service';
 
 
 @Component({
@@ -23,11 +22,13 @@ export class ManageCourseComponent implements OnInit {
   courseId!: CourseManageType
 
   public courses: Array<CourseManageType> = []
+  public modules: Array<ModuleType> = [];
+  private _toastService: any;
   
   constructor(
     public dialog: MatDialog,
     private _courseService: CourseService,
-    private _router: Router) { }
+    private _moduleService: ModuleService) { }
 
   ngOnInit(): void {
     this._courseService.findListCourse()
@@ -70,8 +71,8 @@ export class ManageCourseComponent implements OnInit {
     }
   }
 
-  doRemoveCourse(course: CourseListType): void {
-    /*this._courseService.remove(course.id!)
+  doRemoveCourse(course: CourseManageType): void {
+    this._courseService.remove(course.id!)
       .pipe(take(1))
       .subscribe({
         next: (response: HttpResponse<any>) => {
@@ -85,8 +86,33 @@ export class ManageCourseComponent implements OnInit {
         complete: () => {this.courses
           .splice(this.courses
             .indexOf(course),1 )}
-      })*/
+      })
+  }
 
+  doRemoveModule(module: ModuleType): void {
+    this._moduleService.remove(module.id!)
+      .pipe(take(1))
+      .subscribe({
+        next: (response: HttpResponse<any>) => {
+           const message: string = `The module ${module.name} has been removed.`
+           this._toastService.show(message)
+        },
+        error: (error: any) => {
+          const badMessage: string = `Sorry, ${module.name} was already removed`
+          this._toastService.show(badMessage)
+        },
+        complete: () => {
+          this.modules.splice(
+            this.modules.indexOf(module),1 )
+        }
+      })
+  }
+
+  removeModule(module: ModuleType): void {
+    this.modules.splice(
+      this.modules.indexOf(module),
+      1
+    )
   }
 
   onVisibility(course: CourseManageType): void {
@@ -99,7 +125,9 @@ export class ManageCourseComponent implements OnInit {
   }
 
   showcard(course: CourseManageType): CourseManageType{
-     return this.courseId = course
+    this.modules = course.modules!
+    course.isSelected = !course.isSelected
+    return this.courseId = course
+     
   }
-
 }

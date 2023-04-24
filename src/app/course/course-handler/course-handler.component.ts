@@ -38,7 +38,6 @@ export class CourseHandlerComponent implements OnInit {
     private _formBuilder: FormCourseBuilderService,
     private _courseService: CourseService,
     private _router: Router,
-    private _routerManage: ActivatedRoute,
     private _dialog: MatDialog,
     private _userService: UserService
   ) {
@@ -53,16 +52,6 @@ export class CourseHandlerComponent implements OnInit {
     return this.form.controls
   }
 
-  /**
-   * La fonction permet de savoir si le user a clické sur le button manage course
-   * pour modifier l'interface IHM
-   * @returns boolean
-   */
-  manageBool(): boolean{
-    this.manageCourse = this._routerManage.snapshot.queryParamMap.get('managerCourse')
-    if( this.manageCourse === 'true'){return this.manageBln = true }
-    else {return this.manageBln = false}
-  }
 
   addModule(): void {
     this._dialog.open(

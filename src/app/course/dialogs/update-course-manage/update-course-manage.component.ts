@@ -1,15 +1,10 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { Component, Inject, Input, OnInit, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CourseManageType } from '../../types/course-manage-type';
 import { CourseService } from '../../services/course.service';
 import { CourseHandlerComponent } from '../../course-handler/course-handler.component';
-import { take } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
-import { CourseListType } from '../../types/course-list-type';
-import { CourseType } from '../../types/course-type';
-import { CourseModel } from '../../models/course-model';
 import { AbstractControl, FormGroup } from '@angular/forms';
-import { UserService } from 'src/app/user/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormCourseBuilderService } from '../../services/course-handler/form-course-builder.service';
 import { ModuleType } from '../../types/module-type';
@@ -41,8 +36,7 @@ export class UpdateCourseManageComponent implements OnInit {
     private _formBuilder: FormCourseBuilderService,
     private _router: Router,
     private _routerManage: ActivatedRoute,
-    private _dialog: MatDialog,
-    private _userService: UserService) {
+    private _dialog: MatDialog) {
       this.form = this._formBuilder.form
      }
 

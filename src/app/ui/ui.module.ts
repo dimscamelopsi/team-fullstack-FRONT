@@ -16,6 +16,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatListModule} from '@angular/material/list';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -42,6 +43,7 @@ export class UiModule {
     MatSelectModule,
     MatCardModule,
     MatRadioModule,
-    MatListModule
+    MatListModule,
+    MatExpansionModule
   ]
 }

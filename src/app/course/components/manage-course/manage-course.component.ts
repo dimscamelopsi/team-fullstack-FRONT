@@ -7,6 +7,9 @@ import { ModuleType } from '../../types/module-type';
 import { CourseManageType } from '../../types/course-manage-type';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateCourseManageComponent } from '../../dialogs/update-course-manage/update-course-manage.component';
+import { ModuleDialogComponent } from '../../dialogs/module-dialog/module-dialog.component';
+import { ModuleManageDialogComponent } from '../../dialogs/module-manage-dialog/module-manage-dialog.component';
+import { NavigationExtras, Router } from '@angular/router';
 
 
 @Component({
@@ -16,12 +19,15 @@ import { UpdateCourseManageComponent } from '../../dialogs/update-course-manage/
 })
 export class ManageCourseComponent implements OnInit {
   courseEdit!: CourseManageType
+  showCard: boolean = false;
+  courseId!: CourseManageType
 
   public courses: Array<CourseManageType> = []
   
   constructor(
     public dialog: MatDialog,
-    private _courseService: CourseService) { }
+    private _courseService: CourseService,
+    private _router: Router) { }
 
   ngOnInit(): void {
     this._courseService.findListCourse()
@@ -36,10 +42,18 @@ export class ManageCourseComponent implements OnInit {
         objective: courseObject.objective,
         visibility: courseObject.publish, 
         modules: courseObject.modules
-  
       }
     }).afterClosed().subscribe(
       (result) => { this.courseEdit = result })
+  }
+
+  openDialogModule(course: CourseManageType): void {
+    const dialogRef = this.dialog.open(ModuleManageDialogComponent, {
+      data: {
+        modules: course.modules
+      }
+    })
+
   }
 
   onCourseToggle(course: CourseListType): void {
@@ -82,6 +96,10 @@ export class ManageCourseComponent implements OnInit {
     }else {
       course.publish = true
     }
+  }
+
+  showcard(course: CourseManageType): CourseManageType{
+     return this.courseId = course
   }
 
 }

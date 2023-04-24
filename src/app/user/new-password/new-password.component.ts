@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-password',
@@ -6,10 +7,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-password.component.scss']
 })
 export class NewPasswordComponent implements OnInit {
+  newpasswordForm!:FormGroup
 
-  constructor() { }
+  constructor(
+    private _fb: FormBuilder,
+    
+  ) { }
 
   ngOnInit(): void {
+    this.newpasswordForm = this._fb.group({
+      password: this._fb.control("",
+        [
+          Validators.required,
+          
+        ]),
+      confirmPassword: this._fb.control("",
+        [
+          Validators.required,
+        ]),
+
+    });
+  }
+  onSubmit() {
+    
   }
 
 }

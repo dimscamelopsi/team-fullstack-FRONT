@@ -15,6 +15,7 @@ import { UserService } from 'src/app/user/services/user.service';
 import { ModuleDialogComponent } from '../dialogs/module-dialog/module-dialog.component';
 import { SimpleStudent } from 'src/app/student/types/simple-student-type';
 import { ReallySimpleStudent } from 'src/app/student/types/really-simple-student';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CourseManageType } from '../types/course-manage-type';
 import { UpdateCourseManageComponent } from '../dialogs/update-course-manage/update-course-manage.component';
 import { HttpResponse } from '@angular/common/http';
@@ -79,6 +80,9 @@ export class CourseHandlerComponent implements OnInit {
       id: this._userService.user.id
     }
 
+    this.modules.map((module:ModuleType)=>{
+      module.orderModule = this.modules.indexOf(module)
+    })
 
     const course: CourseType = {
       title: this.c['title'].value,
@@ -87,6 +91,7 @@ export class CourseHandlerComponent implements OnInit {
       student: student
 
     }
+
     this._courseService.add(course)
       .subscribe((courseType: CourseType) => {
         this._router.navigate(['/', 'conceptor', '/', 'list'])
@@ -99,7 +104,7 @@ export class CourseHandlerComponent implements OnInit {
       title: this.c['title'].value,
       objective: this.c['objective'].value,
       publish: this.publish,
-      isSelected: false 
+      isSelected: false
     }
     console.log(`Student was updated ${course}`)
     this._courseService.update(course)
@@ -123,6 +128,7 @@ export class CourseHandlerComponent implements OnInit {
         width: 'flex'
       }
     ).afterClosed().subscribe((result: CourseListType | undefined) => {
+
       if (result !== undefined) {
         this.modules = []
         this.c['title'].setValue(result.title)
@@ -155,10 +161,10 @@ export class CourseHandlerComponent implements OnInit {
       width: '600px',
       data: {
         show : true,
-        manage : true       
+        manage : true
       }
     }).afterClosed().subscribe(
-      (result: CourseManageType | undefined) => { 
+      (result: CourseManageType | undefined) => {
         if(result !== undefined) {
           this.c['title'].setValue(result.title)
           this.c['objective'].setValue(result.objective)
@@ -178,6 +184,10 @@ export class CourseHandlerComponent implements OnInit {
     this.modules = []
     this.c['title'].setValue('')
     this.c['objective'].setValue('')
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.modules, event.previousIndex, event.currentIndex);
   }
 
 }

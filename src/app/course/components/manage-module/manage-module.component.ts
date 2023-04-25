@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CourseManageType } from '../../types/course-manage-type';
 import { CourseService } from '../../services/course.service';
 import { take } from 'rxjs';
-import { ModuleService } from 'src/app/conceptor/services/module.service';
-import { ModuleType } from 'src/app/conceptor/types/module-type';
 import { ActivatedRoute } from '@angular/router';
+import { ModuleType } from '../../types/module-type';
+import { ModuleService } from 'src/app/conceptor/modules/services/module.service';
 
 @Component({
   selector: 'app-manage-module',

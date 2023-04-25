@@ -1,0 +1,63 @@
+<mat-dialog-content>
+    <div class="row">
+        <div class="col xs10 course-title">
+            <h1>Update course </h1>
+        </div>
+    </div>
+
+    <!-- Form manage course -->
+    <form [formGroup]="form" (ngSubmit)="editSubmit()">
+        <fieldset>
+            <legend>Course</legend>
+            <div class="row">
+                <mat-form-field class="col xs12">
+                    <input matInput formControlName="title" placeholder="Course title..." [(ngModel)]="data.title">
+                    <mat-error *ngIf="c['title'].errors && c['title'].touched">
+                        Title is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field class="col xs12">
+                    <textarea matInput type="textarea" cdkTextareaAutosize cdkAutosizeMaxRows="10"
+                        formControlName="objective" placeholder="Objective..." [(ngModel)]="data.objective"></textarea>
+                </mat-form-field>
+            </div>
+            <!-- Icon Publish -->
+    
+            <!-- Condition publish -->
+            <div *ngIf="publish; then thenBlock else elseBlock "></div>
+            <!-- true -->
+            <ng-template #thenBlock>
+                <div class="row">
+                    <button (click)="editPublish(publish)" mat-button class="col xs1">
+                        <mat-icon>visibility</mat-icon>
+                    </button>
+                    <p class="col xs11">Online !</p>
+                </div>
+            </ng-template>
+    
+            <!-- false -->
+            <ng-template #elseBlock>
+                <div class="row">
+                    <button (click)="editPublish(publish)" mat-button class="col xs1">
+                        <mat-icon>visibility_off</mat-icon>
+                    </button>
+                    <p class="col xs11">Not Online !</p>
+                </div>
+            </ng-template>
+    
+        </fieldset>
+        <div class="row buttons">
+            <div class="col xs9"></div>
+            <div class="col xs1">
+                <button mat-raised-button color="warn" (click)="resetForm($event)">Reset</button>
+            </div>
+            <div class="col xs2">
+                <button mat-raised-button color="primary" [disabled]="form.invalid">Edit</button>
+            </div>
+        </div>
+    </form>
+
+</mat-dialog-content>
+ 

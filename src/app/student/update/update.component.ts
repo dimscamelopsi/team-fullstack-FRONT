@@ -23,7 +23,7 @@ export class UpdateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this._route.snapshot.paramMap.get('id'))
+    //console.log(this._route.snapshot.paramMap.get('id'))
     const id: number = +this._route.snapshot.paramMap.get('id')!
     this._service.findOne(id)
       .subscribe({

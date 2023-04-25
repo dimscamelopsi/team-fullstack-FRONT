@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ModuleAddType } from 'src/app/course/types/module-add-type';
@@ -28,6 +28,12 @@ export class ModuleService {
   public findAllModules(): Observable<ModuleType[]> {
     return this._httpClient.get<ModuleType[]>(
       this.endpoint
+    )
+  }
+
+  public remove(id: number): Observable<HttpResponse<any>> {
+    return this._httpClient.delete<ModuleType>(
+      `${this.endpoint}/${id}`, {observe: 'response'}
     )
   }
 }

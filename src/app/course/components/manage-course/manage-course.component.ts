@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UpdateCourseManageComponent } from '../../dialogs/update-course-manage/update-course-manage.component';
 import { ModuleManageDialogComponent } from '../../dialogs/module-manage-dialog/module-manage-dialog.component';
 import { HttpResponse } from '@angular/common/http';
-import { ModuleService } from 'src/app/conceptor/services/module.service';
+import { ModuleService } from 'src/app/conceptor/modules/services/module.service';
 
 
 @Component({

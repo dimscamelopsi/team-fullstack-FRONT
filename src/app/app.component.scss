@@ -1,8 +1,14 @@
 h1 {
-  color: rgba(127, 127, 200, .8);
+  color: rgba(127, 127, 200, 0.8);
 }
-.container{
+.container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  .special {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
 }

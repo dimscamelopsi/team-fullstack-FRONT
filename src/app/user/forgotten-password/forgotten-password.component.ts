@@ -24,11 +24,13 @@ export class ForgottenPasswordComponent implements OnInit {
       email: this._fb.control("",
         [
           Validators.required,
+          Validators.email
           
         ]),
       answer: this._fb.control("",
         [
           Validators.required,
+        
         ]),
 
     });

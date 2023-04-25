@@ -25,6 +25,11 @@ export class NewPasswordComponent implements OnInit {
         [
           Validators.required,
         ]),
+        email: this._fb.control("",
+        [
+          Validators.required,
+          Validators.email
+        ]),
 
     });
   }

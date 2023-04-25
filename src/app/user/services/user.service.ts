@@ -5,12 +5,14 @@ import { SessionStorageStrategy } from './../../core/store/session-storage-strat
 import { LocalStorageStrategy } from './../../core/store/local-storage-strategy';
 import { BehaviorSubject, Observable, take, tap } from 'rxjs';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { StudentModel } from 'src/app/student/models/student-model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  private readonly endpoint: string = `${environment.apiRootUri}students`
 
   private _user: any = undefined
   private _user$: BehaviorSubject<any  | undefined> = new BehaviorSubject(undefined)
@@ -81,7 +83,17 @@ export class UserService {
         observe: 'response'
       }
     )
-        }
+  }
+  
+  public update(student: StudentModel): Observable<HttpResponse<any>> {
+    return this._httpClient.put<StudentModel>(
+      this.endpoint+`/updatePassword`,
+      student,
+      {
+        observe: 'response'
+      }
+    )
+  }
   
 
 

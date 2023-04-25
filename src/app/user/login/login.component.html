@@ -35,15 +35,18 @@
     </div>
   </mat-form-field>
 
-  <div class="col xs12">
-    <button mat-raised-button color="accent" [disabled]="form.invalid">
+  <div class="col xs6">
+    <button mat-raised-button color="primary" [disabled]="form.invalid">
       Login
     </button>
   </div>
 </form>
 
-<div class="row">
-  <div class="col xs12">
+<div id="option" class="row">
+  <div class="col xs4">
+    <a routerLink="/forgottenPassword">Forgotten password?</a>
+  </div>
+  <div class="col xs4">
     <mat-label> Stay connected ? </mat-label>
     <mat-slide-toggle
       [(ngModel)]="stayConnected"

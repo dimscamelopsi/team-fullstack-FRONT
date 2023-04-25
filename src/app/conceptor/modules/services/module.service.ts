@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ModuleAddType } from 'src/app/course/types/module-add-type';
+import { ModuleType } from 'src/app/course/types/module-type';
 import { environment } from 'src/environments/environment';
-import { ModuleType } from '../types/module-type';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +18,8 @@ export class ModuleService {
   ) { }
 
 
-  public add(module: ModuleType): Observable<any> {
-    return this._httpClient.post<ModuleType>(
+  public add(module: ModuleAddType): Observable<any> {
+    return this._httpClient.post<ModuleAddType>(
       this.endpoint,
       module
     )
@@ -26,6 +28,12 @@ export class ModuleService {
   public findAllModules(): Observable<ModuleType[]> {
     return this._httpClient.get<ModuleType[]>(
       this.endpoint
+    )
+  }
+
+  public remove(id: number): Observable<HttpResponse<any>> {
+    return this._httpClient.delete<ModuleType>(
+      `${this.endpoint}/${id}`, {observe: 'response'}
     )
   }
 }

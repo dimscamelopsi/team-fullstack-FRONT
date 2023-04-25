@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModuleService } from '../services/module.service';
 import { take } from 'rxjs';
 import { ToastService } from 'src/app/core/toast.service';
 import { HttpResponse } from '@angular/common/http';
-import { ModuleType } from '../types/module-type';
+
 import { CourseService } from 'src/app/course/services/course.service';
 import { CourseListType } from 'src/app/course/types/course-list-type';
+import { MediaType } from 'src/app/course/types/media-type';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MediaDialogComponent } from '../media-dialog/media-dialog.component';
+import { ModuleType } from 'src/app/course/types/module-type';
+import { ModuleAddType } from 'src/app/course/types/module-add-type';
 
 @Component({
   selector: 'app-add-module',
@@ -17,13 +22,15 @@ export class AddModuleComponent implements OnInit {
   moduleFormGroup!: FormGroup;
   public moduleType!: ModuleType[];
   public usercourses: Array<CourseListType> = []
+  public medias: Array<MediaType> = []
 
   constructor(
 
     private _fb: FormBuilder,
     private _moduleService: ModuleService,
     private _toastService: ToastService,
-    private _courseService: CourseService
+    private _courseService: CourseService,
+    private _dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -48,18 +55,23 @@ export class AddModuleComponent implements OnInit {
           Validators.required,
           Validators.minLength(4)
         ]),
-      course: this._fb.control("")
+      course: this._fb.control(""),
+      //medias: this.medias
 
     });
   }
 
   public addModule() {
-    //console.log(this.courseFormGroup.value)
-    this._moduleService.add(this.moduleFormGroup.value)
-      .pipe(
-        take(1)
-      ).subscribe({
-        next: (response: HttpResponse<any>) => {
+    const module:ModuleAddType={
+      name:this.moduleFormGroup.controls['name'].value,
+      objective:this.moduleFormGroup.controls['objective'].value,
+      course:this.moduleFormGroup.controls['course'].value,
+      media:this.medias
+    }
+    this._moduleService.add(module) 
+      .subscribe({
+      
+        next: (response:HttpResponse<any>) => {
           const message: string = `module was added. `
           this._toastService.show(message)
         },
@@ -69,5 +81,28 @@ export class AddModuleComponent implements OnInit {
         }
       })
   }
+
+  openMedia(): void {
+    this._dialog.open(
+      MediaDialogComponent,
+      {
+        height: 'flex',
+        width: 'flex'
+      }
+    ).afterClosed().subscribe((result: MediaType | undefined) => {
+      if (result !== undefined) {
+        
+        this.medias.push(result)
+      }
+    })
+  }
+  removeMedia(media: MediaType): void {
+    this.medias.splice(
+      this.medias.indexOf(media),
+      1
+    )
+  }
+
+
 
 }

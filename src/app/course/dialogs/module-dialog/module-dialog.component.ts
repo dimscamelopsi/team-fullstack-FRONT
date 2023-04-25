@@ -45,6 +45,7 @@ export class ModuleDialogComponent implements OnInit {
 
   public addModule(module: ModuleType): void {
     this.module = module
+    console.log(this.module)
     this.dialogRef.close(this.module)
   }
 

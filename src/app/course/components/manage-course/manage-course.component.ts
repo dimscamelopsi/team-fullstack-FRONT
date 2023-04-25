@@ -130,4 +130,8 @@ export class ManageCourseComponent implements OnInit {
     return this.courseId = course
      
   }
+
+  importCourses(){
+    
+  }
 }

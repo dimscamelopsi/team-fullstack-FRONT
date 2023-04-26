@@ -11,6 +11,7 @@ import { HttpResponse } from '@angular/common/http';
 import { ModuleService } from 'src/app/conceptor/modules/services/module.service';
 import { CourseManageDialogComponent } from '../../dialogs/course-manage-dialog/course-manage-dialog.component';
 import { ToastService } from 'src/app/core/toast.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class ManageCourseComponent implements OnInit {
   
   constructor(
     public dialog: MatDialog,
+    private _router: Router,
     private _courseService: CourseService,
     private _toastService: ToastService,
     private _moduleService: ModuleService) { }
@@ -135,12 +137,8 @@ export class ManageCourseComponent implements OnInit {
      
   }
 
-  importCourses(){
-    this.dialog.open( CourseManageDialogComponent,
-      {
-        height: '600',
-        width: '900',
-      }
-    ).afterClosed().subscribe
+  goToAddCourse(){
+    this._router.navigate(['/conceptor/addCourse'])
   }
+
 }

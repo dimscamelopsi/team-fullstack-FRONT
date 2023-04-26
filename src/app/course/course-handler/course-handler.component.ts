@@ -98,7 +98,7 @@ export class CourseHandlerComponent implements OnInit {
       })
   }
 
-
+  
   addCourse(): void {
     this._dialog.open(
       CourseDialogComponent,

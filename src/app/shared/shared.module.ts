@@ -6,15 +6,9 @@ import { RouterModule } from '@angular/router';
 import { UiModule } from '../ui/ui.module';
 import { ToggleDirective } from './directives/toggle.directive';
 
-
-
 @NgModule({
-  declarations: [
-    ToggleDirective
-  ],
-  imports: [
-    CommonModule
-  ],
+  declarations: [ToggleDirective],
+  imports: [CommonModule],
   exports: [
     CommonModule,
     HttpClientModule,
@@ -22,7 +16,7 @@ import { ToggleDirective } from './directives/toggle.directive';
     RouterModule,
     UiModule,
     ReactiveFormsModule,
-    ToggleDirective
-  ]
+    ToggleDirective,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

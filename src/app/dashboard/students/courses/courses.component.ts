@@ -11,11 +11,11 @@ import { CourseListType } from 'src/app/course/types/course-list-type';
 export class CoursesComponent implements OnInit {
   public courses: Array<CourseListType> = [];
 
-  constructor(private _courseService: CourseService) {}
+  constructor(private _courseByAutorService: CourseService) {}
 
   ngOnInit(): void {
-    this._courseService
-      .findUsersCourses()
+    this._courseByAutorService
+      .findListCourse()
       .pipe(take(1))
       .subscribe((response: CourseListType[]) => {
         this.courses = response;

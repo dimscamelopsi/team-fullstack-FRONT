@@ -1,15 +1,15 @@
-footer {
-  background: blue;
-  color: white;
-  height: 150px;
-  margin: 0;
-  bottom: 0;
-  position: relative;
-  display: flex;
-  justify-content: space-around;
-  background: linear-gradient(rgb(85, 85, 85), rgb(17, 17, 17));
-  align-items: center;
-  div {
-    font-size: 20px;
+.footer {
+  position: absolute;
+  bottom: 0%;
+  .row {
+    color: white;
+    height: 75px;
+    display: flex;
+    justify-content: space-around;
+    background: linear-gradient(rgb(85, 85, 85), rgb(62, 6, 61));
+    align-items: center;
+    div {
+      font-size: 20px;
+    }
   }
 }

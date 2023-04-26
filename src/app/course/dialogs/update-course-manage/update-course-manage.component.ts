@@ -77,11 +77,6 @@ export class UpdateCourseManageComponent implements OnInit {
     return this.form.controls
   }
   
-  manageBool(): boolean{
-    this.manageCourse = this._routerManage.snapshot.queryParamMap.get('managerCourse')
-    if( this.manageCourse === 'true'){return this.manageBln = true }
-    else {return this.manageBln = false}
-  }
 
   editSubmit(): void {
     const course: CourseManageType = {
@@ -91,15 +86,15 @@ export class UpdateCourseManageComponent implements OnInit {
       publish: this.publish,
       isSelected: false 
     }
-    console.log(`Student was updated ${course}`)
+    
     this._courseService.update(course)
       .subscribe({
-        next: (response: HttpResponse<any>) => {
-          this._router.navigate(['/'])
-          console.log(`Student was updated ${response.status}`)},
+        next: (response: HttpResponse<any>) => { },
         error: (error: any) => {
           console.log(JSON.stringify(error))
         }})
+    this.course = course
+    this.dialogRef.close(this.course)
   }
 
   addCourseManage(course: CourseManageType): void{

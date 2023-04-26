@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   }
 
   changeStrategy(): void {
-    console.log('stayConnected was changed')
+    //console.log('stayConnected was changed')
     if (this.stayConnected) {
       this._userService.storageStrategy = new LocalStorageStrategy()
     } else {

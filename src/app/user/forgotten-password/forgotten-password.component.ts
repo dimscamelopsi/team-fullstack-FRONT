@@ -38,7 +38,7 @@ export class ForgottenPasswordComponent implements OnInit {
 
   onSubmit(): void {
 
-    this._userService.Trouve(this.forgottenPasswordFormGroup.value)
+    this._userService.FindByEmailAndAnswer(this.forgottenPasswordFormGroup.value)
       .subscribe({
         next: (response: HttpResponse<any>) => {
           this._router.navigate(['/newPassword'])

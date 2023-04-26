@@ -73,6 +73,9 @@ export class AddModuleComponent implements OnInit {
       
         next: (response:HttpResponse<any>) => {
           const message: string = `module was added. `
+          this.moduleFormGroup.reset()
+          this.medias=[]
+        
           this._toastService.show(message)
         },
         error: (error: any) => {

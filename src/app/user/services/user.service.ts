@@ -74,7 +74,7 @@ export class UserService {
       })
     )
   }
-  public Trouve(credentials: any): Observable<HttpResponse<any>> {
+  public FindByEmailAndAnswer(credentials: any): Observable<HttpResponse<any>> {
     const endPoint: string = `${environment.apiRootUri}students/byEmailAndAnswer`
     return this._httpClient.post<any>(
       endPoint,

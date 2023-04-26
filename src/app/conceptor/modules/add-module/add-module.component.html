@@ -35,7 +35,7 @@
                     <div class="row">
                         <div class="col xs12 md6">
                             <mat-form-field>
-                                <input matInput placeholder="Module objective..." formControlName="objective">
+                                <textarea matInput placeholder="Module objective..." formControlName="objective"></textarea>
                                 <mat-error
                                     *ngIf="moduleFormGroup.controls['objective'].errors && moduleFormGroup.controls['objective'].touched">
                                     <span *ngIf="moduleFormGroup.controls['objective'].hasError('required')">

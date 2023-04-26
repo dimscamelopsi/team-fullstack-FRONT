@@ -9,6 +9,8 @@ import { UpdateCourseManageComponent } from '../../dialogs/update-course-manage/
 import { ModuleManageDialogComponent } from '../../dialogs/module-manage-dialog/module-manage-dialog.component';
 import { HttpResponse } from '@angular/common/http';
 import { ModuleService } from 'src/app/conceptor/modules/services/module.service';
+import { CourseManageDialogComponent } from '../../dialogs/course-manage-dialog/course-manage-dialog.component';
+import { ToastService } from 'src/app/core/toast.service';
 
 
 @Component({
@@ -22,12 +24,13 @@ export class ManageCourseComponent implements OnInit {
   courseId!: CourseManageType
 
   public courses: Array<CourseManageType> = []
-  public modules: Array<ModuleType> = [];
-  private _toastService: any;
+  public modules: Array<ModuleType> = []
+  
   
   constructor(
     public dialog: MatDialog,
     private _courseService: CourseService,
+    private _toastService: ToastService,
     private _moduleService: ModuleService) { }
 
   ngOnInit(): void {
@@ -89,6 +92,7 @@ export class ManageCourseComponent implements OnInit {
       })
   }
 
+  // verif 
   doRemoveModule(module: ModuleType): void {
     this._moduleService.remove(module.id!)
       .pipe(take(1))
@@ -132,6 +136,11 @@ export class ManageCourseComponent implements OnInit {
   }
 
   importCourses(){
-    
+    this.dialog.open( CourseManageDialogComponent,
+      {
+        height: '600',
+        width: '900',
+      }
+    ).afterClosed().subscribe
   }
 }

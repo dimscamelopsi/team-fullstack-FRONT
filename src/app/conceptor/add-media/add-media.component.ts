@@ -1,16 +1,15 @@
 import { Component, Directive, OnInit , ViewChild, ElementRef} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MediaService } from '../services/media.service';
 import { ToastService } from 'src/app/core/toast.service';
 import { Observable, take } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { MediaType } from 'src/app/course/types/media-type';
 import { AddMediaType } from 'src/app/course/types/add-media-type';
-import { ModuleService } from '../services/module.service';
 import { ModuleListType } from 'src/app/course/types/media-list-type';
 import { TypeMediaType } from 'src/app/course/types/type-media-type';
-import { TypeMediaService } from '../services/type-media.service';
-import { log } from 'console';
+import { MediaService } from '../modules/services/media.service';
+import { ModuleService } from '../modules/services/module.service';
+import { TypeMediaService } from '../modules/services/type-media.service';
 
 
 
@@ -95,7 +94,7 @@ export class AddMediaComponent implements OnInit {
 
   }
   public addMedia() {
-/* console.log(this.mediaFormGroup.value) */
+/*  console.log(this.mediaFormGroup.value)
     this.mediaService.add(this.mediaFormGroup.value)
       .pipe(
         take(1)
@@ -109,7 +108,7 @@ export class AddMediaComponent implements OnInit {
           const badMessage: string = `media not added.`
           this._toastService.show(badMessage)
         }
-      })
+      }) */
   }
 
 
@@ -212,8 +211,6 @@ export class AddMediaComponent implements OnInit {
   uploadFile(arg0: File) {
     throw new Error('Method not implemented.');
   }
-
-
 
 
 }

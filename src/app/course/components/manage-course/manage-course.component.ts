@@ -48,7 +48,7 @@ export class ManageCourseComponent implements OnInit {
         id: courseObject.id,
         title: courseObject.title,
         objective: courseObject.objective,
-        visibility: courseObject.publish, 
+        publish: courseObject.publish, 
         modules: courseObject.modules
       }
     }).afterClosed().subscribe(
@@ -120,7 +120,6 @@ export class ManageCourseComponent implements OnInit {
   }
 
   onVisibility(course: CourseManageType): void {
-    //(course.publish)? course.publish = false : course.publish = true
     if(course.publish){
       course.publish = false
     }else {

@@ -16,6 +16,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class ListComponent implements OnInit {
 
   public courses: Array<CourseListType> = []
+  
 
   constructor(
     private _courseService: CourseService,
@@ -32,6 +33,8 @@ export class ListComponent implements OnInit {
         this.courses = response
         //this.usercourses=response
       })
+      
+      
   }
 
   onCourseToggle(course: CourseListType): void {

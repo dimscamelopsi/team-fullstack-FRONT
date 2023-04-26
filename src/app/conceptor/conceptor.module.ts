@@ -10,7 +10,6 @@ import { CourseModule } from '../course/course.module';
 import { CourseHandlerComponent } from '../course/course-handler/course-handler.component';
 import { MediaDialogComponent } from './modules/media-dialog/media-dialog.component';
 
-
 @NgModule({
   declarations: [
     SidebarComponent,
@@ -22,9 +21,7 @@ import { MediaDialogComponent } from './modules/media-dialog/media-dialog.compon
     ConceptorRoutingModule,
     SharedModule,
     UiModule,
-    CourseModule,
-
-
+    CourseModule
   ]
 })
 export class ConceptorModule { }

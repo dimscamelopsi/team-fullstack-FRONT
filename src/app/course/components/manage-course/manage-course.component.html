@@ -50,10 +50,11 @@
                                         </div>
                                 </section>
                             </mat-card-title>
-
+                            <!-- Card subtitle -->
                             <mat-card-subtitle>
+                                <!-- Button count module -->
                                 <button mat-button (click)="showcard(course) ">
-                                    module :{{ course.modules?.length }}
+                                    module{{(course.modules?.length! >1)? "s": " " }} :{{ course.modules?.length }}
                                 </button>
                             </mat-card-subtitle>
                     </mat-card-header>
@@ -65,9 +66,9 @@
 
                     <!-- card action  -->
                     <mat-card-actions align="end">
-                        <!-- Button Visibility -->
+                        <!-- icon Visibility -->
                         <div *ngIf="course.publish; then thenBlock else elseBlock"></div>
-                        <ng-template #thenBlock>
+                        <ng-template class="iconPublish" #thenBlock>
                             <div class="">
                                 <mat-icon>visibility</mat-icon>
                             </div>
@@ -77,7 +78,6 @@
                                 <mat-icon>visibility_off</mat-icon>
                             </div>
                         </ng-template>
-
                     </mat-card-actions>
                 </mat-card>
 

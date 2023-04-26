@@ -34,29 +34,13 @@ export class UpdateCourseManageComponent implements OnInit {
     private _changeDetectorRef: ChangeDetectorRef,
     public dialogRef: MatDialogRef<CourseHandlerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CourseManageType, 
-    private _formBuilder: FormCourseBuilderService,
-    private _router: Router,
-    private _routerManage: ActivatedRoute,
-    private _dialog: MatDialog) {
+    private _formBuilder: FormCourseBuilderService) {
       this.form = this._formBuilder.form
      }
 
   ngOnInit(): void {
   }
 
-  onCourseToggle(course: CourseManageType): void {
-    if (course.isSelected) {
-      this.courses
-        .filter((inCourse: CourseManageType) => inCourse.isSelected)
-        .forEach((inCourse: CourseManageType) => {
-          if (course.id !== inCourse.id) {
-            inCourse.isSelected = false
-            // Close all modules too...
-            //inCourse.modules!.forEach((module: ModuleType) => module.selected = false)
-          }
-        })
-    }
-  }
 
   sendCourse(course: CourseManageType) {
     this.course = course
@@ -85,7 +69,7 @@ export class UpdateCourseManageComponent implements OnInit {
       id: this.idCourse = this.data.id,
       title: this.c['title'].value,
       objective: this.c['objective'].value,
-      publish: this.publish,
+      publish: this.data.publish,
       isSelected: false 
     }
     
@@ -99,25 +83,9 @@ export class UpdateCourseManageComponent implements OnInit {
     this.dialogRef.close(this.course)
   }
 
-  addCourseManage(course: CourseManageType): void{
-    this._dialog.open(UpdateCourseManageComponent, {
-      height: '400px',
-      width: '600px',
-      data: { course }
-    }).afterClosed().subscribe(
-      (result: CourseManageType | undefined) => { 
-        if(result !== undefined) {
-          this.c['title'].setValue(result.title)
-          this.c['objective'].setValue(result.objective)
-          this.publish = result.publish
-          this.idCourse = result.id
-        }
-      }
-    )
-  }
 
   editPublish(state: boolean): boolean {
-    return (state)? this.publish = false : this.publish =true
+    return (state)? this.data.publish = false : this.data.publish =true
   }
 
   resetForm(event:any): void {

@@ -9,8 +9,6 @@ import { CourseHandlerComponent } from '../course/course-handler/course-handler.
 import { ManageCourseComponent } from '../course/components/manage-course/manage-course.component';
 import { ManageModuleComponent } from '../course/components/manage-module/manage-module.component';
 
-
-
 @NgModule({
   imports: [RouterModule.forChild(ConceptorRoutingModule.routes)],
   exports: [RouterModule]
@@ -20,6 +18,10 @@ export class ConceptorRoutingModule {
     {
       path: '',
       component: SidebarComponent, children:[
+        {
+        path: 'addModule',
+       component: AddModuleComponent
+        },
         {
         path: 'addCourse',
        component: CourseHandlerComponent
@@ -41,4 +43,4 @@ export class ConceptorRoutingModule {
     }
 
   ];
- }
+}

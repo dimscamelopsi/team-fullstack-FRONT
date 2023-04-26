@@ -50,10 +50,11 @@
                                         </div>
                                 </section>
                             </mat-card-title>
-
+                            <!-- Card subtitle -->
                             <mat-card-subtitle>
+                                <!-- Button count module -->
                                 <button mat-button (click)="showcard(course) ">
-                                    module :{{ course.modules?.length }}
+                                    module{{(course.modules?.length! >1)? "s": " " }} :{{ course.modules?.length }}
                                 </button>
                             </mat-card-subtitle>
                     </mat-card-header>
@@ -77,7 +78,6 @@
                                 <mat-icon>visibility_off</mat-icon>
                             </div>
                         </ng-template>
-
                     </mat-card-actions>
                 </mat-card>
 

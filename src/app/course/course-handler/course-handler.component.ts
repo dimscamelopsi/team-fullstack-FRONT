@@ -98,24 +98,6 @@ export class CourseHandlerComponent implements OnInit {
       })
   }
 
-  editSubmit(): void {
-    const course: CourseManageType = {
-      id: this.idCourse,
-      title: this.c['title'].value,
-      objective: this.c['objective'].value,
-      publish: this.publish,
-      isSelected: false
-    }
-    console.log(`Student was updated ${course}`)
-    this._courseService.update(course)
-      .subscribe({
-        next: (response: HttpResponse<any>) => {
-          this._router.navigate(['/'])
-          console.log(`Student was updated ${response.status}`)},
-        error: (error: any) => {
-          console.log(JSON.stringify(error))
-        }})
-  }
 
   addCourse(): void {
     this._dialog.open(

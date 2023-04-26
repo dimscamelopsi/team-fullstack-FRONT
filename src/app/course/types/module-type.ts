@@ -10,6 +10,4 @@ export type ModuleType = {
   course: CourseType
   medias: MediaType[]
   orderModule: number
-
-
 }

@@ -1,24 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ModuleAddComponent } from '../dialogs/module-add/module-add.component';
 import { FormCourseBuilderService } from '../services/course-handler/form-course-builder.service';
 import { CourseService } from '../services/course.service';
 import { CourseType } from '../types/course-type';
 import { ModuleType } from '../types/module-type';
-import { ListComponent } from '../list/list.component';
 import { CourseDialogComponent } from '../dialogs/course-dialog/course-dialog.component';
 import { CourseListType } from '../types/course-list-type';
-import { BehaviorSubject } from 'rxjs';
 import { UserService } from 'src/app/user/services/user.service';
 import { ModuleDialogComponent } from '../dialogs/module-dialog/module-dialog.component';
-import { SimpleStudent } from 'src/app/student/types/simple-student-type';
 import { ReallySimpleStudent } from 'src/app/student/types/really-simple-student';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { CourseManageType } from '../types/course-manage-type';
-import { UpdateCourseManageComponent } from '../dialogs/update-course-manage/update-course-manage.component';
-import { HttpResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-course-handler',
@@ -30,10 +25,8 @@ export class CourseHandlerComponent implements OnInit {
   public useModule: boolean = true
   public module!: ModuleType
   public modules: Array<ModuleType> = []
-  manageCourse!: string | null
-  manageBln!: boolean
-  publish!: boolean
-  idCourse?: number
+  public isPublished: boolean = true
+
 
   constructor(
     private _formBuilder: FormCourseBuilderService,
@@ -88,33 +81,14 @@ export class CourseHandlerComponent implements OnInit {
       title: this.c['title'].value,
       objective: this.c['objective'].value,
       modules: this.modules,
+      publish: this.isPublished,
       student: student
-
     }
 
     this._courseService.add(course)
       .subscribe((courseType: CourseType) => {
         this._router.navigate(['/', 'conceptor', '/', 'list'])
       })
-  }
-
-  editSubmit(): void {
-    const course: CourseManageType = {
-      id: this.idCourse,
-      title: this.c['title'].value,
-      objective: this.c['objective'].value,
-      publish: this.publish,
-      isSelected: false
-    }
-    console.log(`Student was updated ${course}`)
-    this._courseService.update(course)
-      .subscribe({
-        next: (response: HttpResponse<any>) => {
-          this._router.navigate(['/'])
-          console.log(`Student was updated ${response.status}`)},
-        error: (error: any) => {
-          console.log(JSON.stringify(error))
-        }})
   }
 
   addCourse(): void {
@@ -155,28 +129,8 @@ export class CourseHandlerComponent implements OnInit {
     })
   }
 
-  addCourseManage(): void{
-    this._dialog.open(UpdateCourseManageComponent, {
-      height: '400px',
-      width: '600px',
-      data: {
-        show : true,
-        manage : true
-      }
-    }).afterClosed().subscribe(
-      (result: CourseManageType | undefined) => {
-        if(result !== undefined) {
-          this.c['title'].setValue(result.title)
-          this.c['objective'].setValue(result.objective)
-          this.publish = result.publish
-          this.idCourse = result.id
-        }
-      }
-    )
-  }
-
-  editPublish(state: boolean): boolean {
-    return (state)? this.publish = false : this.publish =true
+  publishHandler(event : Event): void {
+    this.isPublished = !this.isPublished
   }
 
   resetForm(event:any): void {
@@ -189,5 +143,7 @@ export class CourseHandlerComponent implements OnInit {
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.modules, event.previousIndex, event.currentIndex);
   }
+
+
 
 }

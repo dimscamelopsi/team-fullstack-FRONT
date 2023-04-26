@@ -26,11 +26,11 @@
             <!-- Icon Publish -->
     
             <!-- Condition publish -->
-            <div *ngIf="publish; then thenBlock else elseBlock "></div>
+            <div *ngIf="data.publish; then thenBlock else elseBlock "></div>
             <!-- true -->
             <ng-template #thenBlock>
                 <div class="row">
-                    <button (click)="editPublish(publish)" mat-button class="col xs1">
+                    <button (click)="editPublish(data.publish)" mat-button class="col xs1">
                         <mat-icon>visibility</mat-icon>
                     </button>
                     <p class="col xs11">Online !</p>
@@ -40,7 +40,7 @@
             <!-- false -->
             <ng-template #elseBlock>
                 <div class="row">
-                    <button (click)="editPublish(publish)" mat-button class="col xs1">
+                    <button (click)="editPublish(data.publish)" mat-button class="col xs1">
                         <mat-icon>visibility_off</mat-icon>
                     </button>
                     <p class="col xs11">Not Online !</p>

@@ -9,5 +9,7 @@ export type ModuleType = {
   totalTime?: string
   course: CourseType
   medias: MediaType[]
-  order?: number
+  orderModule: number
+
+
 }

@@ -85,7 +85,7 @@ export class UpdateCourseManageComponent implements OnInit {
 
   editSubmit(): void {
     const course: CourseManageType = {
-      id: this.idCourse,
+      id: this.idCourse = this.data.id,
       title: this.c['title'].value,
       objective: this.c['objective'].value,
       publish: this.publish,

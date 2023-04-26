@@ -39,16 +39,15 @@
         <ng-container>
           <fieldset>
             <legend>Modules</legend>
-            <ol class="module-list">
-                <li *ngFor="let module of modules">
-                  <div class="module-tile">
+            <ol cdkDropList class="module-list" (cdkDropListDropped)="drop($event)">
+                <li class="example-box" *ngFor="let module of modules" >
+                  <div class="module-tile" cdkDrag>
                     <div class="title">{{ module.name }}</div>
                     <div class="remove">
                         <button mat-icon-button (click)="removeModule(module)">
                             <mat-icon color="error">delete</mat-icon>
                         </button>
                     </div>
-
                   </div>
 
 
@@ -66,9 +65,6 @@
             </ol>
           </fieldset>
         </ng-container>
-        <!-- <button mat-raised-button type="button" color="warn" (click)="addModule()">
-            Add Module
-        </button> -->
     </ng-container>
 
     <div class="buttons">

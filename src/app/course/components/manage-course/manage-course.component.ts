@@ -9,6 +9,9 @@ import { UpdateCourseManageComponent } from '../../dialogs/update-course-manage/
 import { ModuleManageDialogComponent } from '../../dialogs/module-manage-dialog/module-manage-dialog.component';
 import { HttpResponse } from '@angular/common/http';
 import { ModuleService } from 'src/app/conceptor/modules/services/module.service';
+import { CourseManageDialogComponent } from '../../dialogs/course-manage-dialog/course-manage-dialog.component';
+import { ToastService } from 'src/app/core/toast.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,12 +25,14 @@ export class ManageCourseComponent implements OnInit {
   courseId!: CourseManageType
 
   public courses: Array<CourseManageType> = []
-  public modules: Array<ModuleType> = [];
-  private _toastService: any;
+  public modules: Array<ModuleType> = []
+  
   
   constructor(
     public dialog: MatDialog,
+    private _router: Router,
     private _courseService: CourseService,
+    private _toastService: ToastService,
     private _moduleService: ModuleService) { }
 
   ngOnInit(): void {
@@ -39,6 +44,7 @@ export class ManageCourseComponent implements OnInit {
   openDialog(courseObject: CourseManageType): void {
     const dialogRef = this.dialog.open(UpdateCourseManageComponent, {
       data: {
+        id: courseObject.id,
         title: courseObject.title,
         objective: courseObject.objective,
         visibility: courseObject.publish, 
@@ -89,6 +95,7 @@ export class ManageCourseComponent implements OnInit {
       })
   }
 
+  // verif 
   doRemoveModule(module: ModuleType): void {
     this._moduleService.remove(module.id!)
       .pipe(take(1))
@@ -130,4 +137,10 @@ export class ManageCourseComponent implements OnInit {
     return this.courseId = course
      
   }
+
+  goToAddCourse(){
+    this._router.navigate(['/conceptor/addCourse'])
+  }
+
+
 }

@@ -49,7 +49,8 @@
               >
                 Summary cannot be empty !!!
               </span>
-            </mat-error> </mat-form-field
+            </mat-error>
+             </mat-form-field
           ><br />
 
           <mat-form-field>
@@ -73,7 +74,6 @@
           ><br />
 
 
-
           <mat-form-field>
             <mat-label>List MediaType</mat-label>
             <mat-select [(ngModel)]="selectedOption" formControlName="typeMedia" required>
@@ -83,52 +83,27 @@
             </mat-select>
           </mat-form-field>
 
-          <div *ngIf="selectedOption && selectedOption.title === 'Video'">
+          <div *ngIf="selectedOption && selectedOption.title === 'Video'; then thenBlock else elseBlock"></div>
 
+          <ng-template #thenBlock><br>
             <mat-form-field>
               <mat-label>Media URL</mat-label>
-              <input matInput type="text" formControlName="url" placeholder="Enter url of your Media..*" >
+              <input matInput type="text" formControlName="url" placeholder="Enter url of your Media..*">
             </mat-form-field>
-          </div>
+          </ng-template>
+
+          <ng-template #elseBlock>
+            <div class="file-drop-area">
+              <mat-icon class="icon">cloud_upload</mat-icon>
+              <input type="file" (change)="onFileSelected($event)" accept=".pdf,.ppt,.pptx,.doc,.docx" />
+              <p class="text">Drop files here or click to upload</p>
+            </div>
+          </ng-template>
 
 
-       <!--    <mat-form-field>
-            <mat-label>List MediaType</mat-label>
-            <mat-select
-              [(ngModel)]="selectedOption"
-              formControlName="typeMedia"
-              required
-            >
-              <mat-option
-                [value]="listTypeMedia"
-                *ngFor="let listTypeMedia of typeMedias"
-              >
-       {{ listTypeMedia.title }}
-              </mat-option>
-            </mat-select >
-            <input matInput type="text" *ngIf="selectedOption.find(option => option.title === 'Video')" formControlName="url" placeholder="Enter url of your Media..*">
-
-             </mat-form-field
-          ><br /> -->
 
 
-        <!-- <input matInput  type="text" *ngIf="selectedOption.find(so =>so.title==='Video')  " formControlName="url" placeholder="Enter url of your Media..*" > --> <br>
 
-
-    <!--       <mat-form-field *ngIf="selectedOption === 'Video'">
-            <label for="urlInput">Entrer une URL de vidéo:</label>
-            <input id="urlInput" type="text"  />
-
-            <mat-error *ngIf=" mediaFormGroup.controls['url'].errors && mediaFormGroup.controls['url'].touched " >
-              <span *ngIf="mediaFormGroup.controls['url'].hasError('required')">
-                url cannot be empty !!!
-              </span>
-               </mat-error>
-
-             </mat-form-field -->
-          <br /><!--
-          <div appUpload (onFileDropped)="uploadFile($event)" >Déposer un fichier ici</div>
- -->
           <!--<mat-form-field>
             <mat-label>Module person list ou en boutton</mat-label>
             <mat-select formControlName="Module">
@@ -141,21 +116,20 @@
             </mat-select>
           </mat-form-field>-->
 
+
+
         </fieldset>
         <div class="row">
-          <div class="col xs6"></div>
-          <div class="col xs6">
-            <button
-              mat-raised-button
-              [disabled]="mediaFormGroup.invalid"
-              color="primary"
-            >
-              Add
-            </button>
-          </div>
-          <div class="col xs4"></div>
-        </div>
+    <div class="col xs6"></div>
+    <div class="col xs6">
+      <button mat-raised-button [disabled]="mediaFormGroup.invalid" color="primary" (click)="onSubmit()">
+        Add
+      </button>
+    </div>
+    <div class="col xs4"></div>
+  </div>
       </form>
     </ng-container>
   </div>
 </div>
+

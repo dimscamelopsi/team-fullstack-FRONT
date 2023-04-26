@@ -1,9 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+html {
+  height: 100%;
+}
+
 body {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 1em;
   font-variant: normal;
+  height: 100%;
 }
 /**
 * Helpers
@@ -16,9 +21,9 @@ $cols: 12;
 
 @mixin col-x-list($col-name) {
   @for $i from 1 through $cols {
-      &.#{$col-name}#{$i} {
-        @include col-basis($i);
-      }
+    &.#{$col-name}#{$i} {
+      @include col-basis($i);
+    }
   }
 }
 /**
@@ -66,7 +71,7 @@ $cols: 12;
 .row {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-gap: .5em;
+  grid-gap: 0.5em;
 
   .col {
     &.xs-hidden {
@@ -97,15 +102,21 @@ $cols: 12;
   }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 /**
 * MatSnackBar design
 **/
 .mat-snack-bar-container {
   &.failed {
-    background: rgba(240, 20, 0, .7);
+    background: rgba(240, 20, 0, 0.7);
     .mat-simple-snack-bar-content {
       color: rgb(10, 10, 10);
     }
@@ -115,7 +126,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 
   &.success {
-    background: rgba(20, 20, 200, .7);
+    background: rgba(20, 20, 200, 0.7);
     .mat-simple-snack-bar-content {
       color: rgb(240, 240, 240);
     }
@@ -127,4 +138,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 mat-card-header.mat-card-header div.mat-card-header-text {
   width: 100% !important;
+}
+
+.min-h {
+  min-height: 100%;
+}
+
+.content-app {
+  flex: 1 1 0%;
 }

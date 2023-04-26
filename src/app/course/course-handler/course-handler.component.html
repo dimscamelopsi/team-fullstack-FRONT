@@ -5,6 +5,23 @@
     <button  mat-raised-button type="button" color="primary"  (click)="addCourse()">
       Import
     </button>
+
+    <span>Course visibility :  </span>
+
+    <div class="publish-container" *ngIf="isPublished">
+      <span>Online </span>
+      <button class="icon-button true" (click)="publishHandler($event)" mat-icon-button>
+          <mat-icon>visibility</mat-icon>
+      </button>
+  </div>
+
+  <div class="publish-container" *ngIf="!isPublished">
+    <span>Offline</span>
+    <button class="icon-button false" (click)="publishHandler($event)" mat-icon-button>
+        <mat-icon>visibility_off</mat-icon>
+    </button>
+
+</div>
   </div>
 
 

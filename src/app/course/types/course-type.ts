@@ -10,4 +10,5 @@ export type CourseType = {
   objective: string
   modules?: Array<ModuleType>
   student?: ReallySimpleStudent
+  publish: boolean
 }

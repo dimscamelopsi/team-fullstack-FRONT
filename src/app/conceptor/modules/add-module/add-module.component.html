@@ -1,4 +1,14 @@
 <div class="row">
+    <div class="col xs6">
+        <span>Import a media from an existing one : </span>
+        <button mat-raised-button type="button" color="primary" (click)="openMedia()">
+            Import
+        </button>
+    </div>
+    <div class="col xs1">
+    </div>
+    <div class="col xs5">
+    </div>
 </div>
 <div class="row">
     <div class="col xs12">
@@ -48,6 +58,28 @@
                         </mat-select>
                     </mat-form-field>
                 </fieldset>
+
+
+                <ng-container>
+                    <fieldset>
+                        <legend>Media</legend>
+                        <ol class="media-list" >
+                            <li *ngFor="let media of medias">
+                                <div class="row">
+                                    <div class="col xs7">
+                                        <div class="title">{{ media.title }}</div>
+                                    </div>
+                                    <div class="col xs4">
+                                        <div class="type">{{ media.typeMedia.title }}</div>
+                                    </div>
+                                    <div class="col xs1">
+                                            <mat-icon color="error" (click)="removeMedia(media)">delete</mat-icon>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+                    </fieldset>
+                </ng-container>
                 <div class="row">
                     <div class="col xs5"></div>
                     <div class="col xs2">

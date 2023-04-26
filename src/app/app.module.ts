@@ -8,24 +8,19 @@ import { StudentModule } from './student/student.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
-import { UploadDirective } from './directives/upload.directive';
+import { CoursesComponent } from './dashboard/students/courses/courses.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    TileComponent,
-    UploadDirective
-  ],
+  declarations: [AppComponent, DashboardComponent, TileComponent, CoursesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     StudentModule,
     BrowserAnimationsModule,
     SharedModule,
-    CoreModule
+    CoreModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

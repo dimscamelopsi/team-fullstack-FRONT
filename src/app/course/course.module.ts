@@ -11,6 +11,11 @@ import { CourseHandlerComponent } from './course-handler/course-handler.componen
 import { ModuleAddComponent } from './dialogs/module-add/module-add.component';
 import { CourseDialogComponent } from './dialogs/course-dialog/course-dialog.component';
 import { ModuleDialogComponent } from './dialogs/module-dialog/module-dialog.component';
+import { ManageCourseComponent } from './components/manage-course/manage-course.component';
+import { UpdateCourseManageComponent } from './dialogs/update-course-manage/update-course-manage.component';
+import { ManageModuleComponent } from './components/manage-module/manage-module.component';
+import { ModuleManageDialogComponent } from './dialogs/module-manage-dialog/module-manage-dialog.component';
+import { CourseManageDialogComponent } from './dialogs/course-manage-dialog/course-manage-dialog.component';
 
 
 @NgModule({
@@ -22,7 +27,14 @@ import { ModuleDialogComponent } from './dialogs/module-dialog/module-dialog.com
     CourseHandlerComponent,
     ModuleAddComponent,
     CourseDialogComponent,
-    ModuleDialogComponent
+    ModuleDialogComponent,
+    ManageCourseComponent,
+    CourseDialogComponent,
+    UpdateCourseManageComponent,
+    ModuleDialogComponent,
+    ManageModuleComponent,
+    ModuleManageDialogComponent,
+    CourseManageDialogComponent
   ],
   imports: [
     SharedModule,

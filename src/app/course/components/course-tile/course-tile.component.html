@@ -1,7 +1,7 @@
 <div class="col xs12 course">
   <div class="row">
     <div class="col xs9">
-      {{ course.title}}
+      {{ course.title}} || {{ course.createdAt}} 
     </div>
     <div class="col xs1">
       {{ course.modules!.length }} items
@@ -35,9 +35,9 @@
     </div>
 
     <div class="col xs1" *ngIf="showAdd">
-      <button mat-icon-button (click)="addCourse(course)">
-        <mat-icon >add</mat-icon>
-      </button>
+        <button mat-icon-button (click)="addCourse(course)">
+          <mat-icon >add</mat-icon>
+        </button>
     </div>
   </div>
 

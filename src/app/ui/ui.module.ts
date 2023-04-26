@@ -7,20 +7,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu'
-import { MatSlideToggleModule } from '@angular/material/slide-toggle'
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatSelectModule} from '@angular/material/select'; 
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    ...UiModule.materials
-  ]
+  imports: [CommonModule],
+  exports: [...UiModule.materials],
 })
 export class UiModule {
   public static materials = [
@@ -35,6 +36,11 @@ export class UiModule {
     MatSlideToggleModule,
     MatSidenavModule,
     MatDividerModule,
-    MatSelectModule
-  ]
+    MatSelectModule,
+    MatCardModule,
+    MatRadioModule,
+    MatListModule,
+    MatExpansionModule,
+    DragDropModule,
+  ];
 }

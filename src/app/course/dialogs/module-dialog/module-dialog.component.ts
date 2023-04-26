@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ModuleType } from '../../types/module-type';
-import { ModuleService } from 'src/app/conceptor/services/module.service';
+import { ModuleService } from 'src/app/conceptor/modules/services/module.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CourseHandlerComponent } from '../../course-handler/course-handler.component';
-import { take } from 'rxjs';
+import { BehaviorSubject, take } from 'rxjs';
+import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
   selector: 'app-module-dialog',
@@ -44,6 +45,7 @@ export class ModuleDialogComponent implements OnInit {
 
   public addModule(module: ModuleType): void {
     this.module = module
+    console.log(this.module)
     this.dialogRef.close(this.module)
   }
 

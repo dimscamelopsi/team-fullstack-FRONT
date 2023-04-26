@@ -1,11 +1,15 @@
 import { Component, NgModule } from '@angular/core';
 import { OutletContext, RouterModule, Routes } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { AddModuleComponent } from './add-module/add-module.component';
+
+import { AddModuleComponent } from './modules/add-module/add-module.component';
+
 import { ListComponent } from '../course/list/list.component';
 import { AddMediaComponent } from './add-media/add-media.component';
 
 import { CourseHandlerComponent } from '../course/course-handler/course-handler.component';
+import { ManageCourseComponent } from '../course/components/manage-course/manage-course.component';
+import { ManageModuleComponent } from '../course/components/manage-module/manage-module.component';
 
 @NgModule({
   imports: [RouterModule.forChild(ConceptorRoutingModule.routes)],
@@ -32,6 +36,14 @@ export class ConceptorRoutingModule {
         {
           path:'list',
           component:ListComponent
+        },
+        {
+          path: 'manageCourse',
+          component: ManageCourseComponent
+        },
+        {
+          path: 'manageModule',
+          component: ManageModuleComponent
         }
 
       ]

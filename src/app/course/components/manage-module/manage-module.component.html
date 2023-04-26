@@ -1,0 +1,39 @@
+<h2>Manage Module</h2>
+
+<ng-container *ngIf="modules.length && coursesByAutors.length">
+    <h2>Display modules not assigned</h2>
+    <div class="row">      
+        <ng-container *ngFor="let module of course.modules">
+            <div class="col xs4">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-subtitle> titlte course </mat-card-subtitle>
+                        <mat-card-title> {{module.name}} </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p> {{module.objective}} </p>
+                        <hr>
+                        <div class="row">
+                            <div class="col xs2">
+                                <h6>module n° {{module.id}} </h6>
+                            </div>
+                            <div class="col xs10"></div>
+                            <div class="col xs2">
+                            </div>
+                        </div>
+            
+                    </mat-card-content>
+                    <mat-card-actions align="end">
+                        <button mat-button>Edit</button>
+                        <button mat-button>Delete</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </ng-container> 
+    </div>
+    
+</ng-container>
+
+
+
+

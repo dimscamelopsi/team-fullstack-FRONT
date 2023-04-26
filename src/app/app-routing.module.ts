@@ -5,6 +5,9 @@ import { AddComponent } from './student/add/add.component';
 import { ListComponent } from './student/list/list.component';
 import { UpdateComponent } from './student/update/update.component';
 import { AuthGuard } from './user/guards/auth.guard';
+import { NewPasswordComponent } from './user/new-password/new-password.component';
+import { LoginComponent } from './user/login/login.component';
+import { ForgottenPasswordComponent } from './user/forgotten-password/forgotten-password.component';
 
 @NgModule({
   imports: [RouterModule.forRoot(AppRoutingModule.routes)],
@@ -44,6 +47,14 @@ export class AppRoutingModule {
       canActivate: [
         AuthGuard
       ]
+    },
+    {
+      path: 'forgottenPassword',
+      component: ForgottenPasswordComponent
+    },
+    {
+      path: 'newPassword',
+      component: NewPasswordComponent
     },
     {
       path: 'course',

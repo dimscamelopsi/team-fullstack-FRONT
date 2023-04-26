@@ -44,6 +44,7 @@ export class ManageCourseComponent implements OnInit {
   openDialog(courseObject: CourseManageType): void {
     const dialogRef = this.dialog.open(UpdateCourseManageComponent, {
       data: {
+        id: courseObject.id,
         title: courseObject.title,
         objective: courseObject.objective,
         visibility: courseObject.publish, 
@@ -140,5 +141,6 @@ export class ManageCourseComponent implements OnInit {
   goToAddCourse(){
     this._router.navigate(['/conceptor/addCourse'])
   }
+
 
 }

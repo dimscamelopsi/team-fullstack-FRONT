@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnInit, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CourseManageType } from '../../types/course-manage-type';
 import { CourseService } from '../../services/course.service';
@@ -31,6 +31,7 @@ export class UpdateCourseManageComponent implements OnInit {
 
   constructor(
     private _courseService: CourseService,
+    private _changeDetectorRef: ChangeDetectorRef,
     public dialogRef: MatDialogRef<CourseHandlerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CourseManageType, 
     private _formBuilder: FormCourseBuilderService,
@@ -60,6 +61,7 @@ export class UpdateCourseManageComponent implements OnInit {
   sendCourse(course: CourseManageType) {
     this.course = course
     this.dialogRef.close(this.course)
+    this._changeDetectorRef.detectChanges()
   }
 
   public delete(course: CourseManageType): void {
@@ -125,5 +127,5 @@ export class UpdateCourseManageComponent implements OnInit {
     this.c['objective'].setValue('')
   }
 
-
+  
 }

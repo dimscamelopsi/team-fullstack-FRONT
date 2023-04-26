@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CourseListType } from '../../types/course-list-type';
 import { CourseService } from '../../services/course.service';
 import { take } from 'rxjs';
@@ -31,6 +31,7 @@ export class ManageCourseComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private _router: Router,
+    private _changeDetectorRef: ChangeDetectorRef,
     private _courseService: CourseService,
     private _toastService: ToastService,
     private _moduleService: ModuleService) { }
@@ -42,7 +43,7 @@ export class ManageCourseComponent implements OnInit {
   }
 
   openDialog(courseObject: CourseManageType): void {
-    const dialogRef = this.dialog.open(UpdateCourseManageComponent, {
+    this.dialog.open(UpdateCourseManageComponent, {
       data: {
         id: courseObject.id,
         title: courseObject.title,
@@ -51,17 +52,13 @@ export class ManageCourseComponent implements OnInit {
         modules: courseObject.modules
       }
     }).afterClosed().subscribe(
-      (result) => { this.courseEdit = result })
+      (result) => { 
+        courseObject.title = result.title
+        courseObject.objective = result.objective
+        courseObject.publish = result.publish
+      })
   }
 
-  openDialogModule(course: CourseManageType): void {
-    const dialogRef = this.dialog.open(ModuleManageDialogComponent, {
-      data: {
-        modules: course.modules
-      }
-    })
-
-  }
 
   onCourseToggle(course: CourseListType): void {
     if (course.isSelected) {

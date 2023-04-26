@@ -54,7 +54,7 @@
                 <button mat-raised-button color="warn" (click)="resetForm($event)">Reset</button>
             </div>
             <div class="col xs2">
-                <button mat-raised-button color="primary" [disabled]="form.invalid">Edit</button>
+                <button mat-raised-button color="primary" (click)="sendCourse(course)" [disabled]="form.invalid">Edit</button>
             </div>
         </div>
     </form>

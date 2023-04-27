@@ -25,9 +25,13 @@ export class ListComponent implements OnInit {
       //this._courseService.findUsersCourses()
       .pipe(take(1))
       .subscribe((response: CourseListType[]) => {
-        this.courses = response;
-        //this.usercourses=response
-      });
+        this.courses = response
+        this.courses.map((course) => {
+          course.modules?.sort((a,b)=> (a.orderModule - b.orderModule) * 1)
+        })
+      })
+
+
   }
 
   onCourseToggle(course: CourseListType): void {

@@ -146,4 +146,20 @@ mat-card-header.mat-card-header div.mat-card-header-text {
 
 .content-app {
   flex: 1 1 0%;
+
+
+// Icon for mat button
+.icon-button{
+  background-color:rgb(201, 199, 255);
+  border-radius: 50%;
+  width: 2.8rem;
+  height: 2.8rem;
+}
+.true{
+  background-color:rgb(201, 199, 255);
+}
+.false{
+  background-color:rgb(255, 199, 199);
+
+}
 }

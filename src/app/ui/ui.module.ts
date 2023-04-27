@@ -16,7 +16,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatListModule} from '@angular/material/list';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [],
@@ -44,6 +45,7 @@ export class UiModule {
     MatCardModule,
     MatRadioModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    DragDropModule
   ]
 }

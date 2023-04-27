@@ -12,6 +12,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { MediaDialogComponent } from '../media-dialog/media-dialog.component';
 import { ModuleType } from 'src/app/course/types/module-type';
 import { ModuleAddType } from 'src/app/course/types/module-add-type';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-add-module',
@@ -96,6 +97,7 @@ export class AddModuleComponent implements OnInit {
       if (result !== undefined) {
         
         this.medias.push(result)
+       
       }
     })
   }
@@ -104,6 +106,9 @@ export class AddModuleComponent implements OnInit {
       this.medias.indexOf(media),
       1
     )
+  }
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.medias, event.previousIndex, event.currentIndex);
   }
 
 

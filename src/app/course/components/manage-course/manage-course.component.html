@@ -12,7 +12,7 @@
                 <mat-card>
                     <!-- Card Header -->
                     <mat-card-header >
-                            <mat-card-title class="">
+                            <mat-card-title  class="">
                                 <section class="title_card">
                                         <div id="TITLECARD" class="">
                                             {{ course.title }}
@@ -51,7 +51,7 @@
                                                 <!-- Button Publish course -->
                                                 <button mat-menu-item disabled>
                                                     <mat-icon>{{(course.publish)? "visibility" : "visibility_off"}}</mat-icon>
-                                                    <span>{{(course.publish)? "Publish !" : "Not publish"}}</span>
+                                                    <span>{{(course.publish)? "Online !" : "Offline"}}</span>
                                                 </button>
                                             </mat-menu>
                                         </div>
@@ -59,7 +59,7 @@
                             </mat-card-title>
                     </mat-card-header>
                     <!-- Card Content -->
-                    <mat-card-content>
+                    <mat-card-content (click)="showcard(course)">
                         {{course.objective}}
                     </mat-card-content>
                 </mat-card>

@@ -42,16 +42,20 @@ export class ManageCourseComponent implements OnInit {
   }
 
   openDialog(courseObject: CourseManageType): void {
-    const dialogRef = this.dialog.open(UpdateCourseManageComponent, {
+    this.dialog.open(UpdateCourseManageComponent, {
       data: {
         id: courseObject.id,
         title: courseObject.title,
         objective: courseObject.objective,
-        visibility: courseObject.publish, 
+        publish: courseObject.publish, 
         modules: courseObject.modules
       }
     }).afterClosed().subscribe(
-      (result) => { this.courseEdit = result })
+      result => { 
+        courseObject.title = result.title
+        courseObject.objective = result.objective
+        courseObject.publish = result.publish 
+      })
   }
 
   openDialogModule(course: CourseManageType): void {
@@ -144,3 +148,5 @@ export class ManageCourseComponent implements OnInit {
 
 
 }
+
+

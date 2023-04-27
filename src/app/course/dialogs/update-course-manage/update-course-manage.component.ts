@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnInit, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CourseManageType } from '../../types/course-manage-type';
 import { CourseService } from '../../services/course.service';
@@ -8,6 +8,7 @@ import { AbstractControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormCourseBuilderService } from '../../services/course-handler/form-course-builder.service';
 import { ModuleType } from '../../types/module-type';
+import { ManageCourseComponent } from '../../components/manage-course/manage-course.component';
 
 @Component({
   selector: 'app-update-course-manage',
@@ -31,12 +32,13 @@ export class UpdateCourseManageComponent implements OnInit {
 
   constructor(
     private _courseService: CourseService,
-    public dialogRef: MatDialogRef<CourseHandlerComponent>,
+    public dialogRef: MatDialogRef<ManageCourseComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CourseManageType, 
     private _formBuilder: FormCourseBuilderService,
     private _router: Router,
     private _routerManage: ActivatedRoute,
-    private _dialog: MatDialog) {
+    private _dialog: MatDialog,
+    private _changeDetectorRef: ChangeDetectorRef) {
       this.form = this._formBuilder.form
      }
 
@@ -57,9 +59,11 @@ export class UpdateCourseManageComponent implements OnInit {
     }
   }
 
-  sendCourse(course: CourseManageType) {
-    this.course = course
+  sendCourse(data: CourseManageType) {
+    this.course = data
+    this.course.publish = data.publish
     this.dialogRef.close(this.course)
+    this._changeDetectorRef.detectChanges()
   }
 
   public delete(course: CourseManageType): void {
@@ -88,15 +92,14 @@ export class UpdateCourseManageComponent implements OnInit {
       id: this.idCourse = this.data.id,
       title: this.c['title'].value,
       objective: this.c['objective'].value,
-      publish: this.publish,
+      publish: this.data.publish,
       isSelected: false 
     }
     console.log(`Student was updated ${course}`)
     this._courseService.update(course)
       .subscribe({
         next: (response: HttpResponse<any>) => {
-          this._router.navigate(['/'])
-          console.log(`Student was updated ${response.status}`)},
+          this._router.navigate(['/conceptor/manageCourse'])},
         error: (error: any) => {
           console.log(JSON.stringify(error))
         }})
@@ -112,7 +115,7 @@ export class UpdateCourseManageComponent implements OnInit {
         if(result !== undefined) {
           this.c['title'].setValue(result.title)
           this.c['objective'].setValue(result.objective)
-          this.publish = result.publish
+          this.publish = this.data.publish
           this.idCourse = result.id
         }
       }
@@ -120,7 +123,7 @@ export class UpdateCourseManageComponent implements OnInit {
   }
 
   editPublish(state: boolean): boolean {
-    return (state)? this.publish = false : this.publish =true
+    return (state)? this.data.publish = false : this.data.publish =true
   }
 
   resetForm(event:any): void {

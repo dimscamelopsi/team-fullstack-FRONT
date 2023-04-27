@@ -1,6 +1,6 @@
 <mat-dialog-content>
     <div class="row">
-        <div class="col xs10 course-title">
+        <div class="col xs10 course-title" >
             <h1>Update course </h1>
         </div>
     </div>
@@ -26,11 +26,11 @@
             <!-- Icon Publish -->
     
             <!-- Condition publish -->
-            <div *ngIf="publish; then thenBlock else elseBlock "></div>
+            <div *ngIf="data.publish; then thenBlock else elseBlock "></div>
             <!-- true -->
             <ng-template #thenBlock>
                 <div class="row">
-                    <button (click)="editPublish(publish)" mat-button class="col xs1">
+                    <button (click)="editPublish(data.publish)" mat-button class="col xs1">
                         <mat-icon>visibility</mat-icon>
                     </button>
                     <p class="col xs11">Online !</p>
@@ -40,10 +40,10 @@
             <!-- false -->
             <ng-template #elseBlock>
                 <div class="row">
-                    <button (click)="editPublish(publish)" mat-button class="col xs1">
+                    <button (click)="editPublish(data.publish)" mat-button class="col xs1">
                         <mat-icon>visibility_off</mat-icon>
                     </button>
-                    <p class="col xs11">Not Online !</p>
+                    <p class="col xs11">Offline !</p>
                 </div>
             </ng-template>
     
@@ -54,7 +54,7 @@
                 <button mat-raised-button color="warn" (click)="resetForm($event)">Reset</button>
             </div>
             <div class="col xs2">
-                <button mat-raised-button color="primary" [disabled]="form.invalid">Edit</button>
+                <button mat-raised-button color="primary" (click)="sendCourse(data)" [disabled]="form.invalid">Edit</button>
             </div>
         </div>
     </form>

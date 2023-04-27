@@ -27,7 +27,7 @@ export class ListComponent implements OnInit {
       .subscribe((response: CourseListType[]) => {
         this.courses = response
         this.courses.map((course) => {
-          course.modules?.sort((a,b)=> (a.orderModule - b.orderModule) * 1)
+          course.modules?.sort((a,b)=> (a.orderModule - b.orderModule))
         })
       })
 

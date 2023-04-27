@@ -101,7 +101,7 @@ export class CourseHandlerComponent implements OnInit {
           for (this.module of result.modules!) {
             this.modules.push(this.module);
           }
-          this.modules.sort((a,b)=> (a.orderModule - b.orderModule) * -1)
+          this.modules.sort((a,b)=> (a.orderModule - b.orderModule))
         }
 
       });

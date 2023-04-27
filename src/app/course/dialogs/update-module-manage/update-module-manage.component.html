@@ -1,0 +1,41 @@
+<mat-dialog-content>
+    <div class="row">
+        <div class="col xs10 course-title">
+            <h1>Update Module </h1>
+        </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="editSubmit()">
+        <fieldset>
+            <legend>Module</legend>
+            <div class="row">
+                <!-- Input Name-->
+                <mat-form-field class="col xs12">
+                    <input matInput formControlName="name" placeholder="Module name..." [(ngModel)]="data.name">
+                    <mat-error *ngIf="c['name'].errors && c['name'].touched">
+                        Name is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <!-- Input objective -->
+                <mat-form-field class="col xs12">
+                    <textarea matInput type="textarea" cdkTextareaAutosize cdkAutosizeMaxRows="10"
+                        formControlName="objective" placeholder="Objective..." [(ngModel)]="data.objective"></textarea>
+                </mat-form-field>
+            </div>
+           
+            
+    
+        </fieldset>
+        <div class="row buttons">
+            <div class="col xs9"></div>
+            <div class="col xs1">
+                <button mat-raised-button color="warn" (click)="resetForm($event)">Reset</button>
+            </div>
+            <div class="col xs2">
+                <button mat-raised-button color="primary" (click)="sendModule(data)" [disabled]="form.invalid">Edit</button>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>

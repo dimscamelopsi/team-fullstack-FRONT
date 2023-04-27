@@ -16,6 +16,7 @@ import { UpdateCourseManageComponent } from './dialogs/update-course-manage/upda
 import { ManageModuleComponent } from './components/manage-module/manage-module.component';
 import { ModuleManageDialogComponent } from './dialogs/module-manage-dialog/module-manage-dialog.component';
 import { CourseManageDialogComponent } from './dialogs/course-manage-dialog/course-manage-dialog.component';
+import { UpdateModuleManageComponent } from './dialogs/update-module-manage/update-module-manage.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { CourseManageDialogComponent } from './dialogs/course-manage-dialog/cour
     ModuleDialogComponent,
     ManageModuleComponent,
     ModuleManageDialogComponent,
-    CourseManageDialogComponent
+    CourseManageDialogComponent,
+    UpdateModuleManageComponent
   ],
   imports: [
     SharedModule,

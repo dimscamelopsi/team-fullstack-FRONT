@@ -84,7 +84,7 @@
                                                 <span>media{{(course.modules?.length! > 1)? "s" : ""}} {{module.medias.length}} </span>
                                             </button>
                                             <!-- Button Edit -->
-                                            <button (click)="openDialog(course)" mat-menu-item>
+                                            <button (click)="openDialogModule(module, course)" mat-menu-item>
                                                 <mat-icon>edit</mat-icon>
                                                 <span>Edit</span>
                                             </button>

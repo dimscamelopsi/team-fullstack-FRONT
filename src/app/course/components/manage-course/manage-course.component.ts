@@ -12,6 +12,8 @@ import { ModuleService } from 'src/app/conceptor/modules/services/module.service
 import { CourseManageDialogComponent } from '../../dialogs/course-manage-dialog/course-manage-dialog.component';
 import { ToastService } from 'src/app/core/toast.service';
 import { Router } from '@angular/router';
+import { UpdateModuleManageComponent } from '../../dialogs/update-module-manage/update-module-manage.component';
+import { ModuleManageType } from '../../types/module-manage-type';
 
 
 @Component({
@@ -58,12 +60,22 @@ export class ManageCourseComponent implements OnInit {
       })
   }
 
-  openDialogModule(course: CourseManageType): void {
-    const dialogRef = this.dialog.open(ModuleManageDialogComponent, {
+  openDialogModule(module: ModuleType, course: CourseManageType): void {
+    this.dialog.open(UpdateModuleManageComponent, {
       data: {
-        modules: course.modules
+        id: module.id,
+        name: module.name,
+        objectif: module.objective,
+        orderModule: module.orderModule,
+        course: course
       }
-    })
+    }).afterClosed().subscribe(
+      result => {
+        module.name = result.name
+        module.objective = result.objective
+        module.objective = result.orderModule
+      }
+    )
 
   }
 

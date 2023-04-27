@@ -2,7 +2,9 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ModuleAddType } from 'src/app/course/types/module-add-type';
+import { ModuleManageType } from 'src/app/course/types/module-manage-type';
 import { ModuleType } from 'src/app/course/types/module-type';
+import { UserService } from 'src/app/user/services/user.service';
 import { environment } from 'src/environments/environment';
 
 
@@ -14,7 +16,8 @@ export class ModuleService {
 
 
   constructor(
-    private _httpClient: HttpClient // DI Angular
+    private _httpClient: HttpClient,
+    private _userService: UserService
   ) { }
 
 
@@ -35,5 +38,10 @@ export class ModuleService {
     return this._httpClient.delete<ModuleType>(
       `${this.endpoint}/${id}`, {observe: 'response'}
     )
+  }
+
+  public update(module: ModuleManageType): Observable<HttpResponse<any>> {
+    return this._httpClient.put<ModuleManageType>(
+      this.endpoint +'/'+ this._userService.user.id, module, { observe: 'response' })
   }
 }

@@ -1,8 +1,8 @@
-<div class="row"></div>
+ <div class="row"></div>
 <div class="row">
   <div class="col xs12">
     <ng-container>
-      <form [formGroup]="mediaFormGroup" (ngSubmit)="addMedia()">
+      <form formGroup={{mediaFormGroup}} (ngSubmit)="addMedia()">
         <fieldset>
           <legend>New media</legend>
 
@@ -104,7 +104,7 @@
 
 
 
-          <!--<mat-form-field>
+          <mat-form-field>
             <mat-label>Module person list ou en boutton</mat-label>
             <mat-select formControlName="Module">
               <mat-option
@@ -116,7 +116,7 @@
             </mat-select>
           </mat-form-field>-->
 
-
+<!--
 
         </fieldset>
         <div class="row">
@@ -132,4 +132,5 @@
     </ng-container>
   </div>
 </div>
+
 

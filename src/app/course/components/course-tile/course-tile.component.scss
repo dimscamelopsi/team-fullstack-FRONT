@@ -1,15 +1,15 @@
 .course {
-  padding-bottom: .5em;
+  padding-bottom: 0.5em;
   padding-top: 1em;
-  background-color: rgba(20, 50, 200, .8);
+  background-color: rgba(62, 3, 54, 0.8);
   color: #fff;
-  border-bottom: solid 1px rgba(128, 128, 128, .9);
+  border-bottom: solid 1px rgba(128, 128, 128, 0.9);
 
   .icon-list {
     display: inline-block;
     &.up {
       animation-name: up;
-      animation-duration: .5s;
+      animation-duration: 0.5s;
       animation-fill-mode: forwards;
       animation-iteration-count: 1;
       animation-timing-function: ease-out;
@@ -17,7 +17,7 @@
 
     &.down {
       animation-name: down;
-      animation-duration: .5s;
+      animation-duration: 0.5s;
       animation-fill-mode: forwards;
       animation-iteration-count: 1;
       animation-timing-function: ease-out;
@@ -33,14 +33,13 @@
       animation-fill-mode: forwards;
       animation-iteration-count: 1;
       animation-timing-function: ease-out;
-
     }
   }
 }
 
 span {
   &.hot-action {
-    color: rgb(200,20,10);
+    color: rgb(200, 20, 10);
   }
 }
 
@@ -50,10 +49,10 @@ span {
   }
 
   50% {
-    opacity: .5;
+    opacity: 0.5;
   }
 
-  100%{
+  100% {
     opacity: 1;
   }
 }
@@ -63,7 +62,7 @@ span {
     display: inline-block;
   }
 
-  50%{
+  50% {
     transform: rotate(-45deg);
   }
 
@@ -73,8 +72,9 @@ span {
 }
 
 @keyframes down {
-  0% {}
-  50%{
+  0% {
+  }
+  50% {
     transform: rotate(45deg);
   }
   100% {

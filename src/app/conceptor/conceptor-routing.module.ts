@@ -1,5 +1,5 @@
-import { Component, NgModule } from '@angular/core';
-import { OutletContext, RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 import { AddModuleComponent } from './modules/add-module/add-module.component';
@@ -11,36 +11,36 @@ import { ManageModuleComponent } from '../course/components/manage-module/manage
 
 @NgModule({
   imports: [RouterModule.forChild(ConceptorRoutingModule.routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class ConceptorRoutingModule {
   public static routes: Routes = [
     {
       path: '',
-      component: SidebarComponent, children:[
+      component: SidebarComponent,
+      children: [
         {
-        path: 'addModule',
-       component: AddModuleComponent
+          path: 'addModule',
+          component: AddModuleComponent,
         },
         {
-        path: 'addCourse',
-       component: CourseHandlerComponent
+          path: 'addCourse',
+          component: CourseHandlerComponent,
         },
         {
-          path:'list',
-          component:ListComponent
+          path: 'list',
+          component: ListComponent,
         },
         {
           path: 'manageCourse',
-          component: ManageCourseComponent
+          component: ManageCourseComponent,
         },
         {
           path: 'manageModule',
-          component: ManageModuleComponent
-        }
-
-      ]
-    }
-
+          component: ManageModuleComponent,
+        },
+        { path: '', redirectTo: 'list', pathMatch: 'full' },
+      ],
+    },
   ];
 }

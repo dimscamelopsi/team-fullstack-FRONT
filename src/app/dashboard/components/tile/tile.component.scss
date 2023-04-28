@@ -16,17 +16,11 @@ div {
         font-size: 1.3em;
         padding: 1em;
       }
-
-      &.actions {
-        display: flex;
-        justify-content: end;
-        padding: 1em;
-      }
     }
   }
 }
 .waiter {
-  height: .3em;
+  height: 0.3em;
   width: 100%;
   background-color: lighten($waiter-color, 50%);
   position: relative;
@@ -43,9 +37,47 @@ div {
     animation-fill-mode: backwards;
   }
 }
+.example-card {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  border: solid 1px rgb(128, 128, 128);
+  box-shadow: 1px 1px 3px rgb(128, 128, 128);
 
+  .mat-card-header {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    padding: 1em;
+
+    .mat-card-title {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .image {
+    display: flex;
+    justify-content: center;
+  }
+
+  .mat-card-content {
+    display: flex;
+    justify-content: center;
+    font-size: 1.3em;
+    padding: 1em;
+  }
+
+  .mat-card-actions {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+  }
+}
 @keyframes waiter {
-  0% {}
+  0% {
+  }
 
   10% {
     left: 10%;
@@ -62,7 +94,7 @@ div {
     width: 30%;
   }
 
-  40%{
+  40% {
     left: 40%;
     width: 40%;
   }
@@ -92,5 +124,6 @@ div {
     width: 10%;
   }
 
-  100% {}
+  100% {
+  }
 }

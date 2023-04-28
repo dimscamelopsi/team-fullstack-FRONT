@@ -13,6 +13,7 @@ import { MediaDialogComponent } from '../media-dialog/media-dialog.component';
 import { ModuleType } from 'src/app/course/types/module-type';
 import { ModuleAddType } from 'src/app/course/types/module-add-type';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { forEach } from 'cypress/types/lodash';
 
 @Component({
   selector: 'app-add-module',
@@ -66,9 +67,13 @@ export class AddModuleComponent implements OnInit {
     const module:ModuleAddType={
       name:this.moduleFormGroup.controls['name'].value,
       objective:this.moduleFormGroup.controls['objective'].value,
-      course:this.moduleFormGroup.controls['course'].value,
-      media:this.medias
+      course: this.moduleFormGroup.controls['course'].value,
+      media: this.medias,
     }
+    this.medias.map((media: MediaType) => {
+      media.orderMedia = this.medias.indexOf(media);
+    });
+    
     this._moduleService.add(module) 
       .subscribe({
       
@@ -97,6 +102,10 @@ export class AddModuleComponent implements OnInit {
       if (result !== undefined) {
         
         this.medias.push(result)
+
+        /* for (const media of this.medias) {
+          //console.log(media.title.toString());
+        } */
        
       }
     })

@@ -18,7 +18,8 @@ import { MediaDialogComponent } from './modules/media-dialog/media-dialog.compon
   declarations: [
     SidebarComponent,
     AddModuleComponent,
-    MediaDialogComponent
+    MediaDialogComponent,
+    AddMediaComponent
   ],
   imports: [
     CommonModule,

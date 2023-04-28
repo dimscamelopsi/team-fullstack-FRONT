@@ -1,147 +1,84 @@
-import { Component, Directive, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { ToastService } from 'src/app/core/toast.service';
-import { take } from 'rxjs';
-import { HttpResponse } from '@angular/common/http';
-import { MediaType } from 'src/app/course/types/media-type';
-import { AddMediaType } from 'src/app/course/types/add-media-type';
-
-import { ModuleListType } from 'src/app/course/types/media-list-type';
-import { TypeMediaType } from 'src/app/course/types/type-media-type';
-
-import { log } from 'console';
-import { MediaService } from '../modules/services/media.service';
-import { ModuleService } from '../modules/services/module.service';
-import { TypeMediaService } from '../modules/services/type-media.service';
-
-
 
 @Component({
   selector: 'app-add-media',
   templateUrl: './add-media.component.html',
   styleUrls: ['./add-media.component.scss']
 })
-export class AddMediaComponent implements OnInit {
-  mediaFormGroup!: FormGroup;
-  public mediaType!: MediaType[];
-  public addMediaType!: AddMediaType[];
-  public userModules: Array<ModuleListType> = [];
-  public typeMedias: Array<TypeMediaType> = [];
-  selectedOption = this.typeMedias[0];
-  selectedFiles: File[] = [];
-  mediaForm: any;
 
+
+
+export class AddMediaComponent implements OnInit {
+
+
+  mediaFormGroup!: FormGroup;
+  selectedOption: any;
+  typeMedias = [
+    { id: 1, title: 'Video' },
+    { id: 3, title: 'Document' },
+    { id: 2, title: 'Slide' }
+  ];
 
   constructor(
-    private _fb: FormBuilder,
-    private _mediaService: MediaService,
-    private _toastService: ToastService,
-    private _moduleService: ModuleService,
-    private _typeMediaService: TypeMediaService,
+    private _formBuilder: FormBuilder,
+    private _http: HttpClient) {
+  }
 
-  ) { }
 
 
   ngOnInit(): void {
 
-    this._typeMediaService.getAllTypesMedia()
-      .pipe(
-        take(1)
-      )
-      .subscribe((response: TypeMediaType[]) => {
-
-        this.typeMedias = response
-
-      })
-
-    this.mediaFormGroup = this._fb.group({
-
-      title: this._fb.control
-        ("",
-          [
-            Validators.required,
-          ]),
-      summary: this._fb.control
-        ("",
-          [
-            Validators.required,
-          ]),
-      duration: this._fb.control
-        ("",
-          [
-            Validators.required,
-          ]),
-      url: this._fb.control
-        ("",
-          [
-            Validators.required,
-
-          ]),
-      typeMedia: this._fb.control
-        ("",
-          [
-            Validators.required,
-
-          ]),
-    })
-
-
-
+    {
+      this.mediaFormGroup = this._formBuilder.group({
+        title: this._formBuilder.control("", [Validators.required]),
+        summary: this._formBuilder.control("", [Validators.required]),
+        duration: this._formBuilder.control("", [Validators.required]),
+        typeMedia: this._formBuilder.control("", [Validators.required]),
+        url: this._formBuilder.control(""),
+        file: this._formBuilder.control("" ),
+        Module: this._formBuilder.control(""),
+      });
+    }
   }
-  public addMedia() {
-/* console.log(this.mediaFormGroup.value) */
-    this._mediaService.add(this.mediaFormGroup.value)
-      .pipe(
-        take(1)
-      ).subscribe({
-        next: (_response: HttpResponse<any>) => {
-          const message: string = `media was added. `
-          this._toastService.show(message)
-          this.mediaFormGroup.reset(); // réinitialiser le formulaire
-        },
-        error: (_error: any) => {
-          const badMessage: string = `media not added.`
-          this._toastService.show(badMessage)
-        }
-      })
+
+
+  createFormData(): FormData {
+    const formData = new FormData();
+    formData.append('title' ,this.mediaFormGroup.controls['title'].value);
+    formData.append('summary', this.mediaFormGroup.controls['summary'].value);
+    formData.append('duration', this.mediaFormGroup.controls['duration'].value);
+    formData.append('typeMedia', this.mediaFormGroup.controls['typeMedia'].value.id);
+    formData.append('Module', this.mediaFormGroup.controls['Module'].value.id);
+    if (this.selectedOption && this.selectedOption.title === 'Video') {
+      formData.append('url', this.mediaFormGroup.controls['url'].value);
+    } else {
+      formData.append('file', this.mediaFormGroup.controls['file'].value);
+    }
+    return formData;
+  }
+
+
+  addMedia() {
+    const formData = this.createFormData();
+    this._http.post('url_to_your_api', formData).subscribe(
+      res => {
+        // handle success response
+      },
+      error => {
+        // handle error response
+      }
+    );
+  }
+
+
+  onFileSelected(event: any) {
+    const file = event.tarcontrols.files[0];
+    this.mediaFormGroup.controls['file'].setValue(file);
   }
 
 
 
-
-onSubmit(): void {
-  const formData = new FormData();
-  for (let i = 0; i < this.selectedFiles.length; i++) {
-    formData.append('file[]', this.selectedFiles[i], this.selectedFiles[i].name);
-  }
-  this.mediaFormGroup.reset();
-  this.selectedFiles = [];
-}
-
-   onFileSelected(event: any): void {
-     for (let i = 0; i < event.target.files.length; i++) {
-       this.selectedFiles.push(event.target.files[i]);
-     }
-   }
-
-   onFileDropped(event: any): void {
-     event.preventDefault();
-     for (let i = 0; i < event.dataTransfer.files.length; i++) {
-       this.selectedFiles.push(event.dataTransfer.files[i]);
-     }
-   }
-
-   onDragOver(event: any): void {
-     event.preventDefault();
-   }
-
-   uploadFile(evt: any){
-     // evt est un tableau des fichier(s) déposés sur notre div. Ici nous supposerons qu'il y a un seul fichier uploadé
-
-       let payload = new FormData();
-       payload.append('data', evt[0]);
-       // Nous pouvons maintenant uploader le fichier en lancant une requete POST avec la variable payload comme corps de requete :)
-     }
 
 }

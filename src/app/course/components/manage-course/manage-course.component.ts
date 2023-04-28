@@ -153,10 +153,7 @@ export class ManageCourseComponent implements OnInit {
      
   }
 
-  goToAddCourse(){
-    this._router.navigate(['/conceptor/addCourse'])
-  }
-
+  
 
 }
 

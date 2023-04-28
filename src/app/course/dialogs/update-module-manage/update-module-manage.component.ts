@@ -5,9 +5,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ModuleService } from 'src/app/conceptor/modules/services/module.service';
 import { HttpResponse } from '@angular/common/http';
 import { AbstractControl, FormGroup } from '@angular/forms';
-import { FormCourseBuilderService } from '../../services/course-handler/form-course-builder.service';
-import { ModuleManageType } from '../../types/module-manage-type';
 import { Router } from '@angular/router';
+import { FormModuleBuilderService } from '../../services/course-handler/form-module-builder.service';
+import { ModuleManageType } from '../../types/module-manage-type';
 
 @Component({
   selector: 'app-update-module-manage',
@@ -26,7 +26,7 @@ export class UpdateModuleManageComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: ModuleManageType,
     private _moduleService: ModuleService,
     private _router: Router,
-    private _formBuilder: FormCourseBuilderService,
+    private _formBuilder: FormModuleBuilderService,
     private _changeDetectorRef: ChangeDetectorRef) { 
       this.form = this._formBuilder.form
     }
@@ -58,15 +58,13 @@ export class UpdateModuleManageComponent implements OnInit {
   editSubmit(): void {
     const module: ModuleManageType = {
       id: this.module_id = this.data.id,
-      name: this.c['mane'].value,
+      name: this.c['name'].value,
       objective: this.c['objective'].value,
-      totalTime: this.c['totalTime'].value,
-      orderModule: this.c['orderModule'].value,
-      selected: false,
-      course: this.data.course
+      orderModule: this.data.orderModule,
+      course: this.data.course,
+      isSelected: false
     }
 
-    console.log(`Student was updated ${module}`)
     this._moduleService.update(module)
       .subscribe({
         next: (response: HttpResponse<any>) => {
@@ -78,10 +76,8 @@ export class UpdateModuleManageComponent implements OnInit {
 
   resetForm(event:any): void {
     event.preventDefault();
-    this.c['mane'].value,
-    this.c['objective'].value,
-    this.c['totalTime'].value,
-    this.c['orderModule'].value
+    this.c['name'].value,
+    this.c['objective'].value
   }
 
 }

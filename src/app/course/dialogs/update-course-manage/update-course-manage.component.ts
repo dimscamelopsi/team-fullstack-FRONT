@@ -95,7 +95,6 @@ export class UpdateCourseManageComponent implements OnInit {
       publish: this.data.publish,
       isSelected: false 
     }
-    console.log(`Student was updated ${course}`)
     this._courseService.update(course)
       .subscribe({
         next: (response: HttpResponse<any>) => {

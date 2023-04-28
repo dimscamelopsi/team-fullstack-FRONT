@@ -53,7 +53,7 @@ export class ManageCourseComponent implements OnInit {
         modules: courseObject.modules
       }
     }).afterClosed().subscribe(
-      result => { 
+      (result) => { 
         courseObject.title = result.title
         courseObject.objective = result.objective
         courseObject.publish = result.publish 
@@ -65,15 +65,14 @@ export class ManageCourseComponent implements OnInit {
       data: {
         id: module.id,
         name: module.name,
-        objectif: module.objective,
-        orderModule: module.orderModule,
+        objective: module.objective,
         course: course
       }
     }).afterClosed().subscribe(
-      result => {
+      (result) => {
         module.name = result.name
         module.objective = result.objective
-        module.objective = result.orderModule
+        module.totalTime = result.totalTime
       }
     )
 

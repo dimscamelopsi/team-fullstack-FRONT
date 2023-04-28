@@ -41,7 +41,7 @@ export class ModuleService {
   }
 
   public update(module: ModuleManageType): Observable<HttpResponse<any>> {
-    return this._httpClient.put<ModuleManageType>(
-      this.endpoint +'/'+ this._userService.user.id, module, { observe: 'response' })
+    return this._httpClient.put<ModuleType>(
+      this.endpoint +'/'+ module.id, module, { observe: 'response' })
   }
 }

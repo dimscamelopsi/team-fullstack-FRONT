@@ -2,6 +2,9 @@
     <div class="row">
         <div class="col xs10 course-title">
             <h1>Update Module </h1>
+            <h3>Title Module : {{data.name}} </h3>
+            <h3>Course id : {{data.course.id}} </h3>
+            <h3>Obbjective : {{data.objective}} </h3>
         </div>
     </div>
 
@@ -24,9 +27,6 @@
                         formControlName="objective" placeholder="Objective..." [(ngModel)]="data.objective"></textarea>
                 </mat-form-field>
             </div>
-           
-            
-    
         </fieldset>
         <div class="row buttons">
             <div class="col xs9"></div>

@@ -107,6 +107,7 @@
             </mat-form-field>
           </ng-template>
 
+
           <ng-template #elseBlock>
             <div class="file-drop-area">
               <mat-icon class="icon">cloud_upload</mat-icon>
@@ -119,22 +120,24 @@
             </div>
           </ng-template>
 
-      <!--     <mat-form-field>
-            <mat-label>Module person list ou en boutton</mat-label>
-            <mat-select formControlName="Module">
-              <mat-option
-                *ngFor="let userModules of userModules"
-                [value]="userModules"
-              >
-                {{ userModules.name }}
-              </mat-option>
+
+
+        <!--   <mat-form-field>
+            <mat-label>Module</mat-label>
+            <mat-select formControlName="module">
+              <mat-option *ngFor="let module of modules" [value]="module.id">{{module.name}}</mat-option>
             </mat-select>
           </mat-form-field> -->
+
+
+
+          <span>{{ mediaFormGroup.controls['Module'].value.name }}</span>
         </fieldset>
         <div class="row">
-          <div class="col xs5"></div>
+          <div class="col xs5">
+          </div>
           <div class="col xs2">
-              <button mat-raised-button [disabled]="mediaFormGroup.invalid" color="primary">Add</button>
+              <button mat-raised-button [formGroup]="mediaFormGroup" color="primary">Add</button>
           </div>
           <div class="col xs5"></div>
       </div>

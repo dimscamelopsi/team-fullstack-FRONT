@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModuleType } from 'src/app/course/types/module-type';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-add-media',
@@ -12,6 +15,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class AddMediaComponent implements OnInit {
 
+  public modules: ModuleType[] = [];
 
   mediaFormGroup!: FormGroup;
   selectedOption: any;
@@ -23,9 +27,9 @@ export class AddMediaComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private _http: HttpClient) {
+    private _http: HttpClient)
+     {
   }
-
 
 
   ngOnInit(): void {
@@ -62,23 +66,37 @@ export class AddMediaComponent implements OnInit {
 
   addMedia() {
     const formData = this.createFormData();
-    this._http.post('url_to_your_api', formData).subscribe(
-      res => {
-        // handle success response
+    this._http.post(`${environment.apiRootUri}media`,formData).subscribe({
+
+
+      next: (response :any)=> {
+        const message: string = `Media was added. `
+        console.log(message);
+
+        //this._toastService.show(message)
       },
-      error => {
-        // handle error response
+      error:(error: any) => {
+        const badMessage: string = `Media not added.`
+        //this._toastService.show(badMessage)
       }
-    );
+  });
+
   }
 
 
   onFileSelected(event: any) {
-    const file = event.tarcontrols.files[0];
+    const file = event.target.files[0];
     this.mediaFormGroup.controls['file'].setValue(file);
+    console.log ("test  j'ai ajouter un fichier")
   }
 
-
-
+  onSubmit() {
+    if (this.mediaFormGroup.valid) {
+      this.addMedia();
+    }
+  }
+ /*  addMediaToModule() {
+    throw new Error('Method not implemented.');
+    } */
 
 }

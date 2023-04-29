@@ -55,7 +55,7 @@ export class CourseService {
     return this._httpClient.get<CourseListType[]>(
       //`${this.endPoint}/usersCourses/${this._userService.user.id}`,
       this.endPoint + '/usersCourses/' + this._userService.user.id
-   
+
     )
   }
   public findListCourse(): Observable<CourseManageType[]> {

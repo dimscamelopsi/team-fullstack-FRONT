@@ -68,9 +68,9 @@ export class AddModuleComponent implements OnInit {
       course:this.moduleFormGroup.controls['course'].value,
       media:this.medias
     }
-    this._moduleService.add(module) 
+    this._moduleService.add(module)
       .subscribe({
-      
+
         next: (response:HttpResponse<any>) => {
           const message: string = `module was added. `
           this._toastService.show(message)
@@ -91,7 +91,7 @@ export class AddModuleComponent implements OnInit {
       }
     ).afterClosed().subscribe((result: MediaType | undefined) => {
       if (result !== undefined) {
-        
+
         this.medias.push(result)
       }
     })

@@ -5,6 +5,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { AddModuleComponent } from './modules/add-module/add-module.component';
 
 import { ListComponent } from '../course/list/list.component';
+import { AddMediaComponent } from './add-media/add-media.component';
+
 import { CourseHandlerComponent } from '../course/course-handler/course-handler.component';
 import { ManageCourseComponent } from '../course/components/manage-course/manage-course.component';
 import { ManageModuleComponent } from '../course/components/manage-module/manage-module.component';
@@ -24,8 +26,13 @@ export class ConceptorRoutingModule {
           component: AddModuleComponent,
         },
         {
-          path: 'addCourse',
-          component: CourseHandlerComponent,
+          path: 'addMedia',
+          component: AddMediaComponent
+        },
+        {
+
+        path: 'addCourse',
+       component: CourseHandlerComponent
         },
         {
           path: 'list',
@@ -43,4 +50,5 @@ export class ConceptorRoutingModule {
       ],
     },
   ];
-}
+    }
+

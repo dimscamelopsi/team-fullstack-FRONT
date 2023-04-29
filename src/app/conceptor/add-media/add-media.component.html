@@ -1,0 +1,147 @@
+<div>
+  <div>
+    <ng-container>
+      <form [formGroup]="mediaFormGroup" (ngSubmit)="addMedia()">
+        <fieldset>
+          <legend>New media</legend>
+          <div class="row">
+            <div class="col xs12 md6">
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Media title..."
+                  formControlName="title"
+                />
+                <mat-error
+                  *ngIf="
+                    mediaFormGroup.controls['title'].errors &&
+                    mediaFormGroup.controls['title'].touched
+                  "
+                >
+                  <span
+                    *ngIf="
+                      mediaFormGroup.controls['title'].hasError('required')
+                    "
+                  >
+                    Title cannot be empty !!!
+                  </span>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Media summary.."
+              formControlName="summary"
+            />
+            <mat-error
+              *ngIf="
+                mediaFormGroup.controls['summary'].errors &&
+                mediaFormGroup.controls['summary'].touched
+              "
+            >
+              <span
+                *ngIf="mediaFormGroup.controls['summary'].hasError('required')"
+              >
+                Summary cannot be empty !!!
+              </span>
+            </mat-error> </mat-form-field
+          ><br />
+
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Media duration.."
+              formControlName="duration"
+            />
+            <mat-error
+              *ngIf="
+                mediaFormGroup.controls['duration'].errors &&
+                mediaFormGroup.controls['duration'].touched
+              "
+            >
+              <span
+                *ngIf="mediaFormGroup.controls['duration'].hasError('required')"
+              >
+                Duration cannot be empty !!!
+              </span>
+            </mat-error> </mat-form-field
+          ><br />
+
+          <mat-form-field>
+            <mat-label>List MediaType</mat-label>
+            <mat-select
+              [(ngModel)]="selectedOption"
+              formControlName="typeMedia"
+              required
+            >
+              <mat-option
+                [value]="listTypeMedia"
+                *ngFor="let listTypeMedia of typeMedias"
+              >
+                {{ listTypeMedia.title }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div
+            *ngIf="
+              selectedOption && selectedOption.title === 'Video';
+              then thenBlock;
+              else elseBlock
+            "
+          ></div>
+
+          <ng-template #thenBlock
+            ><br />
+            <mat-form-field>
+              <mat-label>Media URL</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="url"
+                placeholder="Enter url of your Media..*"
+              />
+            </mat-form-field>
+          </ng-template>
+
+
+          <ng-template #elseBlock>
+            <div class="file-drop-area">
+              <mat-icon class="icon">cloud_upload</mat-icon>
+              <input
+                type="file"
+                (change)="onFileSelected($event)"
+                accept=".pdf,.ppt,.pptx,.doc,.docx"
+              />
+              <p class="text">Drop files here or click to upload</p>
+            </div>
+          </ng-template>
+
+
+
+        <!--   <mat-form-field>
+            <mat-label>Module</mat-label>
+            <mat-select formControlName="module">
+              <mat-option *ngFor="let module of modules" [value]="module.id">{{module.name}}</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
+
+
+          <span>{{ mediaFormGroup.controls['Module'].value.name }}</span>
+        </fieldset>
+        <div class="row">
+          <div class="col xs5">
+          </div>
+          <div class="col xs2">
+              <button mat-raised-button [formGroup]="mediaFormGroup" color="primary">Add</button>
+          </div>
+          <div class="col xs5"></div>
+      </div>
+      </form>
+    </ng-container>
+  </div>
+</div>

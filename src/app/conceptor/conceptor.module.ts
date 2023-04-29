@@ -7,14 +7,19 @@ import { UiModule } from '../ui/ui.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AddModuleComponent } from './modules/add-module/add-module.component';
 import { CourseModule } from '../course/course.module';
+
+import { AddMediaComponent } from './add-media/add-media.component';
+
 import { CourseHandlerComponent } from '../course/course-handler/course-handler.component';
 import { MediaDialogComponent } from './modules/media-dialog/media-dialog.component';
+
 
 @NgModule({
   declarations: [
     SidebarComponent,
     AddModuleComponent,
-    MediaDialogComponent
+    MediaDialogComponent,
+    AddMediaComponent
   ],
   imports: [
     CommonModule,

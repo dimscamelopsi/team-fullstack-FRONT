@@ -1,0 +1,32 @@
+
+<mat-dialog-content>
+  <div class="col xs9 course-title">
+    Module List
+  </div>
+
+  <ng-container *ngFor="let course of courses">
+  <div class="row">
+
+    <div class="col xs1 course-number">
+     <!--  {{ course.modules}} items -->{{ course.title}}
+    </div>
+  </div>
+
+
+  <ng-container *ngIf="course.modules">
+    <ng-container *ngFor="let module of course.modules">
+      <div class="module-list">
+        <span>{{module.name}}</span>
+
+        <button mat-icon-button id="add" (click)="addModule(module)">
+          <mat-icon >add</mat-icon>
+        </button>
+        <mat-divider></mat-divider>
+      </div>
+
+
+    </ng-container>
+  </ng-container>
+</ng-container>
+</mat-dialog-content>
+

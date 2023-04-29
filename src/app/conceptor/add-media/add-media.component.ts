@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModuleType } from 'src/app/course/types/module-type';
 import { environment } from 'src/environments/environment';
+import { ModuleDialogComponent } from '../modules/module-dialog/module-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -15,10 +17,12 @@ import { environment } from 'src/environments/environment';
 
 export class AddMediaComponent implements OnInit {
 
-  public modules: ModuleType[] = [];
+
 
   mediaFormGroup!: FormGroup;
   selectedOption: any;
+  public modules: Array<ModuleType> = [];
+
   typeMedias = [
     { id: 1, title: 'Video' },
     { id: 3, title: 'Document' },
@@ -27,7 +31,9 @@ export class AddMediaComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private _http: HttpClient)
+    private _http: HttpClient,
+    private _dialog: MatDialog,
+    )
      {
   }
 
@@ -95,8 +101,19 @@ export class AddMediaComponent implements OnInit {
       this.addMedia();
     }
   }
- /*  addMediaToModule() {
-    throw new Error('Method not implemented.');
-    } */
+
+  openModule(): void {
+    this._dialog
+      .open(ModuleDialogComponent, {
+        height: 'flex',
+        width: 'flex',
+      })
+      .afterClosed()
+      .subscribe((result: ModuleType | undefined) => {
+        if (result !== undefined) {
+          this.modules.push(result);
+        }
+      });
+  }
 
 }

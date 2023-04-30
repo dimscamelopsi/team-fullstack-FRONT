@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -12,7 +11,12 @@ import { CoreModule } from './core/core.module';
 import { CoursesComponent } from './dashboard/students/courses/courses.component';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, TileComponent, CoursesComponent],
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    TileComponent,
+    CoursesComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

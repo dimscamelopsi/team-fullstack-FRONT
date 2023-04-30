@@ -1,9 +1,10 @@
 <div>
+  <h1>Create a new media</h1>
   <div>
     <ng-container>
       <form [formGroup]="mediaFormGroup" (ngSubmit)="addMedia()">
         <fieldset>
-          <legend>New media</legend>
+          <legend> My new media</legend>
           <div class="row">
             <div class="col xs12 md6">
               <mat-form-field>
@@ -105,33 +106,33 @@
                 placeholder="Enter url of your Media..*"
               />
             </mat-form-field>
-          </ng-template>
+          </ng-template><br>
 
 
           <ng-template #elseBlock>
-            <div class="file-drop-area">
-              <mat-icon class="icon">cloud_upload</mat-icon>
+
+
+
+            <div class="container" appDnd (fileDropped)="onFileSelected($event)">
+              <input type="file" #fileDropRef id="fileDropRef" multiple (change)="onFileSelected($event)" />
+              <img src="assets/img/dnd/ic-upload-file.svg" alt="">
+              <h3>Drag and drop file here</h3>
+              <h3>or</h3>
+              <label for="fileDropRef">Browse for file</label>
+            </div>
+     <!--        <div class="file-drop-area">
+
               <input
                 type="file"
                 (change)="onFileSelected($event)"
                 accept=".pdf,.ppt,.pptx,.doc,.docx"
               />
               <p class="text">Drop files here or click to upload</p>
-            </div>
-          </ng-template>
+             </div> -->
+           </ng-template>
 
 
-
-        <!--   <mat-form-field>
-            <mat-label>Module</mat-label>
-            <mat-select formControlName="module">
-              <mat-option *ngFor="let module of modules" [value]="module.id">{{module.name}}</mat-option>
-            </mat-select>
-          </mat-form-field> -->
-
-
-
-          <span>{{ mediaFormGroup.controls['Module'].value.name }}</span>
+        <!--   <span>{{ mediaFormGroup.controls['Module'].value.name }}</span> -->
         </fieldset>
         <div class="row">
           <div class="col xs5">
@@ -148,6 +149,40 @@
           Import
       </button>
       </div>
+    </ng-container>
+
+     <ng-container *ngIf="useModule">
+        <ng-container>
+          <fieldset>
+
+            <legend>Modules</legend>
+            <ol cdkDropList class="module-list" (cdkDropListDropped)="drop($event)">
+                <li class="example-box" *ngFor="let module of modules" >
+                  <div class="module-tile" cdkDrag>
+                    <div class="title">{{ module.name }}</div>
+                    <div class="remove">
+                        <button mat-icon-button (click)="removeModule(module)">
+                            <mat-icon color="error">delete</mat-icon>
+                        </button>
+                    </div>
+                  </div>
+
+                    <ul class="media-list">
+                      <li *ngFor="let media of module.medias">
+                        <div class="media-tile">
+                          <div class="title">{{ media.title }}</div>
+                          <div class="type">{{ media.typeMedia.title }}</div>
+                          <div class="duration">{{ media.totalTime }}</div>
+                        </div>
+                        <mat-divider></mat-divider>
+                      </li>
+                    </ul>
+                </li>
+            </ol>
+
+          </fieldset>
+
+        </ng-container>
     </ng-container>
   </div>
 </div>

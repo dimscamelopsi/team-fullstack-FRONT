@@ -136,7 +136,9 @@ body {
   }
 }
 
-
+mat-card-header.mat-card-header div.mat-card-header-text {
+  width: 100% !important;
+}
 
 .min-h {
   min-height: 100%;

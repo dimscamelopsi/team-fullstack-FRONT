@@ -10,7 +10,7 @@ import { CourseListType } from '../../types/course-list-type';
 })
 export class CourseTileComponent implements OnInit {
   @Input() public course!: CourseListType
-  @Input() public manage!: boolean 
+  @Input() public manage!: boolean
   @Output() public onToggleCourse: EventEmitter<CourseListType> = new EventEmitter()
   @Output() public onRemoveCourse: EventEmitter<CourseListType> = new EventEmitter()
   @Output() public sendCourse: EventEmitter<CourseListType> = new EventEmitter()
@@ -25,7 +25,6 @@ export class CourseTileComponent implements OnInit {
 
   public revealOrHide(course: CourseListType): void {
     course.isSelected = !course.isSelected
-    console.log(`Course was toggled : ${course.isSelected}`)
     this.onToggleCourse.emit(course)
   }
 

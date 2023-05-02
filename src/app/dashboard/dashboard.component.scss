@@ -2,6 +2,11 @@
   border: solid 1px black;
 }
 
+.row {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 span {
   display: inline-block;
   font-weight: bold;

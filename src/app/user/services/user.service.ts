@@ -7,58 +7,64 @@ import { BehaviorSubject, Observable, take, tap } from 'rxjs';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { StudentModel } from 'src/app/student/models/student-model';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-  private readonly endpoint: string = `${environment.apiRootUri}students`
+  private readonly endpoint: string = `${environment.apiRootUri}students`;
 
-  private _user: any = undefined
-  private _user$: BehaviorSubject<any  | undefined> = new BehaviorSubject(undefined)
+  private _user: any = undefined;
+  private _user$: BehaviorSubject<any | undefined> = new BehaviorSubject(
+    this._user
+  );
 
-  private _storageStrategy: IStorageStrategy
+  private _storageStrategy: IStorageStrategy;
 
-  constructor(
-    private _httpClient: HttpClient
-  ) {
-    this._storageStrategy = environment.storage.auth.strategy === 'session' ?
-      new SessionStorageStrategy() :
-      new LocalStorageStrategy()
+  constructor(private _httpClient: HttpClient) {
+    this._storageStrategy =
+      environment.storage.auth.strategy === 'session'
+        ? new SessionStorageStrategy()
+        : new LocalStorageStrategy();
   }
 
   public set storageStrategy(strategy: IStorageStrategy) {
-    this._storageStrategy = strategy
+    this._storageStrategy = strategy;
+  }
+
+  public get storageStrategy(): IStorageStrategy {
+    return this._storageStrategy;
   }
 
   public get user(): any {
     if (this._user === undefined) {
-      this._user = this._storageStrategy.retrieve()
+      this._user = this._storageStrategy.retrieve();
     }
 
-    return this._user
+    return this._user;
   }
 
   public get user$() {
-    return this._user$
+    return this._user$;
+  }
+
+  set user(user: any) {
+    this._user = user;
+    this._user$.next(this._user);
   }
 
   public authenticate(credentials: any): Observable<HttpResponse<any>> {
-    const endPoint: string = `${environment.apiRootUri}students/byLoginAndPassword`
-    return this._httpClient.post<any>(
-      endPoint,
-      credentials,
-      {
-        observe: 'response'
-      }
-    ).pipe(
-      take(1),
-      tap((response: HttpResponse<any>) => {
-        if (response.status === 200) {
-          this._user = response.body
+    const endPoint: string = `${environment.apiRootUri}students/byLoginAndPassword`;
+    return this._httpClient
+      .post<any>(endPoint, credentials, {
+        observe: 'response',
+      })
+      .pipe(
+        take(1),
+        tap((response: HttpResponse<any>) => {
+          if (response.status === 200) {
+            this._user = response.body;
 
-
-          /**
+            /**
           let storage = this.user.stayConnected ? localStorage : sessionStorage
           storage.setItem('auth', JSON.stringify(credentials))
           storage.setItem('auth', credentials) /// BOUM !
@@ -68,11 +74,11 @@ export class UserService {
             sessionStorage.setItem('auth', JSON.stringify(credentials))
           }
           */
-         this._storageStrategy.store(this._user);
-          this._user$.next(this._user)
-        }
-      })
-    )
+            this._storageStrategy.store(this._user);
+            this._user$.next(this._user);
+          }
+        })
+      );
   }
   public FindByEmailAndAnswer(credentials: any): Observable<HttpResponse<any>> {
     const endPoint: string = `${environment.apiRootUri}students/byEmailAndAnswer`
@@ -84,26 +90,25 @@ export class UserService {
       }
     )
   }
-  
+
   public update(student: StudentModel): Observable<HttpResponse<any>> {
     return this._httpClient.put<StudentModel>(
-      this.endpoint+`/updatePassword`,
+      this.endpoint + `/updatePassword`,
       student,
       {
-        observe: 'response'
+        observe: 'response',
       }
-    )
+    );
   }
-  
-
 
   public logout(): void {
-    this._storageStrategy.remove()
-    this._user = undefined
-    this._user$.next(this._user)
+    this._storageStrategy.remove();
+    this._user = undefined;
+    this._user$.next(this._user);
     // Fallback to default strategy
-    this._storageStrategy = environment.storage.auth.strategy === 'session' ?
-      new SessionStorageStrategy() :
-      new LocalStorageStrategy()
+    this._storageStrategy =
+      environment.storage.auth.strategy === 'session'
+        ? new SessionStorageStrategy()
+        : new LocalStorageStrategy();
   }
 }

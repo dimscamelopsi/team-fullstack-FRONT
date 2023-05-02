@@ -1,7 +1,11 @@
 div {
-  &.course-title {
-    font-size: 1.2em;
+  &.course-number {
+    font-size: 1rem;
     font-weight: bold;
-    letter-spacing: .5em;
+    letter-spacing: 0.5em;
   }
+}
+
+h2 {
+  font-size: 2rem;
 }

@@ -1,39 +1,61 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
   /**
    * Tiles to display in the HTML template
    */
-  public tiles: Array<any> = []
+  public tiles: Array<any> = [];
 
   /**
    * Specify if a "user" is admin or not (default true)
    */
-  public isAdmin: boolean = true
+  public isAdmin: boolean = true;
 
-  constructor(
-  ) { }
+  constructor(private _userService: UserService) {}
 
   ngOnInit(): void {
-    this.tiles.push({
-      title: 'Parameters',
-      summary: 'Parameters management',
-      action: ['dashboard']
-    },
-    {
-      title: 'Students',
-      summary: 'Add, remove, view students',
-      action: ['/', 'student', 'list']
-    },
-    {
-      title: 'Courses',
-      summary: 'Manage courses and medias',
-      action: ['conceptor']
-    })
+    if (this._userService.user.role === 'MANAGER') {
+      this.tiles.push(
+        {
+          title: 'Parameters',
+          summary: 'Parameters management',
+          image: 'assets/settings.png',
+          action: ['dashboard'],
+        },
+        {
+          title: 'Users',
+          summary: 'Add, remove and view users',
+          image: 'assets/graduates.png',
+          action: ['/', 'student', 'list'],
+        },
+        {
+          title: 'Courses',
+          summary: 'Manage courses and medias',
+          image: 'assets/course.png',
+          action: ['conceptor'],
+        }
+      );
+    } else if (this._userService.user.role === 'CONCEPTEUR') {
+      this.tiles.push(
+        {
+          title: 'Parameters',
+          summary: 'Parameters management',
+          image: 'assets/settings.png',
+          action: ['dashboard'],
+        },
+        {
+          title: 'Courses',
+          summary: 'Manage courses and medias',
+          image: 'assets/course.png',
+          action: ['conceptor'],
+        }
+      );
+    }
   }
 }

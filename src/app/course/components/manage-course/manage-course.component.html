@@ -1,9 +1,6 @@
 <div class="row">
-    <div class="col xs9 course-title">
-        Manage Course
-    </div>
-    <div class="col xs1 course-number">
-        {{ courses.length }} Course
+    <div class="col xs12 course-title" style="text-align: center;">
+        <h1> Manage Course </h1>
     </div>
 </div>
 
@@ -14,8 +11,8 @@
                 <!-- Card -->
                 <mat-card>
                     <!-- Card Header -->
-                    <mat-card-header *ngIf="!courseEdit">
-                            <mat-card-title class="">
+                    <mat-card-header >
+                            <mat-card-title  class="">
                                 <section class="title_card">
                                         <div id="TITLECARD" class="">
                                             {{ course.title }}
@@ -26,6 +23,11 @@
                                                 <mat-icon>more_vert</mat-icon>
                                             </button>
                                             <mat-menu #menu="matMenu">
+                                                <!-- Button View module -->
+                                                <button mat-menu-item (click)="showcard(course)">
+                                                    <mat-icon>list</mat-icon>
+                                                    <span>Module{{(course.modules?.length! > 1)? "s" : ""}} :{{ course.modules?.length }}</span>
+                                                </button>
                                                 <!-- Button Edit -->
                                                 <button (click)="openDialog(course)" mat-menu-item>
                                                     <mat-icon>edit</mat-icon>
@@ -37,7 +39,7 @@
                                                     <span>Delete</span>
                                                 </button>
                                                 <!-- Button Add Course -->
-                                                <button mat-menu-item mat-menu-item>
+                                                <button (click)="goToAddCourse()" mat-menu-item mat-menu-item>
                                                     <mat-icon>add_to_photos</mat-icon>
                                                     <span>Course</span>
                                                 </button>
@@ -46,70 +48,57 @@
                                                     <mat-icon>add_to_photos</mat-icon>
                                                     <span>Module</span>
                                                 </button>
+                                                <!-- Button Publish course -->
+                                                <button mat-menu-item disabled>
+                                                    <mat-icon>{{(course.publish)? "visibility" : "visibility_off"}}</mat-icon>
+                                                    <span>{{(course.publish)? "Online !" : "Offline"}}</span>
+                                                </button>
                                             </mat-menu>
                                         </div>
                                 </section>
                             </mat-card-title>
-
-                            <mat-card-subtitle>
-                                <button mat-button (click)="showcard(course) ">
-                                    module :{{ course.modules?.length }}
-                                </button>
-                            </mat-card-subtitle>
                     </mat-card-header>
-
                     <!-- Card Content -->
-                    <mat-card-content>
+                    <mat-card-content (click)="showcard(course)">
                         {{course.objective}}
                     </mat-card-content>
-
-                    <!-- card action  -->
-                    <mat-card-actions align="end">
-                        <!-- Button Visibility -->
-                        <div *ngIf="course.publish; then thenBlock else elseBlock"></div>
-                        <ng-template #thenBlock>
-                            <div class="">
-                                <button (click)="onVisibility(course)" mat-icon-button matTooltip="Basic"
-                                    aria-label="Example icon-button with a heart icon">
-                                    <mat-icon>visibility</mat-icon>
-                                </button>
-                            </div>
-                        </ng-template>
-                        <ng-template #elseBlock>
-                            <div class="">
-                                <button (click)="onVisibility(course)" mat-icon-button matTooltip="Basic"
-                                    aria-label="Example icon-button with a heart icon">
-                                    <mat-icon>visibility_off</mat-icon>
-                                </button>
-                            </div>
-                        </ng-template>
-
-                    </mat-card-actions>
                 </mat-card>
-
                 <!-- card - Module -->
                 <ng-container *ngFor="let module of course.modules; let index = index">
                     <mat-card class="cardmodule" *ngIf="course.isSelected">
                         <mat-card-header *ngIf="!courseEdit " >
-                            <mat-card-title> {{module.name}} </mat-card-title>
-                            <mat-card-subtitle>média {{module.medias.length}} </mat-card-subtitle>
+                            <mat-card-title> 
+                                <section class="title_card">
+                                    <div id="TITLECARD" class="">
+                                        {{module.name}}
+                                    </div>
+                                    <div id="MENU" class="">
+                                        <!--  Menu more_vert -->
+                                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
+                                            <mat-icon>more_vert</mat-icon>
+                                        </button>
+                                        <mat-menu #menu="matMenu">
+                                            <!-- List Media -->
+                                            <button mat-menu-item>
+                                                <mat-icon>list</mat-icon>
+                                                <span>media{{(course.modules?.length! > 1)? "s" : ""}} {{module.medias.length}} </span>
+                                            </button>
+                                            <!-- Button Edit -->
+                                            <button (click)="openDialogModule(module, course)" mat-menu-item>
+                                                <mat-icon>edit</mat-icon>
+                                                <span>Edit</span>
+                                            </button>
+                                            <!-- Button delete -->
+                                            <button (click)="doRemoveModule(module)" mat-menu-item>
+                                                <mat-icon>delete</mat-icon>
+                                                <span>Delete</span>
+                                            </button>
+                                        </mat-menu>
+                                    </div>
+                                </section>
+                            </mat-card-title>
                         </mat-card-header>
                         <mat-card-content> {{module.objective}} </mat-card-content>
-                        <mat-card-actions align="end">
-                            <!-- Button edit -->
-                            <button mat-icon-button matTooltip="Basic"
-                                aria-label="Example icon-button with a heart icon">
-                                <mat-icon>edit</mat-icon>
-                            </button>
-                            <ng-container></ng-container>
-                            
-                            <!-- Button delete -->
-                            <button (click)="doRemoveModule(module)" mat-icon-button matTooltip="Basic" aria-label="Example icon-button with a heart icon">
-                                <mat-icon>delete</mat-icon>
-                            </button>
-                        </mat-card-actions>
-
-
                     </mat-card>
                 </ng-container>                
             </div>

@@ -1,14 +1,8 @@
 <div class="row">
-  <span id="toggle-user-role" (click)="isAdmin = !isAdmin">
-    {{ isAdmin ? 'Admin' : 'User'}}
-  </span>
-</div>
-
-<div class="row">
   <ng-container *ngFor="let tile of tiles">
     <app-tile
       *ngIf="isAdmin || tile.title !== 'Parameters'"
-      class="col xs12 md4"
+      class="col xs12 md5"
       [tileInfo]="tile"
     >
     </app-tile>

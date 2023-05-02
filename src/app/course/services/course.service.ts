@@ -64,6 +64,7 @@ export class CourseService {
   }
 
   public update(course: CourseManageType): Observable<HttpResponse<any>> {
+    console.log(course)
     return this._httpClient.put<CourseManageType>(
       this.endPoint +'/'+ this._userService.user.id, course, { observe: 'response' })
   }

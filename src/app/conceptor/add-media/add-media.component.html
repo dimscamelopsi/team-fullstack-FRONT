@@ -1,8 +1,9 @@
 <div>
   <h1>Create a new media</h1>
   <div>
+    <form [formGroup]="mediaFormGroup" (ngSubmit)="addMedia()">
     <ng-container>
-      <form [formGroup]="mediaFormGroup" (ngSubmit)="addMedia()">
+
         <fieldset>
           <legend> My new media</legend>
           <div class="row">
@@ -110,39 +111,38 @@
 
 
           <ng-template #elseBlock>
+               <div class="container" appDnd (fileDropped)="onFileDropped($event)">
+                  <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event)" />
+                     <img src="assets/img/dnd/ic-upload-file.svg" alt="">
+                       <h4>Drag and drop file here</h4>
+                        <h4>or</h4>
+                  <label for="fileDropRef">Browse for file</label>
+            </div><br>
 
+            <div class="files-list">
+              <div class="single-file" *ngFor="let file of files; let i = index">
+                <img src="assets/img/dnd/ic-file.svg" width="45px" alt="file">
+                <div class="info">
+                  <h4 class="name">
+                    {{ file?.name }}
+                  </h4>
+                  <p class="size">
+                    {{ formatBytes(file?.size) }}
+                  </p>
+                  <app-progress [progress]="file?.progress"></app-progress>
+                </div>
+                <img src="assets/img/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">
+               </div>
+             </div>
+           </ng-template><br>
 
-
-            <div class="container" appDnd (fileDropped)="onFileSelected($event)">
-              <input type="file" #fileDropRef id="fileDropRef" multiple (change)="onFileSelected($event)" />
-              <img src="assets/img/dnd/ic-upload-file.svg" alt="">
-              <h3>Drag and drop file here</h3>
-              <h3>or</h3>
-              <label for="fileDropRef">Browse for file</label>
-            </div>
-     <!--        <div class="file-drop-area">
-
-              <input
-                type="file"
-                (change)="onFileSelected($event)"
-                accept=".pdf,.ppt,.pptx,.doc,.docx"
-              />
-              <p class="text">Drop files here or click to upload</p>
-             </div> -->
-           </ng-template>
-
-
-        <!--   <span>{{ mediaFormGroup.controls['Module'].value.name }}</span> -->
         </fieldset>
-        <div class="row">
-          <div class="col xs5">
-          </div>
-          <div class="col xs2"><br>
-              <button mat-raised-button [formGroup]="mediaFormGroup" color="primary">Add</button>
-          </div>
+            <div class="row">
+              <div class="col xs5">
+            </div>
           <div class="col xs5"></div>
-      </div>
-      </form>
+        </div><br>
+
       <div id="import">
         <span>Import a module from an existing one :  </span>
         <button  mat-raised-button type="button" color="primary"  (click)="openModule()">
@@ -183,6 +183,11 @@
           </fieldset>
 
         </ng-container>
+        <div class="add-button col xs2"><br>
+          <button mat-raised-button [disabled]="mediaFormGroup.invalid" color="primary">Add</button>
+      </div>
     </ng-container>
+  </form>
   </div>
 </div>
+

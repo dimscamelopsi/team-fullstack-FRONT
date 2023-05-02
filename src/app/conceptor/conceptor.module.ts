@@ -9,6 +9,8 @@ import { CourseModule } from '../course/course.module';
 import { AddMediaComponent } from './add-media/add-media.component';
 import { MediaDialogComponent } from './modules/media-dialog/media-dialog.component';
 import { ModuleDialogComponent } from './modules/module-dialog/module-dialog.component';
+import { DndDirective } from '../directives/dnd.directive';
+import { ProgressComponent } from './progress/progress.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { ModuleDialogComponent } from './modules/module-dialog/module-dialog.com
     AddModuleComponent,
     MediaDialogComponent,
     AddMediaComponent,
-    ModuleDialogComponent
+    ModuleDialogComponent,
+    DndDirective,
+    ProgressComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +29,7 @@ import { ModuleDialogComponent } from './modules/module-dialog/module-dialog.com
     SharedModule,
     UiModule,
     CourseModule,
+
 
 
   ]

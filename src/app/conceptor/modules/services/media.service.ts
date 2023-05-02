@@ -20,8 +20,8 @@ export class MediaService {
       this.endpoint
     )
   }
-  public add(media: AddMediaType) : Observable<any> {
-    return this._httpClient.post<AddMediaType>(
+  public add(media: FormData) : Observable<any> {
+    return this._httpClient.post<FormData>(
       this.endpoint,
       media
     )

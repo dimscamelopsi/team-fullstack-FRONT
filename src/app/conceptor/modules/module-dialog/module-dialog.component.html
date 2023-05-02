@@ -8,7 +8,7 @@
   <ng-container *ngFor="let course of courses">
   <div class="row">
 
-    <div class="col xs6 course-title"><br>
+    <div class="col xs6 course-title" *ngIf="course.modules?.length != 0"><br>
     {{ course.title}}
     </div>
   </div><br>

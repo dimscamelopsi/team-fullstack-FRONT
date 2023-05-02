@@ -103,7 +103,6 @@ export class CourseHandlerComponent implements OnInit {
           }
           this.modules.sort((a,b)=> (a.orderModule - b.orderModule))
         }
-
       });
   }
 

@@ -6,14 +6,12 @@ import { ModuleType } from '../../types/module-type';
 import { CourseManageType } from '../../types/course-manage-type';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateCourseManageComponent } from '../../dialogs/update-course-manage/update-course-manage.component';
-import { ModuleManageDialogComponent } from '../../dialogs/module-manage-dialog/module-manage-dialog.component';
 import { HttpResponse } from '@angular/common/http';
 import { ModuleService } from 'src/app/conceptor/modules/services/module.service';
-import { CourseManageDialogComponent } from '../../dialogs/course-manage-dialog/course-manage-dialog.component';
 import { ToastService } from 'src/app/core/toast.service';
 import { Router } from '@angular/router';
 import { UpdateModuleManageComponent } from '../../dialogs/update-module-manage/update-module-manage.component';
-import { ModuleManageType } from '../../types/module-manage-type';
+import { AddModuleManageComponent } from '../../dialogs/add-module-manage/add-module-manage.component';
 
 
 @Component({
@@ -76,6 +74,16 @@ export class ManageCourseComponent implements OnInit {
       }
     )
 
+  }
+
+  openDialogImportModule(): void {
+    this.dialog.open(AddModuleManageComponent, {
+      data: {
+        courses: this.courses
+      }
+    }).afterClosed().subscribe(
+      (result) => {  }
+    )
   }
 
   onCourseToggle(course: CourseListType): void {

@@ -1,11 +1,11 @@
 <div class="col xs12 course">
   <div class="row">
-    <div class="col xs9">
+    <div class="col xs6">
       {{ course.title }}
     </div>
-    <div class="col xs1">{{ course.modules!.length }} items</div>
+    <div class="col xs3">{{ course.modules!.length }} items</div>
     <!-- Icon open / close -->
-    <div class="col xs1">
+    <div class="col xs2">
       <toggle
         [selectedStatus]="course.isSelected"
         [isExpandable]="course.modules!.length > 0"

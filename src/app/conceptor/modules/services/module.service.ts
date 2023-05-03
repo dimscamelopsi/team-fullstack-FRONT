@@ -34,6 +34,11 @@ export class ModuleService {
     )
   }
 
+  public findModulesByPersonId(): Observable<ModuleType[]> {
+    return this._httpClient.get<ModuleType[]>(
+      this.endpoint +'/'+ this._userService.user.id)
+  }
+
   public remove(id: number): Observable<HttpResponse<any>> {
     return this._httpClient.delete<ModuleType>(
       `${this.endpoint}/${id}`, {observe: 'response'}

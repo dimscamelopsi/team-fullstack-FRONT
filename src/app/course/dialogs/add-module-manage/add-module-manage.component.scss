@@ -1,0 +1,43 @@
+.row {}
+
+
+.module-list {
+    display: grid;
+    grid-template-columns: 40% 20% 20% 20%;
+    align-items: center;
+    padding: 0.5rem 1.5rem 0.5rem;
+    background: rgb(237, 242, 244);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-size: medium;
+
+    #add {
+        grid-column: 4;
+    }
+
+    button {
+        background-color: whitesmoke;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+
+
+
+.media-list {
+    list-style-type: none;
+    font-size: small;
+
+    li {
+        div {
+            &.media-tile {
+                display: grid;
+                margin: 0.2rem;
+                grid-template-columns: 50% 25% 25%;
+            }
+        }
+    }
+}

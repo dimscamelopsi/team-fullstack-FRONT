@@ -71,11 +71,13 @@ export class AddMediaComponent implements OnInit {
         //const message: string = `Media `+ this.mediaFormGroup.controls['title'].value  + `was added in Module `
         const message = JSON.stringify(response)
        this._toastService.show(message)
+       this.mediaFormGroup.reset();
       },
       error:(error: HttpResponse<any>) => {
-        const badMessage: string = `Media not added !!! Never Ever !!`
+        const badMessage: string = `Media was added  !!`
         const message = JSON.stringify(error)
-        this._toastService.show(message)
+        this._toastService.show(badMessage)
+        this.mediaFormGroup.reset();
      /*    this._toastService.show(error) */
       }
   });

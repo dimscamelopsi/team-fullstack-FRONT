@@ -13,7 +13,7 @@ import { MediaDialogComponent } from '../media-dialog/media-dialog.component';
 import { ModuleType } from 'src/app/course/types/module-type';
 import { ModuleAddType } from 'src/app/course/types/module-add-type';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { forEach } from 'cypress/types/lodash';
+
 
 @Component({
   selector: 'app-add-module',

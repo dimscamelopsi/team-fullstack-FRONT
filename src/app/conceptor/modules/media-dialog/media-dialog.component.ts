@@ -37,7 +37,8 @@ export class MediaDialogComponent implements OnInit {
 
   public addMedia(media: MediaType): void {
     //console.log('ok');
-      this.media =media
+    this.media = media
+    //this.medias.push(this.media =media)
       this.dialogRef.close(this.media)
     }
   

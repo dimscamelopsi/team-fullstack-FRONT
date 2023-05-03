@@ -174,7 +174,10 @@ export class AddMediaComponent implements OnInit {
       } else {
         const progressInterval = setInterval(() => {
           if (this.files[index].progress === 100) {
+            const file = this.files[0]
+            this.mediaFormGroup.controls['file'].setValue(file);
             clearInterval(progressInterval);
+
             this.uploadFilesSimulator(index + 1);
           } else {
             this.files[index].progress += 5;

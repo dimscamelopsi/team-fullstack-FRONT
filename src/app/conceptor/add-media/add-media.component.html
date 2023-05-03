@@ -1,9 +1,11 @@
 <div>
+  <h1>Create a new media</h1>
   <div>
+    <form [formGroup]="mediaFormGroup" (ngSubmit)="addMedia()">
     <ng-container>
-      <form [formGroup]="mediaFormGroup" (ngSubmit)="addMedia()">
+
         <fieldset>
-          <legend>New media</legend>
+          <legend> My new media</legend>
           <div class="row">
             <div class="col xs12 md6">
               <mat-form-field>
@@ -43,7 +45,7 @@
               "
             >
               <span
-                *ngIf="mediaFormGroup.controls['summary'].hasError('required')"
+              *ngIf="mediaFormGroup.controls['duration'].hasError('required')"
               >
                 Summary cannot be empty !!!
               </span>
@@ -51,24 +53,18 @@
           ><br />
 
           <mat-form-field>
-            <input
-              matInput
-              placeholder="Media duration.."
-              formControlName="duration"
-            />
+            <input matInput type="number" placeholder="Media duration..." formControlName="duration">
             <mat-error
-              *ngIf="
-                mediaFormGroup.controls['duration'].errors &&
-                mediaFormGroup.controls['duration'].touched
-              "
-            >
-              <span
-                *ngIf="mediaFormGroup.controls['duration'].hasError('required')"
-              >
-                Duration cannot be empty !!!
-              </span>
-            </mat-error> </mat-form-field
-          ><br />
+                *ngIf="mediaFormGroup.controls['duration'].errors && mediaFormGroup.controls['duration'].touched">
+                <span *ngIf="mediaFormGroup.controls['duration'].hasError('required')">
+                  duration cannot be empty
+                </span>
+                <span *ngIf="mediaFormGroup.controls['duration'].hasError('max')">
+                    Media duration should have 3  max numbers
+                </span>
+            </mat-error>
+        </mat-form-field>
+          <br />
 
           <mat-form-field>
             <mat-label>List MediaType</mat-label>
@@ -103,45 +99,79 @@
                 type="text"
                 formControlName="url"
                 placeholder="Enter url of your Media..*"
+                required
               />
             </mat-form-field>
-          </ng-template>
+          </ng-template><br>
 
 
           <ng-template #elseBlock>
-            <div class="file-drop-area">
-              <mat-icon class="icon">cloud_upload</mat-icon>
-              <input
-                type="file"
-                (change)="onFileSelected($event)"
-                accept=".pdf,.ppt,.pptx,.doc,.docx"
-              />
-              <p class="text">Drop files here or click to upload</p>
-            </div>
-          </ng-template>
+               <div class="container" appDnd (fileDropped)="onFileDropped($event)">
+                  <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event)"  required/>
+                     <img src="assets/img/dnd/ic-upload-file.svg" alt="download">
+                       <h4>Drag and drop file here</h4>
+                        <h4>or</h4>
+                  <label for="fileDropRef">Browse for file</label>
+            </div><br>
 
+            <div class="files-list">
+              <div class="single-file" *ngFor="let file of files; let i = index">
+                <img src="assets/img/dnd/ic-file.svg" width="45px" alt="file">
+                <div class="info">
+                  <h4 class="name">
+                    {{ file?.name }}
+                  </h4>
+                  <p class="size">
+                    {{ formatBytes(file?.size) }}
+                  </p>
+                  <app-progress [progress]="file?.progress"></app-progress>
+                </div>
+                <img src="assets/img/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">
+               </div>
+             </div>
+           </ng-template><br>
 
-
-        <!--   <mat-form-field>
-            <mat-label>Module</mat-label>
-            <mat-select formControlName="module">
-              <mat-option *ngFor="let module of modules" [value]="module.id">{{module.name}}</mat-option>
-            </mat-select>
-          </mat-form-field> -->
-
-
-
-          <span>{{ mediaFormGroup.controls['Module'].value.name }}</span>
         </fieldset>
-        <div class="row">
-          <div class="col xs5">
-          </div>
-          <div class="col xs2">
-              <button mat-raised-button [formGroup]="mediaFormGroup" color="primary">Add</button>
-          </div>
+            <div class="row">
+              <div class="col xs5">
+            </div>
           <div class="col xs5"></div>
+        </div><br>
+
+      <div id="import">
+        <span>Import a module from an existing one :  </span>
+        <button  mat-raised-button type="button" color="primary"  (click)="openModule()">
+          Import
+      </button>
       </div>
-      </form>
     </ng-container>
+
+     <ng-container *ngIf="useModule">
+        <ng-container>
+          <fieldset>
+
+            <legend>Modules</legend>
+            <ol cdkDropList class="module-list" (cdkDropListDropped)="drop($event)">
+                <li class="example-box" *ngFor="let module of modules" >
+                  <div class="module-tile" cdkDrag>
+                    <div class="title">{{ module.name }}</div>
+                    <div class="remove">
+                        <button mat-icon-button (click)="removeModule(module)">
+                            <mat-icon color="error">delete</mat-icon>
+                        </button>
+                    </div>
+                  </div>
+                </li>
+            </ol>
+
+          </fieldset>
+
+        </ng-container>
+        <div class="add-button col xs2"><br>
+          <button mat-raised-button [disabled]="mediaFormGroup.invalid" color="primary">Add</button>
+      </div>
+    </ng-container>
+  </form>
   </div>
 </div>
+

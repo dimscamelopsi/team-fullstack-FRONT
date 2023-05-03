@@ -1,15 +1,15 @@
 describe('Connect to different dashboard', () => {
     beforeEach(() => {
       cy.viewport(1280, 900);
-      cy.visit('user/login');
+      cy.visit('dashboard');
     });
 
     it('Should connecte and disconnect from the dashboard', () => {
         cy.get('form').within(($form) => {
-          cy.get('input[formControlName="login"]').type('Lemaire.Aldegonde');
-          cy.get('input[formControlName="password"]').type('Java@12345');
-            cy.root().submit();
-        });
+        cy.get('input[formControlName="login"]').type('Lemaire.Aldegonde');
+        cy.get('input[formControlName="password"]').type('12345');
+        cy.root().submit();
+        }); 
           
         cy.get('button[id="Courses"]').click();
         cy.get('button[id="addModule"]').click();

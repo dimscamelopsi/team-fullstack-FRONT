@@ -7,7 +7,7 @@ describe('Connect to different dashboard', () => {
     it('Should connecte and disconnect from the dashboard', () => {
       cy.get('form').within(($form) => {
         cy.get('input[formControlName="login"]').type('Lemaire.Aldegonde');
-        cy.get('input[formControlName="password"]').type('Java@12345');
+        cy.get('input[formControlName="password"]').type('12345');
           cy.root().submit();
       });
         

@@ -47,23 +47,11 @@
                         </mat-select>
                     </mat-form-field>
                 </fieldset>
-                <div class="row">
-                    <div class="col xs6">
-                        <span>Import a media from an existing one : </span>
-                        <button id="openMedia" mat-raised-button type="button" color="primary" (click)="openMedia()">
-                            Import
-                        </button>
-                    </div>
-                    <div class="col xs1">
-                    </div>
-                    <div class="col xs5">
-                    </div>
-                </div>
 
                 <div class="row">
                   <div class="col xs6">
                       <span class="bold-font">Import a media : </span>
-                      <button mat-raised-button type="button" color="primary" (click)="openMedia()">
+                      <button mat-raised-button type="button" color="primary" (click)="openMedia()" id="openMedia">
                           Import
                       </button>
                   </div>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AddMediaType } from 'src/app/course/types/add-media-type';
 import { MediaType } from 'src/app/course/types/media-type';
 import { environment } from 'src/environments/environment';
 
@@ -17,6 +18,12 @@ export class MediaService {
   public findAllMedias(): Observable<MediaType[]> {
     return this._httpClient.get<MediaType[]>(
       this.endpoint
+    )
+  }
+  public add(media: FormData) : Observable<any> {
+    return this._httpClient.post<FormData>(
+      this.endpoint,
+      media
     )
   }
 }

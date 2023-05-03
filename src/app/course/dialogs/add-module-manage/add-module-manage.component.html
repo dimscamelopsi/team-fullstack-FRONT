@@ -1,0 +1,25 @@
+<mat-dialog-content>
+    <div class="row">
+        <div class="col xs9 course-title">
+            Module List
+        </div>
+        <div class="col xs1 course-number">
+            {{ modules.length }} items
+        </div>
+    </div>
+
+    <ng-container *ngIf="modules.length">
+        <ng-container *ngFor="let module of modules">
+            <div class="module-list">
+                <span>{{module.name}}</span>
+                
+                
+                <button mat-icon-button id="add" (click)="addModule(module, data)">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <mat-divider></mat-divider>
+            </div>
+  
+        </ng-container>
+    </ng-container>
+</mat-dialog-content>

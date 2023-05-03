@@ -20,9 +20,18 @@
 
 .title_card {
     width: 100%;
-    display: flex;
-    flex-direction: row;
+    display : grid;
+    grid-template-columns: 65% 20% 10% 05%;
     align-items: center;
-    justify-content: space-between;
+
+}
+
+#module-font{
+  font-size: 1.1rem;
+  cursor: pointer
+}
+
+#MENU{
+  grid-column: 4;
 }
 

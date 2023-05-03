@@ -72,10 +72,8 @@ export class AddModuleComponent implements OnInit {
     this.medias.map((media: MediaType) => {
       media.orderMedia = this.medias.indexOf(media);
     });
-    
-    this._moduleService.add(module) 
+    this._moduleService.add(module)
       .subscribe({
-      
         next: (response:HttpResponse<any>) => {
           const message: string = `module was added.`
           this.moduleFormGroup.reset()
@@ -99,7 +97,7 @@ export class AddModuleComponent implements OnInit {
       }
     ).afterClosed().subscribe((result: MediaType | undefined) => {
       if (result !== undefined) {
-        
+
         this.medias.push(result)
 
         /* for (const media of this.medias) {

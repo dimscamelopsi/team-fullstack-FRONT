@@ -1,11 +1,16 @@
-ul {
+ol {
   &.module-list {
-    list-style-type: none;
-    background-color: rgba(128, 7, 20, 0.8);
-    color: #fff;
+    ::marker {
+      font-weight: 600;
+      color: #002b5c;
+      font-size: 1.5rem;
+    }
     li {
-      padding-left: 0.5em;
-      border-bottom: solid 1px rgba(128, 128, 128, 0.8);
+      padding: 1em 3em 1em 3em;
+      margin: 0.8em;
+      border-radius: 4px;
+      background-color: white;
+      box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 1px 3px 0px rgba(0, 0, 0, 0.12);
       div {
         &.module-tile {
           display: flex;
@@ -27,9 +32,9 @@ ul {
       }
       ul {
         list-style-type: none;
-        background-color: rgba(67, 2, 13, 0.8);
 
         li {
+
           div {
             &.media {
               display: flex;
@@ -57,7 +62,7 @@ ul {
     display: inline-block;
     &.up {
       animation-name: up;
-      animation-duration: 0.5s;
+      animation-duration: 0.2s;
       animation-fill-mode: forwards;
       animation-iteration-count: 1;
       animation-timing-function: ease-out;
@@ -65,7 +70,7 @@ ul {
 
     &.down {
       animation-name: down;
-      animation-duration: 0.5s;
+      animation-duration: 0.2s;
       animation-fill-mode: forwards;
       animation-iteration-count: 1;
       animation-timing-function: ease-out;

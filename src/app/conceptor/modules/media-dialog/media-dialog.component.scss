@@ -1,4 +1,16 @@
-fieldset{
-    box-shadow: 3px;
-    border-radius: 5px;
+
+mat-card{
+  &:hover{
+    background-color: #f0f6fc;
+  }
+  .fields{
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+  }
+
+  margin: 0.3rem 0 0.3rem 0;
+  button{
+    background-color: whitesmoke;
+  }
 }

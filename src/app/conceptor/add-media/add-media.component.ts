@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModuleType } from 'src/app/course/types/module-type';
@@ -66,14 +66,16 @@ export class AddMediaComponent implements OnInit {
     this._mediaService.add(formData)
   .subscribe({
 
-      next: (response :any)=> {
-        this.responseData = response;
-        const message: string = `Media `+ this.mediaFormGroup.controls['title'].value  + `was added in Module `
+      next: (response :HttpResponse<any>)=> {
+        //this.responseData = response;
+        //const message: string = `Media `+ this.mediaFormGroup.controls['title'].value  + `was added in Module `
+        const message = JSON.stringify(response)
        this._toastService.show(message)
       },
-      error:(error: any) => {
+      error:(error: HttpResponse<any>) => {
         const badMessage: string = `Media not added !!! Never Ever !!`
-        this._toastService.show(badMessage)
+        const message = JSON.stringify(error)
+        this._toastService.show(message)
      /*    this._toastService.show(error) */
       }
   });
@@ -85,7 +87,7 @@ export class AddMediaComponent implements OnInit {
     formData.append('summary', this.mediaFormGroup.controls['summary'].value);
     formData.append('duration', this.mediaFormGroup.controls['duration'].value);
     formData.append('typeMedia', this.mediaFormGroup.controls['typeMedia'].value.title);
-    formData.append('moduleId',module.id)/* , this.mediaFormGroup.controls['module'].value.id) */;
+    formData.append('moduleId',this.modules[0].id?.toString()!)/* , this.mediaFormGroup.controls['module'].value.id) */;
     if (this.selectedOption && this.selectedOption.title === 'Video') {
       formData.append('url', this.mediaFormGroup.controls['url'].value);
     } else {

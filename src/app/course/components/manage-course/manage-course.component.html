@@ -17,6 +17,13 @@
                                         <div id="TITLECARD" class="">
                                             {{ course.title }}
                                         </div>
+                                        <div  (click)="showcard(course)">
+                                          <!-- <mat-icon>list</mat-icon> -->
+                                          <span id="module-font">Module{{(course.modules?.length! > 1)? "s " : " "}} : {{ course.modules?.length }}</span>
+                                        </div>
+                                      <button mat-menu-item disabled>
+                                        <mat-icon>{{(course.publish)? "visibility" : "visibility_off"}}</mat-icon>
+                                    </button>
                                         <div id="MENU" class="">
                                             <!--  Menu more_vert -->
                                             <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
@@ -24,10 +31,7 @@
                                             </button>
                                             <mat-menu #menu="matMenu">
                                                 <!-- Button View module -->
-                                                <button mat-menu-item (click)="showcard(course)">
-                                                    <mat-icon>list</mat-icon>
-                                                    <span>Module{{(course.modules?.length! > 1)? "s" : ""}} :{{ course.modules?.length }}</span>
-                                                </button>
+
                                                 <!-- Button Edit -->
                                                 <button (click)="openDialog(course)" mat-menu-item>
                                                     <mat-icon>edit</mat-icon>
@@ -49,12 +53,10 @@
                                                     <span>Module</span>
                                                 </button>
                                                 <!-- Button Publish course -->
-                                                <button mat-menu-item disabled>
-                                                    <mat-icon>{{(course.publish)? "visibility" : "visibility_off"}}</mat-icon>
-                                                    <span>{{(course.publish)? "Online !" : "Offline"}}</span>
-                                                </button>
+
                                             </mat-menu>
                                         </div>
+
                                 </section>
                             </mat-card-title>
                     </mat-card-header>
@@ -67,7 +69,7 @@
                 <ng-container *ngFor="let module of course.modules; let index = index">
                     <mat-card class="cardmodule" *ngIf="course.isSelected">
                         <mat-card-header *ngIf="!courseEdit " >
-                            <mat-card-title> 
+                            <mat-card-title>
                                 <section class="title_card">
                                     <div id="TITLECARD" class="">
                                         {{module.name}}
@@ -100,10 +102,10 @@
                         </mat-card-header>
                         <mat-card-content> {{module.objective}} </mat-card-content>
                     </mat-card>
-                </ng-container>                
+                </ng-container>
             </div>
         </ng-container>
-        
+
     </div>
 
 </ng-container>

@@ -70,7 +70,6 @@ export class AddModuleComponent implements OnInit {
     }
     this._moduleService.add(module)
       .subscribe({
-
         next: (response:HttpResponse<any>) => {
           const message: string = `module was added. `
           this._toastService.show(message)

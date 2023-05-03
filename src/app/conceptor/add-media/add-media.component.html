@@ -107,7 +107,7 @@
 
           <ng-template #elseBlock>
                <div class="container" appDnd (fileDropped)="onFileDropped($event)">
-                  <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event)"  required/>
+                  <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event)" />
                      <img src="assets/img/dnd/ic-upload-file.svg" alt="download">
                        <h4>Drag and drop file here</h4>
                         <h4>or</h4>

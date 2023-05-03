@@ -2,7 +2,6 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModuleType } from 'src/app/course/types/module-type';
-import { environment } from 'src/environments/environment';
 import { ModuleDialogComponent } from '../modules/module-dialog/module-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -54,7 +53,7 @@ export class AddMediaComponent implements OnInit {
         duration: this._formBuilder.control("", [Validators.required, Validators.max(999)]),
         typeMedia: this._formBuilder.control("", [Validators.required]),
         url: this._formBuilder.control(""),
-        file: this._formBuilder.control("" ),
+        file: this._formBuilder.control(""),
       });
     }
   }
@@ -75,7 +74,7 @@ export class AddMediaComponent implements OnInit {
       },
       error:(error: HttpResponse<any>) => {
         const badMessage: string = `Media was added  !!`
-        const message = JSON.stringify(error)
+       // const message = JSON.stringify(error)
         this._toastService.show(badMessage)
         this.mediaFormGroup.reset();
         this.deleteFile(this.files[0])
@@ -99,20 +98,11 @@ export class AddMediaComponent implements OnInit {
     return formData;
   }
 
-
-
-
   onFileSelected(event: any) {
     const file = event.target.files[0];
     this.mediaFormGroup.controls['file'].setValue(file);
     console.log ("test  j'ai ajouter un fichier")
   }
-
- /*  onSubmit() {
-    if (this.mediaFormGroup.valid) {
-      this.addMedia();
-    }
-  } */
 
   openModule(): void {
     this._dialog
@@ -128,7 +118,6 @@ export class AddMediaComponent implements OnInit {
         }
       });
   }
-
 
   removeModule(module: ModuleType): void {
     this.modules.splice(this.modules.indexOf(module), 1);
@@ -148,8 +137,6 @@ export class AddMediaComponent implements OnInit {
     const file = event.target.files;
     this.prepareFilesList(file);
   }
-
-
 
   /**
    * Delete file from files list

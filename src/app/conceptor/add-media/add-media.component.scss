@@ -1,14 +1,19 @@
+h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 0.7rem;
+}
 
 .module-list {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   display: grid;
-  grid-template-columns: 40% 20% 20% 20%;
+  grid-template-columns: 90% 10%;
+        align-items: center;
   align-items: center;
   padding: 0.5rem 1.5rem 0.5rem;
-  background: rgb(237, 242, 244);
-  box-shadow: rgba(82, 33, 127, 0.795) 0px 2px 7px;
-  border-radius: 8px;
+
+  border-radius: 4px;
   margin-top: 1rem;
-  color: rgb(9, 9, 159);
   font-size:medium;
   #add{
     grid-column: 5;
@@ -22,7 +27,13 @@
   }
   }
 
-
+  fieldset {
+    margin: 1.5rem 0 0 0;
+    font-size: 1.2rem;
+    border-radius: 4px;
+    border-style: none;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  }
 
 
 .media-list {
@@ -46,13 +57,14 @@ grid-column: 4;
 font-weight: bolder;
 }
 .container {
-  width: 450px;
+  margin-top:1rem;
+  width: 30%;
   height: 200px;
   padding: 2rem;
   text-align: center;
   border: dashed 1px #979797;
   position: relative;
-  margin: 0 auto;
+
 
   input {
     opacity: 0;
@@ -179,3 +191,51 @@ font-weight: bolder;
     transform: translate(1px, -2px) rotate(-1deg);
   }
 }
+
+.form-field{
+  width: 100%;
+}
+
+mat-form-field{
+  width: 100%;
+}
+
+#import{
+  margin-top: 1.5rem;
+  button{
+    margin-left: 1rem;
+    width: 6rem;
+    font-size: 1rem;
+  }
+  .bold-font {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+}
+
+.module-list {
+  list-style: none;
+  li {
+    :hover{
+        background-color: #f0f6fc;
+      }
+     div {
+      &.module-tile {
+        font-family: Roboto, "Helvetica Neue", sans-serif;
+        display: grid;
+        grid-template-columns: 90% 10%;
+        align-items: center;
+        padding: 0.5rem 1.5rem 0.5rem;
+        border-radius: 4px;
+        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+
+        button{
+          background-color: whitesmoke;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        }
+      }
+    }
+  }

@@ -1,8 +1,6 @@
 <mat-dialog-content class="list-media">
-    <fieldset>
-        <legend>Media List</legend>
     <ng-container *ngIf="medias.length">
-        <div class="row">
+        <div class="row ">
             <div class="col xs5"><span><strong>Title</strong></span></div>
             <div class="col xs5"><span><strong>Media type</strong></span></div>
             <div class="col xs2"><span></span></div>
@@ -10,23 +8,23 @@
         <ng-container *ngFor="let media of medias">
             <div class="media-list">
                 <div class="row" id="list-m">
-                    
-                        
-                      
+
+
+
                 </div>
                 <mat-card>
                     <mat-card-content>
                         <div class="row xs12">
-                        <div class="col xs5"><span>{{media.title}}</span></div>
-                        <div class="col xs5"><span>{{media.typeMedia.title}}</span></div>
-                        <div class="col xs2"><span (click)="addMedia(media)"><mat-icon>add</mat-icon></span></div>
+                        <div class="col xs5 fields"><span>{{media.title}}</span></div>
+                        <div class="col xs5 fields"><span>{{media.typeMedia.title}}</span></div>
+                        <div class="col xs2"><button mat-icon-button (click)="addMedia(media)"><mat-icon>add</mat-icon></button></div>
                         </div>
                     </mat-card-content>
                   </mat-card>
             </div>
         </ng-container>
     </ng-container>
-</fieldset>
+
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
     <!--<button mat-button  cdkFocusInitial>Ok</button>-->

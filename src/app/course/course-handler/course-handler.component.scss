@@ -1,11 +1,11 @@
 h2 {
   font-size: 2rem;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 0.7rem;
 }
 
 #import {
-  margin-top: 3rem;
+  margin-top: 2rem;
   font-size: 1.1rem;
   display: grid;
   grid-template-columns: 70% 15% 15%;
@@ -48,15 +48,6 @@ h2 {
     font-size: 1rem;
   }
 }
-
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 48
-}
-
 
 fieldset {
   margin: 1.5rem 0 1.5rem 0;

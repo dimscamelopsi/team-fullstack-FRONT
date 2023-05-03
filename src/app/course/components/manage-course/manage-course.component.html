@@ -19,7 +19,7 @@
                                         </div>
                                         <div  (click)="showcard(course)">
                                           <!-- <mat-icon>list</mat-icon> -->
-                                          <span>Module{{(course.modules?.length! > 1)? "s " : " "}} : {{ course.modules?.length }}</span>
+                                          <span id="module-font">Module{{(course.modules?.length! > 1)? "s " : " "}} : {{ course.modules?.length }}</span>
                                         </div>
                                       <button mat-menu-item disabled>
                                         <mat-icon>{{(course.publish)? "visibility" : "visibility_off"}}</mat-icon>

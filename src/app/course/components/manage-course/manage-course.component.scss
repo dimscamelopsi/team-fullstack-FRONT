@@ -21,12 +21,14 @@
 .title_card {
     width: 100%;
     display : grid;
-    grid-template-columns: 40% 45% 10% 05%;
+    grid-template-columns: 65% 20% 10% 05%;
     align-items: center;
+
 }
 
 #module-font{
   font-size: 1.1rem;
+  cursor: pointer
 }
 
 #MENU{

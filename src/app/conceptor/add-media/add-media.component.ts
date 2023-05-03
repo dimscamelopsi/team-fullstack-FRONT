@@ -87,7 +87,7 @@ export class AddMediaComponent implements OnInit {
     formData.append('summary', this.mediaFormGroup.controls['summary'].value);
     formData.append('duration', this.mediaFormGroup.controls['duration'].value);
     formData.append('typeMedia', this.mediaFormGroup.controls['typeMedia'].value.title);
-    formData.append('moduleId',this.modules[0].id?.toString()!)/* , this.mediaFormGroup.controls['module'].value.id) */;
+    this.modules.length > 0 ? formData.append('moduleId', this.modules[0].id!.toString()) : null
     if (this.selectedOption && this.selectedOption.title === 'Video') {
       formData.append('url', this.mediaFormGroup.controls['url'].value);
     } else {

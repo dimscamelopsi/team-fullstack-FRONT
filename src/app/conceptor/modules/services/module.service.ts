@@ -28,6 +28,13 @@ export class ModuleService {
     )
   }
 
+  public addModule(module: ModuleType): Observable<any> {
+    return this._httpClient.post<ModuleType>(
+      this.endpoint,
+      module
+    )
+  }
+
   public findAllModules(): Observable<ModuleType[]> {
     return this._httpClient.get<ModuleType[]>(
       this.endpoint

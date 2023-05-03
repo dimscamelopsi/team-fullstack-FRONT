@@ -12,7 +12,8 @@ import { ToastService } from 'src/app/core/toast.service';
 import { Router } from '@angular/router';
 import { UpdateModuleManageComponent } from '../../dialogs/update-module-manage/update-module-manage.component';
 import { AddModuleManageComponent } from '../../dialogs/add-module-manage/add-module-manage.component';
-import { ModuleManageType } from '../../types/module-manage-type';
+import { ModuleAddType } from 'src/app/course/types/module-add-type';
+
 
 
 @Component({
@@ -82,12 +83,21 @@ export class ManageCourseComponent implements OnInit {
 
   openDialogImportModule(course: CourseManageType): void {
     this.dialog.open(AddModuleManageComponent, {
-      
+      data: {
+        id: course.id
+      }
     }).afterClosed().subscribe(
-      (result: ModuleType) => { 
+      (result) => { 
         if(result !== undefined){
           course.modules?.push(result)
+          this._moduleService.addModule(result).subscribe({
+            next: (response: HttpResponse<any>) => {
+              this._toastService.show('Module was added')},
+            error: (error: any) => {
+              console.log(JSON.stringify(error))}}
+          )
         }
+        
        }
     )
   }

@@ -7,6 +7,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CourseManageType } from '../../types/course-manage-type';
 import { ManageCourseComponent } from '../../components/manage-course/manage-course.component';
 import { CourseService } from '../../services/course.service';
+import { HttpResponse } from '@angular/common/http';
 
 
 @Component({
@@ -24,9 +25,7 @@ export class AddModuleManageComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ManageCourseComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CourseManageType, 
-    private _moduleService: ModuleService,
-    private _courseService: CourseService,
-    private _toastService: ToastService) {
+    private _moduleService: ModuleService,) {
      }
 
   ngOnInit(): void {
@@ -36,7 +35,8 @@ export class AddModuleManageComponent implements OnInit {
     
   }
 
-  public addModule(module: ModuleType): void {
+  public addModule(module: ModuleType, courseId: CourseManageType): void {
+    module.course = courseId
     this.module = module
     this.dialogRef.close(this.module)
   }

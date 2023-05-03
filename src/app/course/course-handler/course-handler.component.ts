@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { ModuleAddComponent } from '../dialogs/module-add/module-add.component';
 import { FormCourseBuilderService } from '../services/course-handler/form-course-builder.service';
 import { CourseService } from '../services/course.service';
@@ -13,6 +14,8 @@ import { UserService } from 'src/app/user/services/user.service';
 import { ModuleDialogComponent } from '../dialogs/module-dialog/module-dialog.component';
 import { ReallySimpleStudent } from 'src/app/student/types/really-simple-student';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ToastService } from 'src/app/core/toast.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-course-handler',
@@ -31,7 +34,9 @@ export class CourseHandlerComponent implements OnInit {
     private _courseService: CourseService,
     private _router: Router,
     private _dialog: MatDialog,
-    private _userService: UserService
+    private _userService: UserService,
+    private _snackBar: MatSnackBar,
+    private _toastService : ToastService
   ) {
     this.form = this._formBuilder.form;
   }
@@ -77,9 +82,21 @@ export class CourseHandlerComponent implements OnInit {
       student: student,
     };
 
-    this._courseService.add(course).subscribe((courseType: CourseType) => {
-      this._router.navigate(['/', 'conceptor', '/', 'list']);
+    this.c['title'].setValue("");
+    this.c['objective'].setValue("");
+
+    this._courseService.add(course).subscribe({
+      next: (response:HttpResponse<any>) => {
+        const message: string = `Course ${course.title} was added. `
+        this._toastService.show(message)
+        this._router.navigate(['/', 'conceptor', '/', 'list']);
+      },
+      error: (error: any) => {
+        const badMessage: string = `An error occured`
+        this._toastService.show(badMessage)
+      }
     });
+
   }
 
   addCourse(): void {

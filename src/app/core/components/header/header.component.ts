@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { UserService } from 'src/app/user/services/user.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -18,16 +17,9 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this._userService.user$.subscribe((_user: any) => {
+    this._userService.user$.subscribe((_user: any) => {
       this.user = _user;
     });
-    this.user = environment.storage.auth.key;
-    console.log('====================================');
-    console.log(this.user);
-    console.log('====================================');
-    console.log('====================================');
-    console.log(this.user$);
-    console.log('====================================');
   }
 
   logout(): void {

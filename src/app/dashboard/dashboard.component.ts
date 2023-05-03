@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   constructor(private _userService: UserService) {}
 
   ngOnInit(): void {
-    if (this._userService.user.role === 'CONCEPTEUR') {
+    if (this._userService.user.role === 'MANAGER') {
       this.tiles.push(
         {
           title: 'Parameters',
@@ -29,10 +29,25 @@ export class DashboardComponent implements OnInit {
           action: ['dashboard'],
         },
         {
-          title: 'Students',
-          summary: 'Add, remove and view students',
+          title: 'Users',
+          summary: 'Add, remove and view users',
           image: 'assets/graduates.png',
           action: ['/', 'student', 'list'],
+        },
+        {
+          title: 'Courses',
+          summary: 'Manage courses and medias',
+          image: 'assets/course.png',
+          action: ['conceptor'],
+        }
+      );
+    } else if (this._userService.user.role === 'CONCEPTEUR') {
+      this.tiles.push(
+        {
+          title: 'Parameters',
+          summary: 'Parameters management',
+          image: 'assets/settings.png',
+          action: ['dashboard'],
         },
         {
           title: 'Courses',

@@ -11,7 +11,12 @@ import { CoreModule } from './core/core.module';
 import { CoursesComponent } from './dashboard/students/courses/courses.component';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, TileComponent, CoursesComponent],
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    TileComponent,
+    CoursesComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

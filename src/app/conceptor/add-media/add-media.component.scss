@@ -81,12 +81,12 @@ font-weight: bolder;
 }
 
 .fileover {
-  animation: shake 1s;
+  animation: shake 2s;
   animation-iteration-count: infinite;
 }
 
 .files-list {
-  margin-top: 1.5rem;
+  margin-top: 1.7rem;
 
   .single-file {
     display: flex;
@@ -107,28 +107,28 @@ font-weight: bolder;
     flex-grow: 1;
 
     .name {
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 12px;
+      font-weight: 400;
       color: #353f4a;
       margin: 0;
     }
 
     .size {
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 400;
       color: #a4a4a4;
       margin: 0;
       margin-bottom: 0.25rem;
     }
 
     .info {
-      width: 100%
+      width: 70%
     }
   }
 }
 
 .add-button {
-  margin-top: 1rem;
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
 }

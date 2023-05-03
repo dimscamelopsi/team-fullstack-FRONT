@@ -51,7 +51,7 @@ export class AddMediaComponent implements OnInit {
       this.mediaFormGroup = this._formBuilder.group({
         title: this._formBuilder.control("", [Validators.required]),
         summary: this._formBuilder.control("", [Validators.required]),
-        duration: this._formBuilder.control("", [Validators.required, Validators.maxLength(4)]),
+        duration: this._formBuilder.control("", [Validators.required, Validators.max(999)]),
         typeMedia: this._formBuilder.control("", [Validators.required]),
         url: this._formBuilder.control(""),
         file: this._formBuilder.control("" ),
@@ -78,6 +78,7 @@ export class AddMediaComponent implements OnInit {
         const message = JSON.stringify(error)
         this._toastService.show(badMessage)
         this.mediaFormGroup.reset();
+        this.deleteFile(this.files[0])
      /*    this._toastService.show(error) */
       }
   });
@@ -200,6 +201,7 @@ export class AddMediaComponent implements OnInit {
     }
     this.fileDropEl.nativeElement.value = "";
     this.uploadFilesSimulator(0);
+
   }
     /**
    * format bytes

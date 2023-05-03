@@ -28,10 +28,22 @@ export class ModuleService {
     )
   }
 
+  public addModule(module: ModuleType): Observable<any> {
+    return this._httpClient.post<ModuleType>(
+      this.endpoint,
+      module
+    )
+  }
+
   public findAllModules(): Observable<ModuleType[]> {
     return this._httpClient.get<ModuleType[]>(
       this.endpoint
     )
+  }
+
+  public findModulesByPersonId(): Observable<ModuleType[]> {
+    return this._httpClient.get<ModuleType[]>(
+      this.endpoint +'/'+ this._userService.user.id)
   }
 
   public remove(id: number): Observable<HttpResponse<any>> {

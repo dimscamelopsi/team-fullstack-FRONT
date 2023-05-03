@@ -6,14 +6,14 @@ import { ModuleType } from '../../types/module-type';
 import { CourseManageType } from '../../types/course-manage-type';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateCourseManageComponent } from '../../dialogs/update-course-manage/update-course-manage.component';
-import { ModuleManageDialogComponent } from '../../dialogs/module-manage-dialog/module-manage-dialog.component';
 import { HttpResponse } from '@angular/common/http';
 import { ModuleService } from 'src/app/conceptor/modules/services/module.service';
-import { CourseManageDialogComponent } from '../../dialogs/course-manage-dialog/course-manage-dialog.component';
 import { ToastService } from 'src/app/core/toast.service';
 import { Router } from '@angular/router';
 import { UpdateModuleManageComponent } from '../../dialogs/update-module-manage/update-module-manage.component';
-import { ModuleManageType } from '../../types/module-manage-type';
+import { AddModuleManageComponent } from '../../dialogs/add-module-manage/add-module-manage.component';
+import { ModuleAddType } from 'src/app/course/types/module-add-type';
+
 
 
 @Component({
@@ -28,6 +28,7 @@ export class ManageCourseComponent implements OnInit {
 
   public courses: Array<CourseManageType> = []
   public modules: Array<ModuleType> = []
+  public module!: ModuleType
   
   
   constructor(
@@ -62,6 +63,8 @@ export class ManageCourseComponent implements OnInit {
 
   openDialogModule(module: ModuleType, course: CourseManageType): void {
     this.dialog.open(UpdateModuleManageComponent, {
+      height: 'flex',
+      width: 'flex',
       data: {
         id: module.id,
         name: module.name,
@@ -76,6 +79,27 @@ export class ManageCourseComponent implements OnInit {
       }
     )
 
+  }
+
+  openDialogImportModule(course: CourseManageType): void {
+    this.dialog.open(AddModuleManageComponent, {
+      data: {
+        id: course.id
+      }
+    }).afterClosed().subscribe(
+      (result) => { 
+        if(result !== undefined){
+          course.modules?.push(result)
+          this._moduleService.addModule(result).subscribe({
+            next: (response: HttpResponse<any>) => {
+              this._toastService.show('Module was added')},
+            error: (error: any) => {
+              console.log(JSON.stringify(error))}}
+          )
+        }
+        
+       }
+    )
   }
 
   onCourseToggle(course: CourseListType): void {
@@ -153,10 +177,7 @@ export class ManageCourseComponent implements OnInit {
      
   }
 
-  goToAddCourse(){
-    this._router.navigate(['/conceptor/addCourse'])
-  }
-
+  
 
 }
 

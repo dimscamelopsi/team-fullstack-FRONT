@@ -24,15 +24,17 @@ export class AddModuleManageComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ManageCourseComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: CourseManageType, 
+    @Inject(MAT_DIALOG_DATA) public data: CourseManageType,
     private _moduleService: ModuleService,) {
      }
 
   ngOnInit(): void {
     this._moduleService.findModulesByPersonId()
       .pipe(take(1)).subscribe(
-        (response: ModuleType[]) => {this.modules = response})
-    
+        (response: ModuleType[]) => {this.modules = response
+          this.modules = this.modules.filter((obj, index) => this.modules.findIndex((item) => item.name === obj.name) === index)
+        })
+
   }
 
   public addModule(module: ModuleType, courseId: CourseManageType): void {

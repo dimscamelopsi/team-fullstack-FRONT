@@ -29,6 +29,7 @@ export class ModuleDialogComponent implements OnInit {
     )
     .subscribe((response: any) => {
       this.modules = response
+      this.modules = this.modules.filter((obj, index) => this.modules.findIndex((item) => item.name === obj.name) === index)
     })
   }
 

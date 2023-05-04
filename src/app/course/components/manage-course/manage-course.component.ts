@@ -29,8 +29,8 @@ export class ManageCourseComponent implements OnInit {
   public courses: Array<CourseManageType> = []
   public modules: Array<ModuleType> = []
   public module!: ModuleType
-  
-  
+
+
   constructor(
     public dialog: MatDialog,
     private _router: Router,
@@ -50,14 +50,14 @@ export class ManageCourseComponent implements OnInit {
         id: courseObject.id,
         title: courseObject.title,
         objective: courseObject.objective,
-        publish: courseObject.publish, 
+        publish: courseObject.publish,
         modules: courseObject.modules
       }
     }).afterClosed().subscribe(
-      (result) => { 
+      (result) => {
         courseObject.title = result.title
         courseObject.objective = result.objective
-        courseObject.publish = result.publish 
+        courseObject.publish = result.publish
       })
   }
 
@@ -87,7 +87,7 @@ export class ManageCourseComponent implements OnInit {
         id: course.id
       }
     }).afterClosed().subscribe(
-      (result) => { 
+      (result) => {
         if(result !== undefined){
           course.modules?.push(result)
           this._moduleService.addModule(result).subscribe({
@@ -97,7 +97,7 @@ export class ManageCourseComponent implements OnInit {
               console.log(JSON.stringify(error))}}
           )
         }
-        
+
        }
     )
   }
@@ -134,7 +134,7 @@ export class ManageCourseComponent implements OnInit {
       })
   }
 
-  // verif 
+  // verif
   doRemoveModule(module: ModuleType): void {
     this._moduleService.remove(module.id!)
       .pipe(take(1))
@@ -174,10 +174,10 @@ export class ManageCourseComponent implements OnInit {
     this.modules = course.modules!
     course.isSelected = !course.isSelected
     return this.courseId = course
-     
+
   }
 
-  
+
 
 }
 

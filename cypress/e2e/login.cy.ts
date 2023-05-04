@@ -3,14 +3,14 @@ describe('Connect to different dashboard', () => {
       cy.viewport(1280, 900);
       cy.visit('user/login');
     });
-  
+
     it('Should connecte and disconnect from the dashboard', () => {
       cy.get('form').within(($form) => {
         cy.get('input[formControlName="login"]').type('Lemaire.Aldegonde');
-        cy.get('input[formControlName="password"]').type('12345');
+        cy.get('input[formControlName="password"]').type('GfNScUbIzt6VJzZEtfgH');
           cy.root().submit();
       });
-        
+
     });
     it('Test connect if your login and password without', () => {
         cy.get('form').within(($form) => {

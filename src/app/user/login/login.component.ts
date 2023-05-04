@@ -11,6 +11,7 @@ import { LocalStorageStrategy } from 'src/app/core/store/local-storage-strategy'
 import { SessionStorageStrategy } from 'src/app/core/store/session-storage-strategy';
 import { environment } from './../../../environments/environment';
 import { HttpResponse } from '@angular/common/http';
+import { ToastService } from 'src/app/core/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -24,14 +25,15 @@ export class LoginComponent implements OnInit {
   public stayConnected: boolean =
     environment.storage.auth.strategy !== 'session';
 
-  constructor(private _userService: UserService, private _router: Router) {}
+  constructor(private _userService: UserService, private _router: Router,
+    private _toastService: ToastService) { }
 
   ngOnInit(): void {
-    const loginControl: AbstractControl = new FormControl('Lemaire.Aldegonde', [
+    const loginControl: AbstractControl = new FormControl('', [
       Validators.required,
     ]);
     const passwordControl: AbstractControl = new FormControl(
-      'GfNScUbIzt6VJzZEtfgH',
+      '',
       [Validators.required]
     );
 
@@ -60,7 +62,11 @@ export class LoginComponent implements OnInit {
       next: (response: HttpResponse<any>) => {
         this._router.navigate(['/']);
       },
-      error: (error: any) => {},
+      error: (error: any) => {
+        const message: string = `UserName and password do not match.`
+          this._toastService.show(message)
+
+      },
       complete: () => {
         this.form.controls['login'].setValue('');
         this.form.controls['password'].setValue('');

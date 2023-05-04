@@ -80,11 +80,15 @@ export class UserService {
         })
       );
   }
-  public Trouve(credentials: any): Observable<HttpResponse<any>> {
-    const endPoint: string = `${environment.apiRootUri}students/byEmailAndAnswer`;
-    return this._httpClient.post<any>(endPoint, credentials, {
-      observe: 'response',
-    });
+  public FindByEmailAndAnswer(credentials: any): Observable<HttpResponse<any>> {
+    const endPoint: string = `${environment.apiRootUri}students/byEmailAndAnswer`
+    return this._httpClient.post<any>(
+      endPoint,
+      credentials,
+      {
+        observe: 'response'
+      }
+    )
   }
 
   public update(student: StudentModel): Observable<HttpResponse<any>> {
@@ -95,6 +99,12 @@ export class UserService {
         observe: 'response',
       }
     );
+  }
+
+  public updateUser(student: StudentModel): Observable<HttpResponse<any>> {
+    return this._httpClient.put<StudentModel>(this.endpoint, student, {
+      observe: 'response',
+    });
   }
 
   public logout(): void {

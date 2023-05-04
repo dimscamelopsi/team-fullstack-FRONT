@@ -17,9 +17,9 @@
                                         <div id="TITLECARD" class="">
                                             {{ course.title }}
                                         </div>
-                                        <div (click)="showcard(course)">
+                                        <div id="module-font" (click)="showcard(course)">
                                           <!-- <mat-icon>list</mat-icon> -->
-                                          <span id="module-font">Module{{(course.modules?.length! > 1)? "s " : " "}} : {{ course.modules?.length }}</span>
+                                          <span >Module{{(course.modules?.length! > 1)? "s " : " "}} : {{ course.modules?.length }}</span>
                                         </div>
                                       <button mat-menu-item disabled>
                                         <mat-icon>{{(course.publish)? "visibility" : "visibility_off"}}</mat-icon>
@@ -42,13 +42,8 @@
                                                     <mat-icon>delete</mat-icon>
                                                     <span>Delete</span>
                                                 </button>
-                                                <!-- Button Add Course -->
-                                                <button (click)="goToAddCourse()" mat-menu-item mat-menu-item>
-                                                    <mat-icon>add_to_photos</mat-icon>
-                                                    <span>Course</span>
-                                                </button>
                                                 <!-- Button Add module -->
-                                                <button mat-menu-item>
+                                                <button (click)="openDialogImportModule(course)" mat-menu-item>
                                                     <mat-icon>add_to_photos</mat-icon>
                                                     <span>Module</span>
                                                 </button>
@@ -86,7 +81,10 @@
                                         </button>
                                         <mat-menu #menu="matMenu">
                                             <!-- List Media -->
-
+                                            <button mat-menu-item>
+                                                <mat-icon>list</mat-icon>
+                                                <!--<span>media{{(course.modules?.length! > 1)? "s" : ""}} {{module.medias.length}} </span>-->
+                                            </button>
                                             <!-- Button Edit -->
                                             <button (click)="openDialogModule(module, course)" mat-menu-item>
                                                 <mat-icon>edit</mat-icon>

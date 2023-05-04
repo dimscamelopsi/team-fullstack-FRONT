@@ -22,9 +22,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col xs12 md6">
+                        <div class="col xs12">
                             <mat-form-field>
-                                <input matInput placeholder="Module objective..." formControlName="objective">
+                                <textarea matInput placeholder="Module objective..." formControlName="objective"></textarea>
                                 <mat-error
                                     *ngIf="moduleFormGroup.controls['objective'].errors && moduleFormGroup.controls['objective'].touched">
                                     <span *ngIf="moduleFormGroup.controls['objective'].hasError('required')">
@@ -40,8 +40,8 @@
 
                     <mat-form-field>
                         <mat-label>List Courses</mat-label>
-                        <mat-select formControlName="course">
-                            <mat-option *ngFor="let userCourse of usercourses" [value]="userCourse">
+                        <mat-select id="selectCourse" formControlName="course">
+                            <mat-option id="{{userCourse.title}}" *ngFor="let userCourse of usercourses" [value]="userCourse">
                                 {{userCourse.title}}
                             </mat-option>
                         </mat-select>
@@ -51,7 +51,7 @@
                 <div class="row">
                   <div class="col xs6">
                       <span class="bold-font">Import a media : </span>
-                      <button mat-raised-button type="button" color="primary" (click)="openMedia()">
+                      <button mat-raised-button type="button" color="primary" (click)="openMedia()" id="openMedia">
                           Import
                       </button>
                   </div>
@@ -64,7 +64,10 @@
                 <ng-container>
                     <fieldset>
                         <legend>Media</legend>
+                          <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
                         <ol class="media-list" >
+                           <!--  <li *ngFor="let media of medias" cdkDrag>
+                                <div class="row"> -->
                             <li *ngFor="let media of medias">
                                 <div class="row media-tile">
                                     <div class="col xs7">
@@ -79,12 +82,13 @@
                                 </div>
                             </li>
                         </ol>
+                    </div>
                     </fieldset>
                 </ng-container>
                 <div class="row">
                     <div class="col xs5"></div>
                     <div class="col xs2">
-                        <button mat-raised-button [disabled]="moduleFormGroup.invalid" color="primary">Add</button>
+                        <button mat-raised-button id="addModuleFinale" [disabled]="moduleFormGroup.invalid" color="primary">Add</button>
                     </div>
                     <div class="col xs5"></div>
                 </div>

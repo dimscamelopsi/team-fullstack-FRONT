@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
           title: 'Parameters',
           summary: 'Parameters management',
           image: 'assets/settings.png',
-          action: ['dashboard'],
+          action: ['user/param'],
         },
         {
           title: 'Users',
@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
           title: 'Courses',
           summary: 'Manage courses and medias',
           image: 'assets/course.png',
-          action: ['conceptor'],
+          action: ['course/list'],
         }
       );
     } else if (this._userService.user.role === 'CONCEPTEUR') {
@@ -47,13 +47,28 @@ export class DashboardComponent implements OnInit {
           title: 'Parameters',
           summary: 'Parameters management',
           image: 'assets/settings.png',
-          action: ['dashboard'],
+          action: ['user/param'],
         },
         {
           title: 'Courses',
           summary: 'Manage courses and medias',
           image: 'assets/course.png',
           action: ['conceptor'],
+        }
+      );
+    } else {
+      this.tiles.push(
+        {
+          title: 'Parameters',
+          summary: 'Parameters management',
+          image: 'assets/settings.png',
+          action: ['user/param'],
+        },
+        {
+          title: 'Courses',
+          summary: 'View courses and medias',
+          image: 'assets/course.png',
+          action: ['course/sev'],
         }
       );
     }

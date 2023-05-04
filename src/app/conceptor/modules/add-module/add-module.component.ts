@@ -12,6 +12,8 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { MediaDialogComponent } from '../media-dialog/media-dialog.component';
 import { ModuleType } from 'src/app/course/types/module-type';
 import { ModuleAddType } from 'src/app/course/types/module-add-type';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-add-module',
@@ -55,8 +57,7 @@ export class AddModuleComponent implements OnInit {
           Validators.required,
           Validators.minLength(4)
         ]),
-      course: this._fb.control(""),
-      //medias: this.medias
+      course: this._fb.control(null),
 
     });
   }
@@ -65,13 +66,19 @@ export class AddModuleComponent implements OnInit {
     const module:ModuleAddType={
       name:this.moduleFormGroup.controls['name'].value,
       objective:this.moduleFormGroup.controls['objective'].value,
-      course:this.moduleFormGroup.controls['course'].value,
-      media:this.medias
+      course: this.moduleFormGroup.controls['course'].value,
+      media: this.medias,
     }
+    this.medias.map((media: MediaType) => {
+      media.orderMedia = this.medias.indexOf(media);
+    });
     this._moduleService.add(module)
       .subscribe({
         next: (response:HttpResponse<any>) => {
-          const message: string = `module was added. `
+          const message: string = `module was added.`
+          this.moduleFormGroup.reset()
+          this.medias=[]
+        
           this._toastService.show(message)
           this.moduleFormGroup.reset();
         },
@@ -94,6 +101,11 @@ export class AddModuleComponent implements OnInit {
       if (result !== undefined) {
 
         this.medias.push(result)
+
+        /* for (const media of this.medias) {
+          //console.log(media.title.toString());
+        } */
+       
       }
     })
   }
@@ -102,6 +114,9 @@ export class AddModuleComponent implements OnInit {
       this.medias.indexOf(media),
       1
     )
+  }
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.medias, event.previousIndex, event.currentIndex);
   }
 
 

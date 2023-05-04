@@ -6,13 +6,15 @@ import { LoginComponent } from './login/login.component';
 import { SharedModule } from '../shared/shared.module';
 import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
 import { NewPasswordComponent } from './new-password/new-password.component';
+import { UpdateComponent } from './update/update.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     ForgottenPasswordComponent,
-    NewPasswordComponent
+    NewPasswordComponent,
+    UpdateComponent
   ],
   imports: [
     CommonModule,

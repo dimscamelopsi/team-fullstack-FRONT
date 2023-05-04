@@ -8,5 +8,6 @@ export type MediaType = {
     totalTime: string
     createdAt: Date
     url: string,
-    typeMedia: TypeMediaType
+    typeMedia: TypeMediaType,
+    orderMedia:number
 }

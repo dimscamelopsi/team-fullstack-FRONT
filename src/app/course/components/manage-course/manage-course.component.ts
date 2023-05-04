@@ -14,6 +14,8 @@ import { ToastService } from 'src/app/core/toast.service';
 import { Router } from '@angular/router';
 import { UpdateModuleManageComponent } from '../../dialogs/update-module-manage/update-module-manage.component';
 import { ModuleManageType } from '../../types/module-manage-type';
+import { MediaType } from '../../types/media-type';
+import { MediaService } from 'src/app/conceptor/modules/services/media.service';
 
 
 @Component({
@@ -25,17 +27,21 @@ export class ManageCourseComponent implements OnInit {
   courseEdit!: CourseManageType
   showCard: boolean = false;
   courseId!: CourseManageType
+  isClicked!: boolean
 
   public courses: Array<CourseManageType> = []
   public modules: Array<ModuleType> = []
-  
-  
+  public medias: Array<MediaType> = []
+
+
   constructor(
     public dialog: MatDialog,
     private _router: Router,
     private _courseService: CourseService,
     private _toastService: ToastService,
-    private _moduleService: ModuleService) { }
+    private _moduleService: ModuleService){ }
+
+
 
   ngOnInit(): void {
     this._courseService.findListCourse()
@@ -49,14 +55,14 @@ export class ManageCourseComponent implements OnInit {
         id: courseObject.id,
         title: courseObject.title,
         objective: courseObject.objective,
-        publish: courseObject.publish, 
+        publish: courseObject.publish,
         modules: courseObject.modules
       }
     }).afterClosed().subscribe(
-      (result) => { 
+      (result) => {
         courseObject.title = result.title
         courseObject.objective = result.objective
-        courseObject.publish = result.publish 
+        courseObject.publish = result.publish
       })
   }
 
@@ -110,7 +116,7 @@ export class ManageCourseComponent implements OnInit {
       })
   }
 
-  // verif 
+  // verif
   doRemoveModule(module: ModuleType): void {
     this._moduleService.remove(module.id!)
       .pipe(take(1))
@@ -150,7 +156,11 @@ export class ManageCourseComponent implements OnInit {
     this.modules = course.modules!
     course.isSelected = !course.isSelected
     return this.courseId = course
-     
+
+  }
+
+  showMedia(module : ModuleType) {
+    module.selected = !module.selected
   }
 
   goToAddCourse(){

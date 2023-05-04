@@ -9,4 +9,5 @@ export type MediaType = {
     createdAt: Date
     url: string,
     typeMedia: TypeMediaType
+    file:Blob
 }

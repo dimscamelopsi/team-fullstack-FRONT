@@ -73,10 +73,12 @@ export class AddModuleComponent implements OnInit {
         next: (response:HttpResponse<any>) => {
           const message: string = `module was added. `
           this._toastService.show(message)
+          this.moduleFormGroup.reset();
         },
         error: (error: any) => {
           const badMessage: string = `Module not added.`
           this._toastService.show(badMessage)
+          this.moduleFormGroup.reset();
         }
       })
   }

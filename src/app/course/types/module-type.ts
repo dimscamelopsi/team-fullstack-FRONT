@@ -2,6 +2,7 @@ import { CourseType } from "./course-type"
 import { MediaType } from "./media-type"
 
 export type ModuleType = {
+  isMediaVisible: boolean
   id?: number
   name: string
   objective: string

@@ -17,7 +17,7 @@
                                         <div id="TITLECARD" class="">
                                             {{ course.title }}
                                         </div>
-                                        <div  (click)="showcard(course)">
+                                        <div (click)="showcard(course)">
                                           <!-- <mat-icon>list</mat-icon> -->
                                           <span id="module-font">Module{{(course.modules?.length! > 1)? "s " : " "}} : {{ course.modules?.length }}</span>
                                         </div>
@@ -74,6 +74,11 @@
                                     <div id="TITLECARD" class="">
                                         {{module.name}}
                                     </div>
+                                    <button mat-menu-item (click)="showMedia(module)" >
+                                      <span>{{module.medias.length ? module.medias.length === 1 ? 'medium' : 'media' : ''}} {{module.medias.length}} </span>
+                                  </button>
+
+
                                     <div id="MENU" class="">
                                         <!--  Menu more_vert -->
                                         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
@@ -81,10 +86,7 @@
                                         </button>
                                         <mat-menu #menu="matMenu">
                                             <!-- List Media -->
-                                            <button mat-menu-item>
-                                                <mat-icon>list</mat-icon>
-                                                <span>media{{(course.modules?.length! > 1)? "s" : ""}} {{module.medias.length}} </span>
-                                            </button>
+
                                             <!-- Button Edit -->
                                             <button (click)="openDialogModule(module, course)" mat-menu-item>
                                                 <mat-icon>edit</mat-icon>
@@ -97,16 +99,32 @@
                                             </button>
                                         </mat-menu>
                                     </div>
+
                                 </section>
                             </mat-card-title>
                         </mat-card-header>
-                        <mat-card-content> {{module.objective}} </mat-card-content>
+                        <mat-card-content (click)="showMedia(module)"> {{module.objective}} </mat-card-content>
+
                     </mat-card>
+                    <!-- card - Media -->
+                    <ng-container *ngFor="let media of module.medias; let index = index">
+                      <mat-card class="cardmedia"*ngIf="module.selected">
+                      <mat-card-content>
+                                   {{ media.title}}
+                                   {{ media.typeMedia.title}}
+                                 </mat-card-content>
+                               </mat-card>
+                                  <!-- Card Content -->
+            <!--         <mat-card-content (click)="showcard(media)">
+                      {{media.name}}
+                  </mat-card-content> -->
+                             </ng-container>
+
                 </ng-container>
+
             </div>
         </ng-container>
 
     </div>
-
 </ng-container>
 

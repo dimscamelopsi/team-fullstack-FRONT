@@ -73,11 +73,13 @@
 
                     <ul class="media-list">
                       <li *ngFor="let media of module.medias">
-                        <div class="media-tile">
-                          <div class="title">{{ media.title }}</div>
-                          <div class="type">{{ media.typeMedia.title }}</div>
-                          <div class="duration">{{ media.totalTime }}</div>
+                          <div class="media-tile">
+                             <div class="title">{{ media.title }}
+                               </div>
+                             <div class="type">{{ media.typeMedia.title }}</div>
+                           <div class="duration">{{ media.totalTime }} {{media.file}}</div>
                         </div>
+
                         <mat-divider></mat-divider>
                       </li>
                     </ul>

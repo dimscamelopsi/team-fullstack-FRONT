@@ -97,6 +97,12 @@ export class UserService {
     );
   }
 
+  public updateUser(student: StudentModel): Observable<HttpResponse<any>> {
+    return this._httpClient.put<StudentModel>(this.endpoint, student, {
+      observe: 'response',
+    });
+  }
+
   public logout(): void {
     this._storageStrategy.remove();
     this._user = undefined;

@@ -3,7 +3,7 @@
     <div class="col xs6 fields">
       {{ course.title }}
     </div>
-    <div class="col xs3 fields">{{ course.modules!.length }} items</div>
+    <div class="col xs3 fields">{{ course.modules!.length }}  item{{(course.modules?.length! > 1)? "s" : ""}}</div>
     <!-- Icon open / close -->
     <div class="col xs2 fields">
       <toggle

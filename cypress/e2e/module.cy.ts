@@ -23,7 +23,7 @@ describe('Connect to different dashboard', () => {
         cy.get('mat-select[formControlName="course"]').click();
         cy.get('mat-option[id="React"]').click();
       cy.get('button[id="openMedia"]').click();
-      cy.get('mat-icon[id="Odio quae quas."]').click();
+      cy.get('mat-icon[id="In quo neque."]').click();
       cy.get('button[id="addModuleFinale"]').click();
 
     });

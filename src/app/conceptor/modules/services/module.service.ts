@@ -20,7 +20,11 @@ export class ModuleService {
     private _userService: UserService
   ) { }
 
-
+  /**
+   * Adds a new module to the server.
+   * @param module The module to be added.
+   * @returns An Observable emitting the response from the server.
+   */
   public add(module: ModuleAddType): Observable<any> {
     return this._httpClient.post<ModuleAddType>(
       this.endpoint,
@@ -28,6 +32,11 @@ export class ModuleService {
     )
   }
 
+  /**
+ * Adds a new module to the server.
+ * @param module The module to be added.
+ * @returns An Observable emitting the response from the server.
+ */
   public addModule(module: ModuleType): Observable<any> {
     return this._httpClient.post<ModuleType>(
       this.endpoint,
@@ -35,25 +44,45 @@ export class ModuleService {
     )
   }
 
+  /**
+ * Fetches all modules from the server.
+ * @returns An Observable emitting an array of ModuleType objects.
+ */
   public findAllModules(): Observable<ModuleType[]> {
     return this._httpClient.get<ModuleType[]>(
       this.endpoint
     )
   }
 
+  /**
+ * Fetches modules by person ID from the server.
+ * @returns An Observable emitting an array of ModuleType objects.
+ */
   public findModulesByPersonId(): Observable<ModuleType[]> {
     return this._httpClient.get<ModuleType[]>(
-      this.endpoint +'/'+ this._userService.user.id)
+      this.endpoint + '/' + this._userService.user.id)
   }
 
+
+  /**
+ * Removes a module from the server.
+ * @param id The ID of the module to be removed.
+ * @returns An Observable emitting the response from the server.
+ */
   public remove(id: number): Observable<HttpResponse<any>> {
     return this._httpClient.delete<ModuleType>(
-      `${this.endpoint}/${id}`, {observe: 'response'}
+      `${this.endpoint}/${id}`, { observe: 'response' }
     )
   }
 
+
+  /**
+  * Updates a module on the server.
+  * @param module The updated module.
+  * @returns An Observable emitting the response from the server.
+  */
   public update(module: ModuleManageType): Observable<HttpResponse<any>> {
     return this._httpClient.put<ModuleType>(
-      this.endpoint +'/'+ module.id, module, { observe: 'response' })
+      this.endpoint + '/' + module.id, module, { observe: 'response' })
   }
 }

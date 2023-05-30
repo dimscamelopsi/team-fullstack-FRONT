@@ -15,12 +15,22 @@ export class MediaService {
     private _httpClient: HttpClient // DI Angular
   ) { }
 
+  /**
+   * Fetches all media from the server.
+   * @returns An Observable emitting an array of MediaType objects.
+   */
   public findAllMedias(): Observable<MediaType[]> {
     return this._httpClient.get<MediaType[]>(
       this.endpoint
     )
   }
-  public add(media: FormData) : Observable<any> {
+
+  /**
+  * Adds a new media to the server.
+  * @param media The media to be added, as FormData.
+  * @returns An Observable emitting the response from the server.
+  */
+  public add(media: FormData): Observable<any> {
     return this._httpClient.post<FormData>(
       this.endpoint,
       media

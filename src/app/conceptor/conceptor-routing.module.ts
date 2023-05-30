@@ -15,6 +15,8 @@ import { ManageModuleComponent } from '../course/components/manage-module/manage
   imports: [RouterModule.forChild(ConceptorRoutingModule.routes)],
   exports: [RouterModule],
 })
+
+
 export class ConceptorRoutingModule {
   public static routes: Routes = [
     {

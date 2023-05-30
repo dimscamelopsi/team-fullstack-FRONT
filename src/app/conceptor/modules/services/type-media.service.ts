@@ -10,15 +10,17 @@ import { environment } from 'src/environments/environment';
 
 
 export class TypeMediaService {
-  private readonly endpoint: string =`${environment.apiRootUri}typeMedia`
+  private readonly endpoint: string = `${environment.apiRootUri}typeMedia`
   constructor(
     private _httpClient: HttpClient
-  ) {}
+  ) { }
 
 
-
-   getAllTypesMedia():Observable<TypeMediaType[]>
-   {
+  /**
+   * Fetches all types of media from the server.
+   * @returns An Observable emitting an array of TypeMediaType objects.
+   */
+  getAllTypesMedia(): Observable<TypeMediaType[]> {
     return this._httpClient.get<TypeMediaType[]>(
       this.endpoint
     )

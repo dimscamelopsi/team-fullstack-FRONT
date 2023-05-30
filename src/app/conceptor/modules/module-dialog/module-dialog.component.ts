@@ -15,29 +15,34 @@ import { CourseListType } from 'src/app/course/types/course-list-type';
 
 
 export class ModuleDialogComponent implements OnInit {
- // public modules: Array<ModuleType> = []
+  // public modules: Array<ModuleType> = []
   public module!: ModuleType
-  public courses : Array<CourseListType> = []
+  public courses: Array<CourseListType> = []
 
 
   constructor(
     private _moduleService: ModuleService,
     public dialogRef: MatDialogRef<AddMediaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private _courseService :CourseService
+    private _courseService: CourseService
 
   ) { }
 
   ngOnInit(): void {
+    // Fetch the list of courses
     this._courseService.findListCourse()
-    .pipe(
-      take(1)
-    )
-    .subscribe((response: any) => {
-      this.courses = response
-    })
+      .pipe(
+        take(1)
+      )
+      .subscribe((response: any) => {
+        this.courses = response
+      })
   }
 
+  /**
+   * Add a module to the dialog and close it.
+   * @param module The selected module
+   */
   public addModule(module: ModuleType): void {
     this.module = module
     console.log(this.module)

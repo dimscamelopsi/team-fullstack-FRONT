@@ -27,7 +27,6 @@ export class AddModuleComponent implements OnInit {
   public medias: Array<MediaType> = []
 
   constructor(
-
     private _fb: FormBuilder,
     private _moduleService: ModuleService,
     private _toastService: ToastService,
@@ -36,7 +35,7 @@ export class AddModuleComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    // Fetching user's courses
     this._courseService.findUsersCourses()
       .pipe(
         take(1)
@@ -45,7 +44,7 @@ export class AddModuleComponent implements OnInit {
 
         this.usercourses = response
       })
-
+    // Initializing module form group
     this.moduleFormGroup = this._fb.group({
       name: this._fb.control("",
         [
@@ -62,23 +61,26 @@ export class AddModuleComponent implements OnInit {
     });
   }
 
+  /**
+   * Add a module.
+   */
   public addModule() {
-    const module:ModuleAddType={
-      name:this.moduleFormGroup.controls['name'].value,
-      objective:this.moduleFormGroup.controls['objective'].value,
+    const module: ModuleAddType = {
+      name: this.moduleFormGroup.controls['name'].value,
+      objective: this.moduleFormGroup.controls['objective'].value,
       course: this.moduleFormGroup.controls['course'].value,
       media: this.medias,
-    }
+    } // Set orderMedia property for each media in the module
     this.medias.map((media: MediaType) => {
       media.orderMedia = this.medias.indexOf(media);
     });
     this._moduleService.add(module)
       .subscribe({
-        next: (response:HttpResponse<any>) => {
+        next: (response: HttpResponse<any>) => {
           const message: string = `module was added.`
           this.moduleFormGroup.reset()
-          this.medias=[]
-        
+          this.medias = []
+
           this._toastService.show(message)
           this.moduleFormGroup.reset();
         },
@@ -90,6 +92,9 @@ export class AddModuleComponent implements OnInit {
       })
   }
 
+  /**
+    * Open the media dialog.
+    */
   openMedia(): void {
     this._dialog.open(
       MediaDialogComponent,
@@ -105,16 +110,26 @@ export class AddModuleComponent implements OnInit {
         /* for (const media of this.medias) {
           //console.log(media.title.toString());
         } */
-       
+
       }
     })
   }
+
+  /**
+ * Remove a media from the module.
+ * @param media The media to remove
+ */
   removeMedia(media: MediaType): void {
     this.medias.splice(
       this.medias.indexOf(media),
       1
     )
   }
+
+  /**
+ * Handle the drop event when reordering medias.
+ * @param event The drop event
+ */
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.medias, event.previousIndex, event.currentIndex);
   }

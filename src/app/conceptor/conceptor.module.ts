@@ -29,9 +29,6 @@ import { ProgressComponent } from './progress/progress.component';
     SharedModule,
     UiModule,
     CourseModule,
-
-
-
   ]
 })
 export class ConceptorModule { }

@@ -19,27 +19,36 @@ export class MediaDialogComponent implements OnInit {
     private _mediaService: MediaService,
     public dialogRef: MatDialogRef<MediaDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    
+
   ) { }
 
   ngOnInit(): void {
+    // Fetch all medias
     this._mediaService.findAllMedias()
-    .pipe(
-      take(1)
-    )
-    .subscribe((response: any) => {
-      this.medias = response
-    })
+      .pipe(
+        take(1)
+      )
+      .subscribe((response: any) => {
+        this.medias = response
+      })
   }
+
+  /**
+  * Close the dialog without selecting any media.
+  */
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  /**
+    * Add a media to the dialog and close it.
+    * @param media The selected media
+    */
   public addMedia(media: MediaType): void {
     //console.log('ok');
     this.media = media
     //this.medias.push(this.media =media)
-      this.dialogRef.close(this.media)
-    }
-  
+    this.dialogRef.close(this.media)
+  }
+
 }

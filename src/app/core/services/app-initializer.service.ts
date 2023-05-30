@@ -9,6 +9,11 @@ import { HttpResponse } from '@angular/common/http';
 export class AppInitializerService {
   constructor(private _userService: UserService) {}
 
+
+   /**
+   * Initializes the application.
+   * @returns A promise that resolves when initialization is complete.
+   */
   init(): Promise<void> {
     return new Promise((resolve) => {
       let jsonUser: string | null = localStorage.getItem(
@@ -40,6 +45,11 @@ export class AppInitializerService {
     });
   }
 
+   /**
+   * Initializes the app by calling the init() method of AppInitializerService.
+   * @param _appInitializerService - The instance of AppInitializerService.
+   * @returns A function that returns a promise for initializing the app.
+   */
   public static initializeApp(
     _appInitializerService: AppInitializerService
   ): any {

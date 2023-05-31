@@ -23,6 +23,7 @@ export class ModuleDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Fetches all modules
     this._moduleService.findAllModules()
     .pipe(
       take(1)
@@ -32,6 +33,11 @@ export class ModuleDialogComponent implements OnInit {
     })
   }
 
+
+   /**
+   * Toggles the visibility of the module.
+   * @param module - The module to reveal or hide.
+   */
   revealOrHide(module: ModuleType): void {
     module.selected = !module.selected
     if (module.selected) {
@@ -43,6 +49,11 @@ export class ModuleDialogComponent implements OnInit {
     }
   }
 
+
+    /**
+   * Adds the selected module and closes the dialog.
+   * @param module - The module to add.
+   */
   public addModule(module: ModuleType): void {
     this.module = module
     console.log(this.module)

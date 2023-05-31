@@ -23,16 +23,31 @@ export class CourseTileComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  /**
+ * Toggle the visibility of the course.
+ * @param course The course object.
+ */
   public revealOrHide(course: CourseListType): void {
     course.isSelected = !course.isSelected
     this.onToggleCourse.emit(course)
   }
 
+
+  /**
+  * Toggle the course selection.
+  * @param courseStatus The status of the course selection.
+  */
   public toggle(courseStatus: boolean): void {
     this.course.isSelected = courseStatus
     this.onToggleCourse.emit(this.course)
   }
 
+
+  /**
+ * Open the remove course dialog and remove the course if confirmed.
+ * @param course The course object.
+ */
   public onRemoveClick(course: CourseListType): void {
     this._dialog.open(
       RemoveCourseDialogComponent,
@@ -49,8 +64,10 @@ export class CourseTileComponent implements OnInit {
     })
   }
 
-  // Send course data so we can import it in create a course (course-handler component)
-
+  /**
+    * Emit the course data to be sent.
+    * @param course The course object.
+    */
   public addCourse(course: CourseListType): void {
     this.sendCourse.emit(this.course)
   }

@@ -24,32 +24,48 @@ export class AddModuleManageComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ManageCourseComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: CourseManageType, 
+    @Inject(MAT_DIALOG_DATA) public data: CourseManageType,
     private _moduleService: ModuleService,) {
-     }
-
-  ngOnInit(): void {
-    this._moduleService.findModulesByPersonId()
-      .pipe(take(1)).subscribe(
-        (response: ModuleType[]) => {this.modules = response})
-    
   }
 
+  ngOnInit(): void {
+    // Fetches modules by person ID
+    this._moduleService.findModulesByPersonId()
+      .pipe(take(1)).subscribe(
+        (response: ModuleType[]) => { this.modules = response })
+
+  }
+
+
+  /**
+ * Adds a module to the course and closes the dialog.
+ * @param module - The module to add.
+ * @param courseId - The ID of the course to add the module to.
+ */
   public addModule(module: ModuleType, courseId: CourseManageType): void {
     module.course = courseId
     this.module = module
     this.dialogRef.close(this.module)
   }
 
-  public listModule(): ModuleType[]{
-    for(let course of this.courses){
-      for(let moduleD of course.modules!){
-         this.moduleData.push(moduleD)
+
+  /**
+ * Lists all the modules from the courses.
+ * @returns An array of modules from the courses.
+ */
+  public listModule(): ModuleType[] {
+    for (let course of this.courses) {
+      for (let moduleD of course.modules!) {
+        this.moduleData.push(moduleD)
       }
     }
     return this.moduleData
   }
 
+
+  /**
+ * Closes the dialog without any action.
+ */
   onNoClick(): void {
     this.dialogRef.close();
   }

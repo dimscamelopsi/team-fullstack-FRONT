@@ -27,16 +27,22 @@ export class CourseDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Fetches the full list of courses
     this._courseService.findFullCourses()
       .pipe(
         take(1)
       )
       .subscribe((response: CourseListType[]) => {
         this.courses = response
-      })  
-      this.showAdd = this.data.show
+      })
+    this.showAdd = this.data.show
   }
 
+
+  /**
+  * Toggles the selection of a course and closes all its modules.
+  * @param course - The course to toggle.
+  */
   onCourseToggle(course: CourseListType): void {
     if (course.isSelected) {
       this.courses
@@ -51,6 +57,11 @@ export class CourseDialogComponent implements OnInit {
     }
   }
 
+
+  /**
+  * Sends the selected course and closes the dialog.
+  * @param course - The selected course.
+  */
   sendCourse(course: CourseListType) {
     this.course = course
     this.dialogRef.close(this.course)

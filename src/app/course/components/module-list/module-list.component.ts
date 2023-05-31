@@ -15,6 +15,12 @@ export class ModuleListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  /**
+   * Toggles the visibility of a module.
+   * Updates the 'selected' property of the module and ensures that only one module is selected at a time.
+   * @param module - The module to reveal or hide.
+   */
   revealOrHide(module: ModuleType): void {
     module.selected = !module.selected
     if (module.selected) {
@@ -25,5 +31,4 @@ export class ModuleListComponent implements OnInit {
       })
     }
   }
-
 }

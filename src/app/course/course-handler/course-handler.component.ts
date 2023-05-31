@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModuleAddComponent } from '../dialogs/module-add/module-add.component';
 import { FormCourseBuilderService } from '../services/course-handler/form-course-builder.service';
 import { CourseService } from '../services/course.service';
@@ -36,17 +36,24 @@ export class CourseHandlerComponent implements OnInit {
     private _dialog: MatDialog,
     private _userService: UserService,
     private _snackBar: MatSnackBar,
-    private _toastService : ToastService
+    private _toastService: ToastService
   ) {
     this.form = this._formBuilder.form;
   }
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void { }
+  /**
+    * Returns the form controls as an object.
+    */
   get c(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 
+
+  /**
+ * Adds a module to the list of modules.
+ * Opens the dialog to add a module and pushes the result to the modules array if a result is obtained.
+ */
   addModule(): void {
     this._dialog
       .open(ModuleAddComponent, {
@@ -61,10 +68,22 @@ export class CourseHandlerComponent implements OnInit {
       });
   }
 
+
+  /**
+ * Removes a module from the list of modules.
+ * @param module - The module to remove.
+ */
   removeModule(module: ModuleType): void {
     this.modules.splice(this.modules.indexOf(module), 1);
   }
 
+
+  /**
+ * Submits the form and adds a new course.
+ * Constructs a CourseType object using the form values and the modules array.
+ * Sends a POST request to add the course.
+ * Resets the form values and navigates to the course list page upon successful addition of the course.
+ */
   onSubmit(): void {
     const student: ReallySimpleStudent = {
       id: this._userService.user.id,
@@ -86,7 +105,7 @@ export class CourseHandlerComponent implements OnInit {
     this.c['objective'].setValue("");
 
     this._courseService.add(course).subscribe({
-      next: (response:HttpResponse<any>) => {
+      next: (response: HttpResponse<any>) => {
         const message: string = `Course ${course.title} was added. `
         this._toastService.show(message)
         this._router.navigate(['/', 'conceptor', '/', 'list']);
@@ -99,6 +118,11 @@ export class CourseHandlerComponent implements OnInit {
 
   }
 
+
+  /**
+*Opens the dialog to add a course.
+*Sets the form values and modules array based on the result obtained from the dialog.
+*/
   addCourse(): void {
     this._dialog
       .open(CourseDialogComponent, {
@@ -118,11 +142,17 @@ export class CourseHandlerComponent implements OnInit {
           for (this.module of result.modules!) {
             this.modules.push(this.module);
           }
-          this.modules.sort((a,b)=> (a.orderModule - b.orderModule))
+          this.modules.sort((a, b) => (a.orderModule - b.orderModule))
         }
       });
   }
 
+
+  /**
+
+Opens the dialog to add a module.
+Pushes the result obtained from the dialog to the modules array.
+*/
   openModule(): void {
     this._dialog
       .open(ModuleDialogComponent, {

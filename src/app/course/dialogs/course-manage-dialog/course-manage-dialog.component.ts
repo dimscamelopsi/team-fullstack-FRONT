@@ -16,15 +16,15 @@ export class CourseManageDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ManageCourseComponent>,
     private _courseService: CourseService,
-    @Inject(MAT_DIALOG_DATA) public data: CourseListType, 
+    @Inject(MAT_DIALOG_DATA) public data: CourseListType,
   ) { }
 
   ngOnInit(): void {
+    // Fetches the full list of courses
     this._courseService.findFullCourses()
       .pipe(take(1))
       .subscribe(
-        (response: CourseListType[]) => {this.courses = response})  
-      
-  }
+        (response: CourseListType[]) => { this.courses = response })
 
+  }
 }
